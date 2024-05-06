@@ -45,6 +45,26 @@ extern void main_loop ();
 void blc_pm_select_none();
 
 
+unsigned int get_sys_elapse(void)
+{
+	static unsigned int my_sys_pre_tick;
+	unsigned int now = stimer_get_tick();
+	unsigned int ms;
+	static unsigned int elapseFullCnt = 0;
+
+	if( now <  my_sys_pre_tick) //overflow
+	{
+        elapseFullCnt++;
+	}
+
+	ms = now / 24000;
+
+	my_sys_pre_tick = now;
+
+	return (ms + elapseFullCnt * (0xFFFFFFFF/24000));
+}
+
+
 int gio , phut,giay;
 
 #if (HCI_ACCESS==HCI_USE_UART)
@@ -278,14 +298,16 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 	LOG_USER_MSG_INFO(0, 0,"[mesh] Start from SIG Mesh", 0);
 	#endif
 
+	lv_tick_set_cb(get_sys_elapse);
+	
 	while (1) {
 #if (MODULE_WATCHDOG_ENABLE)
 		wd_clear(); //clear watch dog
 #endif
 		main_loop ();
-		lv_tick_inc(1);
+		
 		lv_timer_handler();
-		sleep_ms(1);
+		
 
 	}
 	return 0;
