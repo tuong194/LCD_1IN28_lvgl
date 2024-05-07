@@ -33,11 +33,13 @@
 #include "../lvgl/lvgl.h"
 #include "../tuong/LCD_128.h"
 #include "../tuong/LCD_lvgl.h"
+#include "../tuong/switch.h"
 //#include "../lvgl/demos/benchmark/lv_demo_benchmark.h"
 #include "../lvgl/examples/lv_examples.h"
 
 #include "../UI/ui.h"
 
+#include <stdio.h>
 
 
 extern void user_init();
@@ -65,7 +67,23 @@ unsigned int get_sys_elapse(void)
 }
 
 
-int gio , phut,giay;
+char swx;
+int16_t indx;
+
+char buf[3];
+
+void convertIndx(char xx[3], int16_t ind){
+	if(ind >=0 && ind <=9){
+		xx[0] = ind+48;
+	}else if(ind>=10 && ind <=99){
+		xx[0] = ind/10 + 48;
+		xx[1] = ind%10 + 48;
+		xx[2] = NULL;
+	}else if(ind == 100){
+		xx[0] = '1';
+		xx[1] = xx[2] = '0';
+	}
+}
 
 #if (HCI_ACCESS==HCI_USE_UART)
 #include "proj/drivers/uart.h"
@@ -281,14 +299,20 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 	{
 		user_init();
 
-		SPI_Config();
 
+		uart_init(UART0,12,15,UART_PARITY_NONE,UART_STOP_BIT_ONE); // sysclock = 24M
+		uart_set_pin(UART0_TX_PB2,UART0_RX_PB3);
+
+		SPI_Config();
+		Pin_Switch_Config();
 
 		lv_init();
 		lv_port_disp_init();
 
+
 		ui_init();
-//		lv_example_anim_2();
+		indx=50;
+
 
 
 	}
@@ -300,17 +324,50 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 
 	//lv_tick_set_cb();
 
-	
+	unsigned char buff[8];
+
 	while (1) {
 #if (MODULE_WATCHDOG_ENABLE)
 		wd_clear(); //clear watch dog
 #endif
 		main_loop ();
-
-		//lv_tick_inc(1);
 		lv_timer_handler();
-	    //sleep_ms(1);
 		
+		swx = ReadSW();
+
+
+		if(swx == '2'){
+			indx++;
+		    if(indx >= 100){
+		    	indx = 100;
+		    }
+		    lv_arc_set_value(ui_Arc2, indx);
+		    convertIndx(buf,indx);
+		    sprintf(buff,"%d",indx);
+//		    uart_send_byte(UART0,buff[0]);
+//		    uart_send_byte(UART0,buff[1]);
+		    lv_label_set_text(ui_lbNum, buff);
+
+
+
+		}else if(swx == '3'){
+
+			indx--;
+			if(indx <= 0) indx =0;
+			lv_arc_set_value(ui_Arc2, indx);
+			sprintf(buff,"%d",indx);
+
+			lv_label_set_text(ui_lbNum, buff);
+
+
+
+		}else if(swx == '4'){
+			indx = 0;
+			lv_arc_set_value(ui_Arc2, 0);
+			lv_label_set_text(ui_lbNum, "0");
+
+		}
+
 
 	}
 	return 0;

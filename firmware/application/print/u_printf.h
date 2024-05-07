@@ -46,7 +46,8 @@ void u_array_printf(unsigned char*data, unsigned int len);
 //extern u8 get_print_buf_len_flag;
 #else
 	#define printf
-	#define sprintf
+int my_sprintf(char* s, const char *fmt, ...);
+#define sprintf	 		my_sprintf
 	#define array_printf
 #endif
 

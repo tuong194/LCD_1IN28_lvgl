@@ -421,7 +421,7 @@ vendor/mesh/main.d vendor/mesh/main.o: ../vendor/mesh/main.c \
  ../vendor/mesh/../lvgl/src/extra/widgets/span/lv_span.h \
  ../vendor/mesh/../lvgl/src/extra/widgets/span/../../../lvgl.h \
  ../vendor/mesh/../tuong/LCD_128.h ../vendor/mesh/../tuong/LCD_lvgl.h \
- ../vendor/mesh/../tuong/../lvgl/lvgl.h \
+ ../vendor/mesh/../tuong/../lvgl/lvgl.h ../vendor/mesh/../tuong/switch.h \
  ../vendor/mesh/../lvgl/examples/lv_examples.h \
  ../vendor/mesh/../lvgl/examples/../lvgl.h \
  ../vendor/mesh/../lvgl/examples/styles/lv_example_style.h \
@@ -1319,6 +1319,8 @@ vendor/mesh/main.d vendor/mesh/main.o: ../vendor/mesh/main.c \
 ../vendor/mesh/../tuong/LCD_lvgl.h:
 
 ../vendor/mesh/../tuong/../lvgl/lvgl.h:
+
+../vendor/mesh/../tuong/switch.h:
 
 ../vendor/mesh/../lvgl/examples/lv_examples.h:
 

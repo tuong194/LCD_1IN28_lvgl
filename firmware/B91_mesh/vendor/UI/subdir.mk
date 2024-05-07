@@ -5,14 +5,17 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../vendor/UI/ui.c \
+../vendor/UI/ui_events.c \
 ../vendor/UI/ui_helpers.c 
 
 OBJS += \
 ./vendor/UI/ui.o \
+./vendor/UI/ui_events.o \
 ./vendor/UI/ui_helpers.o 
 
 C_DEPS += \
 ./vendor/UI/ui.d \
+./vendor/UI/ui_events.d \
 ./vendor/UI/ui_helpers.d 
 
 

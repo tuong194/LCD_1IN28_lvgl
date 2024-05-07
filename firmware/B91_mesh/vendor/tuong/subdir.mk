@@ -8,21 +8,24 @@ C_SRCS += \
 ../vendor/tuong/LCD_128.c \
 ../vendor/tuong/LCD_lvgl.c \
 ../vendor/tuong/font.c \
-../vendor/tuong/image.c 
+../vendor/tuong/image.c \
+../vendor/tuong/switch.c 
 
 OBJS += \
 ./vendor/tuong/LCDControl.o \
 ./vendor/tuong/LCD_128.o \
 ./vendor/tuong/LCD_lvgl.o \
 ./vendor/tuong/font.o \
-./vendor/tuong/image.o 
+./vendor/tuong/image.o \
+./vendor/tuong/switch.o 
 
 C_DEPS += \
 ./vendor/tuong/LCDControl.d \
 ./vendor/tuong/LCD_128.d \
 ./vendor/tuong/LCD_lvgl.d \
 ./vendor/tuong/font.d \
-./vendor/tuong/image.d 
+./vendor/tuong/image.d \
+./vendor/tuong/switch.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

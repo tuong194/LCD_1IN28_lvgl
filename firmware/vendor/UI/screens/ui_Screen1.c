@@ -34,7 +34,7 @@ void ui_Screen1_screen_init(void)
     lv_obj_set_style_radius(ui_Panel2, 100, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
 
     ui_lbNum = lv_label_create(ui_Screen1);
-    lv_obj_set_width(ui_lbNum, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_width(ui_lbNum, LV_SIZE_CONTENT);   /// 14
     lv_obj_set_height(ui_lbNum, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_x(ui_lbNum, 4);
     lv_obj_set_y(ui_lbNum, -7);
