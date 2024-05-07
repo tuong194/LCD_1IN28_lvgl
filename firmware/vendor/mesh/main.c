@@ -288,7 +288,7 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		lv_port_disp_init();
 
 		ui_init();
-		//lv_example_anim_2();
+//		lv_example_anim_2();
 
 
 	}
@@ -298,15 +298,18 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 	LOG_USER_MSG_INFO(0, 0,"[mesh] Start from SIG Mesh", 0);
 	#endif
 
-	lv_tick_set_cb(get_sys_elapse);
+	//lv_tick_set_cb();
+
 	
 	while (1) {
 #if (MODULE_WATCHDOG_ENABLE)
 		wd_clear(); //clear watch dog
 #endif
 		main_loop ();
-		
+
+		//lv_tick_inc(1);
 		lv_timer_handler();
+	    //sleep_ms(1);
 		
 
 	}

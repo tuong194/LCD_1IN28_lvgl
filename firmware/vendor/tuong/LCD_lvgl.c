@@ -87,20 +87,14 @@ void disp_disable_update(void)
 static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {
     if(disp_flush_enabled) {
-        int32_t x,y;
+    	int32_t y;
         int32_t Width = area->x2 - area->x1 +1;
         LCD_setWindow(area->x1,area->y1,area->x2,area->y2);
         gpio_write(DC_Pin,1);
-        u8 p[2];
+
         u8 *k = color_p;
         for(y = area->y1; y <= area->y2; y++) {
-//        	for(x=area->x1; x<= area->x2;x++){
-//        		p[0] = (u8 *)color_p;
-//        		p[1] = (u8 *)(color_p+1);
-//        		spi_master_write(PSPI_MODULE,p,2);
-//        		color_p+=2;
-//        		wd_clear();
-//        	}
+
         		spi_master_write(PSPI_MODULE,k,2*Width);
         		k+=2*Width;
         		wd_clear();

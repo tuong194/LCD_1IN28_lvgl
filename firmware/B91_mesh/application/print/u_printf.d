@@ -2,7 +2,7 @@ application/print/u_printf.d application/print/u_printf.o: \
  ../application/print/u_printf.c ../application/print/../../drivers.h \
  ../application/print/../../drivers/B91/driver.h \
  ../application/print/../../drivers/B91/lib/include/axon/axon_api.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
  ../application/print/../../drivers/B91/lib/include/axon/axon_dep.h \
  ../application/print/../../drivers/B91/lib/include/pke/pke.h \
  ../drivers/B91/reg_include/register.h \
@@ -35,16 +35,16 @@ application/print/u_printf.d application/print/u_printf.o: \
  ../drivers/B91/reg_include/stimer_reg.h ../drivers/B91/gpio.h \
  ../drivers/B91/lib/include/plic.h ../drivers/B91/core.h \
  ../drivers/B91/lib/include/sys.h ../common/compiler.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/config/user_config.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/user_config.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/proj/mcu/config.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/config.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/mesh/app_config_B91.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/version.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/mesh_config.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/user_app/user_app_config.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/user_app/user_app_default.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/default_config.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/config/user_config.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/user_config.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/proj/mcu/config.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/config.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/mesh/app_config_B91.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/version.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mesh_config.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/user_app/user_app_config.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/user_app/user_app_default.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/default_config.h \
  ../drivers/B91/analog.h ../drivers/B91/dma.h \
  ../drivers/B91/reg_include/gpio_reg.h \
  ../application/print/../../drivers/B91/lib/include/plic.h \
@@ -102,34 +102,34 @@ application/print/u_printf.d application/print/u_printf.o: \
  ../application/print/../../drivers/B91/ext_driver/../stimer.h \
  ../application/print/../../drivers/B91/ext_driver/../clock.h \
  ../application/print/../../drivers/B91/ext_driver/../compatibility_pack/cmpt.h \
- /cygdrive/c/TelinkV323/B91_GC9A01/GC9A01-master/firmware/drivers/B91/gpio.h \
- /cygdrive/c/TelinkV323/B91_GC9A01/GC9A01-master/firmware/drivers/B91/stimer.h \
+ /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/drivers/B91/gpio.h \
+ /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/drivers/B91/stimer.h \
  ../application/print/../../drivers/B91/ext_driver/ext_misc.h \
  ../application/print/../../drivers/B91/ext_driver/../uart.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/chip_adapt_layer/al.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/tl_common.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/utility.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/static_assert.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/assert.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/application/print/printf.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/proj/common/tstring.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/tstring.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/usb_dbg/myudb.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/usb_dbg/log_def_stack.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/usb_dbg/log_def_stack.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/blt_common.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/proj_lib/ble/blt_config.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/dual_mode_adapt.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/blt_common.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/blt_fw_sign.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/blt_led.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/blt_soft_timer.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/custom_pair.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/flash_fw_check.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/proj/common/types.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/chip_adapt_layer/al.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/tl_common.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/utility.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/static_assert.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/assert.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/application/print/printf.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/proj/common/tstring.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/tstring.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/usb_dbg/myudb.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/usb_dbg/log_def_stack.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/usb_dbg/log_def_stack.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/blt_common.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/proj_lib/ble/blt_config.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/dual_mode_adapt.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/blt_common.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/blt_fw_sign.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/blt_led.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/blt_soft_timer.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/custom_pair.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/flash_fw_check.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/proj/common/types.h \
  ../drivers/B91/gpio_default.h ../drivers/B91/gpio.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/application/print/u_printf.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/myprintf.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/application/print/u_printf.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/myprintf.h \
  ../application/print/../../drivers/B91/ext_driver/software_pa.h \
  ../application/print/../../drivers/B91/ext_driver/mcu_boot.h
 
@@ -139,7 +139,7 @@ application/print/u_printf.d application/print/u_printf.o: \
 
 ../application/print/../../drivers/B91/lib/include/axon/axon_api.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
 
 ../application/print/../../drivers/B91/lib/include/axon/axon_dep.h:
 
@@ -217,25 +217,25 @@ application/print/u_printf.d application/print/u_printf.o: \
 
 ../common/compiler.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/config/user_config.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/config/user_config.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/user_config.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/user_config.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/proj/mcu/config.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/proj/mcu/config.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/config.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/config.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/mesh/app_config_B91.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/mesh/app_config_B91.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/version.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/version.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/mesh_config.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mesh_config.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/user_app/user_app_config.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/user_app/user_app_config.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/user_app/user_app_default.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/user_app/user_app_default.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/default_config.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/default_config.h:
 
 ../drivers/B91/analog.h:
 
@@ -355,63 +355,63 @@ application/print/u_printf.d application/print/u_printf.o: \
 
 ../application/print/../../drivers/B91/ext_driver/../compatibility_pack/cmpt.h:
 
-/cygdrive/c/TelinkV323/B91_GC9A01/GC9A01-master/firmware/drivers/B91/gpio.h:
+/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/drivers/B91/gpio.h:
 
-/cygdrive/c/TelinkV323/B91_GC9A01/GC9A01-master/firmware/drivers/B91/stimer.h:
+/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/drivers/B91/stimer.h:
 
 ../application/print/../../drivers/B91/ext_driver/ext_misc.h:
 
 ../application/print/../../drivers/B91/ext_driver/../uart.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/chip_adapt_layer/al.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/chip_adapt_layer/al.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/tl_common.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/tl_common.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/utility.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/utility.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/static_assert.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/static_assert.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/assert.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/assert.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/application/print/printf.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/application/print/printf.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/proj/common/tstring.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/proj/common/tstring.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/tstring.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/tstring.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/usb_dbg/myudb.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/usb_dbg/myudb.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/usb_dbg/log_def_stack.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/usb_dbg/log_def_stack.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/common/usb_dbg/log_def_stack.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/usb_dbg/log_def_stack.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/blt_common.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/blt_common.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/proj_lib/ble/blt_config.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/proj_lib/ble/blt_config.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/dual_mode_adapt.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/dual_mode_adapt.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/blt_common.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/blt_common.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/blt_fw_sign.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/blt_fw_sign.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/blt_led.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/blt_led.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/blt_soft_timer.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/blt_soft_timer.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/custom_pair.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/custom_pair.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/flash_fw_check.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/flash_fw_check.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/proj/common/types.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/proj/common/types.h:
 
 ../drivers/B91/gpio_default.h:
 
 ../drivers/B91/gpio.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/application/print/u_printf.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/application/print/u_printf.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/myprintf.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/myprintf.h:
 
 ../application/print/../../drivers/B91/ext_driver/software_pa.h:
 

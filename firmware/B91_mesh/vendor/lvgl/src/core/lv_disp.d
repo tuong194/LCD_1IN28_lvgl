@@ -2,7 +2,7 @@ vendor/lvgl/src/core/lv_disp.d vendor/lvgl/src/core/lv_disp.o: \
  ../vendor/lvgl/src/core/lv_disp.c ../vendor/lvgl/src/core/lv_disp.h \
  ../vendor/lvgl/src/core/../hal/lv_hal.h \
  ../vendor/lvgl/src/core/../hal/lv_hal_disp.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
  ../vendor/lvgl/src/core/../hal/lv_hal.h \
  ../vendor/lvgl/src/core/../hal/../draw/lv_draw.h \
  ../vendor/lvgl/src/core/../hal/../draw/../lv_conf_internal.h \
@@ -13,7 +13,7 @@ vendor/lvgl/src/core/lv_disp.d vendor/lvgl/src/core/lv_disp.o: \
  ../vendor/lvgl/src/core/../hal/../draw/../misc/../font/../lv_conf_internal.h \
  ../vendor/lvgl/src/core/../hal/../draw/../misc/../font/lv_symbol_def.h \
  ../vendor/lvgl/src/core/../hal/../draw/../misc/../font/../misc/lv_area.h \
- ../vendor/lvgl/src/core/../hal/../draw/../misc/../font/../misc/../lv_conf_internal.h \
+ /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
  ../vendor/lvgl/src/core/../hal/../draw/../misc/lv_color.h \
  ../vendor/lvgl/src/core/../hal/../draw/../misc/../lv_conf_internal.h \
  ../vendor/lvgl/src/core/../hal/../draw/../misc/lv_assert.h \
@@ -93,7 +93,7 @@ vendor/lvgl/src/core/lv_disp.d vendor/lvgl/src/core/lv_disp.o: \
 
 ../vendor/lvgl/src/core/../hal/lv_hal_disp.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
 
 ../vendor/lvgl/src/core/../hal/lv_hal.h:
 
@@ -115,7 +115,7 @@ vendor/lvgl/src/core/lv_disp.d vendor/lvgl/src/core/lv_disp.o: \
 
 ../vendor/lvgl/src/core/../hal/../draw/../misc/../font/../misc/lv_area.h:
 
-../vendor/lvgl/src/core/../hal/../draw/../misc/../font/../misc/../lv_conf_internal.h:
+/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
 
 ../vendor/lvgl/src/core/../hal/../draw/../misc/lv_color.h:
 

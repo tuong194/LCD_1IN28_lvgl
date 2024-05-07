@@ -1,9 +1,9 @@
 vendor/lvgl/src/core/lv_obj_tree.d vendor/lvgl/src/core/lv_obj_tree.o: \
  ../vendor/lvgl/src/core/lv_obj_tree.c \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/mi_api/mijia_ble_api/stdlib.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdlib.h \
  ../vendor/lvgl/src/core/lv_obj.h \
  ../vendor/lvgl/src/core/../lv_conf_internal.h \
- /cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
  ../vendor/lvgl/src/core/../lv_conf_kconfig.h \
  ../vendor/lvgl/src/core/../../lv_conf.h \
  ../vendor/lvgl/src/core/../misc/lv_style.h \
@@ -93,13 +93,13 @@ vendor/lvgl/src/core/lv_obj_tree.d vendor/lvgl/src/core/lv_obj_tree.o: \
  ../vendor/lvgl/src/core/../misc/../core/lv_obj_pos.h \
  ../vendor/lvgl/src/core/../misc/lv_async.h
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/mi_api/mijia_ble_api/stdlib.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdlib.h:
 
 ../vendor/lvgl/src/core/lv_obj.h:
 
 ../vendor/lvgl/src/core/../lv_conf_internal.h:
 
-/cygdrive/C/TelinkV323/B91_GC9A01/GC9A01-master/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
 
 ../vendor/lvgl/src/core/../lv_conf_kconfig.h:
 
