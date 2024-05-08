@@ -23,7 +23,16 @@
 
 #define SW_NOT_PRESS '\0'
 
+#define LED1 GPIO_PB5
+#define LED2 GPIO_PB7
+
+
 #define  FUNC AS_GPIO
+
+#define ONLED1  gpio_write(LED1, 1)
+#define OFFLED1 gpio_write(LED1, 0)
+#define ONLED2  gpio_write(LED2, 1)
+#define OFFLED2 gpio_write(LED2, 0)
 
 u8 stateSW;
 

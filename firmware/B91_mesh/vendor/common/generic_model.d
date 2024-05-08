@@ -207,7 +207,8 @@ vendor/common/generic_model.d vendor/common/generic_model.o: \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mesh_ota.h \
  ../vendor/common/generic_model.h ../vendor/common/directed_forwarding.h \
  ../vendor/common/app_privacy_beacon.h ../vendor/common/subnet_bridge.h \
- ../vendor/common/solicitation_rpl_cfg_model.h
+ ../vendor/common/solicitation_rpl_cfg_model.h \
+ ../vendor/common/../tuong/switch.h
 
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/tl_common.h:
 
@@ -644,3 +645,5 @@ vendor/common/generic_model.d vendor/common/generic_model.o: \
 ../vendor/common/subnet_bridge.h:
 
 ../vendor/common/solicitation_rpl_cfg_model.h:
+
+../vendor/common/../tuong/switch.h:

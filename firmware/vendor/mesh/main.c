@@ -42,6 +42,7 @@
 #include <stdio.h>
 
 
+
 extern void user_init();
 extern void main_loop ();
 void blc_pm_select_none();
@@ -67,23 +68,54 @@ unsigned int get_sys_elapse(void)
 }
 
 
+
+#define GATEWAYADDRESS 0x0002
+void RD_Send_Relay_Stt(uint8_t Relay_ID, uint8_t Relay_Stt)
+{
+	uint8_t Mess_Buff[8] = {0};
+	uint16_t Element_Add = 0x0000;
+
+	Mess_Buff[0]		= Relay_Stt;
+	Element_Add 		= ele_adr_primary + (Relay_ID-1);
+
+	mesh_tx_cmd2normal(G_ONOFF_STATUS, Mess_Buff, 1, Element_Add, GATEWAYADDRESS, 2);
+
+//	char UART_TempSend[128];
+//	sprintf(UART_TempSend,"Messenger On-Off Gw:0x%x- Relay: %d--%d--%d--%d  \n",RD_GATEWAYADDRESS, relay_Stt[0], relay_Stt[1], relay_Stt[2], relay_Stt[3]);
+//	uart_CSend(UART_TempSend);
+}
+
+typedef struct {
+	uint8_t Header[2];
+	uint8_t Length;
+	uint8_t OpCode[2];
+	uint8_t Dim_Stt;
+	uint8_t Cct_Stt;
+	uint8_t CRC;
+} Struct_OPCODE_SET_DIMCCT_t;
+#define LED_ADDR 0xFFFF
+
+/*
+static void RD_Model_OPCODE_SET_DIMCCT(void)
+{
+	Struct_OPCODE_SET_DIMCCT_t *mess_buff;
+
+	mess_buff = (Struct_OPCODE_SET_DIMCCT_t*) vrts_GWIF_IncomeMessage;
+
+	u8 dim_set	= mess_buff->Dim_Stt;
+	u8 cct_set = mess_buff->Cct_Stt;
+
+	//rdPrintf("OPCODE SET dim: %d% cct:%d %", dim_set, cct_set);
+	access_cmd_set_light_ctl_100(LED_ADDR, 2 , dim_set, cct_set, 0);
+	//access_cmd_set_light_ctl(0xffff, 2 , lum2_lightness(dim_set), cct_set, 0, &TTS_CTRL_DF);
+}
+*/
 char swx;
 int16_t indx;
+u8 dim_set;
 
-char buf[3];
 
-void convertIndx(char xx[3], int16_t ind){
-	if(ind >=0 && ind <=9){
-		xx[0] = ind+48;
-	}else if(ind>=10 && ind <=99){
-		xx[0] = ind/10 + 48;
-		xx[1] = ind%10 + 48;
-		xx[2] = NULL;
-	}else if(ind == 100){
-		xx[0] = '1';
-		xx[1] = xx[2] = '0';
-	}
-}
+
 
 #if (HCI_ACCESS==HCI_USE_UART)
 #include "proj/drivers/uart.h"
@@ -312,6 +344,7 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 
 		ui_init();
 		indx=50;
+		dim_set= 50;
 
 
 
@@ -337,36 +370,37 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 
 
 		if(swx == '2'){
+			ONLED2;
+			RD_Send_Relay_Stt(2,1);
+
+
 			indx++;
 		    if(indx >= 100){
 		    	indx = 100;
 		    }
 		    lv_arc_set_value(ui_Arc2, indx);
-		    convertIndx(buf,indx);
 		    sprintf(buff,"%d",indx);
-//		    uart_send_byte(UART0,buff[0]);
-//		    uart_send_byte(UART0,buff[1]);
 		    lv_label_set_text(ui_lbNum, buff);
-
-
+		    access_cmd_set_light_ctl_100(LED_ADDR, 2 , (u8)indx,0, 0);
 
 		}else if(swx == '3'){
-
+			OFFLED2;
+			RD_Send_Relay_Stt(2,0);
 			indx--;
 			if(indx <= 0) indx =0;
 			lv_arc_set_value(ui_Arc2, indx);
 			sprintf(buff,"%d",indx);
-
 			lv_label_set_text(ui_lbNum, buff);
-
-
+			access_cmd_set_light_ctl_100(LED_ADDR, 2 , (u8)indx,0, 0);
 
 		}else if(swx == '4'){
+			ONLED1;
 			indx = 0;
 			lv_arc_set_value(ui_Arc2, 0);
 			lv_label_set_text(ui_lbNum, "0");
-
+			access_cmd_set_light_ctl_100(LED_ADDR, 2 ,0,0, 0);
 		}
+
 
 
 	}

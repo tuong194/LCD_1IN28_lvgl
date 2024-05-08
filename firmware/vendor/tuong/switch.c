@@ -17,6 +17,11 @@
 #define READ_COL2 gpio_read(TL_Key4)
 
 void Pin_Switch_Config(void){
+	gpio_set_func(LED1, FUNC);
+	gpio_output_en(LED1);
+	gpio_set_func(LED2, FUNC);
+	gpio_output_en(LED2);
+
 	gpio_set_func(TL_Key1, FUNC);
 	gpio_output_en(TL_Key1);
 

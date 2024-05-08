@@ -50,6 +50,9 @@
 #include "subnet_bridge.h"
 #include "op_agg_model.h"
 #include "solicitation_rpl_cfg_model.h"
+
+#include"../tuong/switch.h" //T_NOTE: include led
+
 /** @addtogroup Mesh_Common
   * @{
   */
@@ -209,8 +212,19 @@ int g_onoff_set(mesh_cmd_g_onoff_set_t *p_set, int par_len, int force_last, int 
 		level_set_tmp.level = get_light_g_level_by_onoff(idx, p_set->onoff, st_trans_type, force_last);
 		int len_tmp = GET_LEVEL_PAR_LEN(par_len >= sizeof(mesh_cmd_g_onoff_set_t));
 		err = g_level_set((u8 *)&level_set_tmp, len_tmp, G_LEVEL_SET_NOACK, idx, retransaction, st_trans_type, 0, pub_list);
-        if(!err){
-		    set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);
+
+		if(!err){
+			/****************************/
+			// T_NOTE
+			if(idx == 0){
+				gpio_write(LED1,p_set->onoff);
+				set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);
+			}else if(idx == 1){
+				gpio_write(LED2, p_set->onoff);
+				set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);
+			}
+			/******************************/
+		   // set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);
 		}
 	}
 	
@@ -231,6 +245,7 @@ int mesh_cmd_sig_g_onoff_set(u8 *par, int par_len, mesh_cb_fun_par_t *cb_par)
 {
 	int err = 0;
     mesh_cmd_g_onoff_set_t *p_set = (mesh_cmd_g_onoff_set_t *)par;
+
 #if MESH_RX_TEST
 	mesh_rcv_cmd.ack_par_len = par[3];
 	if(par_len>sizeof(mesh_cmd_g_onoff_set_t)){
