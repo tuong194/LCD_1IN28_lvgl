@@ -95,7 +95,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
         u8 *k = color_p;
         for(y = area->y1; y <= area->y2; y++) {
 
-        		spi_master_write(PSPI_MODULE,k,2*Width);
+        		spi_master_write(HSPI_MODULE,k,2*Width);
         		k+=2*Width;
         		wd_clear();
 

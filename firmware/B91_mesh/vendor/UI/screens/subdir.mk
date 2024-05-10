@@ -4,13 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../vendor/UI/screens/ui_Screen1.c 
+../vendor/UI/screens/ui_Screen2.c 
 
 OBJS += \
-./vendor/UI/screens/ui_Screen1.o 
+./vendor/UI/screens/ui_Screen2.o 
 
 C_DEPS += \
-./vendor/UI/screens/ui_Screen1.d 
+./vendor/UI/screens/ui_Screen2.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

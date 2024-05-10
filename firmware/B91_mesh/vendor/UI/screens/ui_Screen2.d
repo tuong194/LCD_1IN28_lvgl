@@ -1,5 +1,5 @@
-vendor/UI/screens/ui_Screen1.d vendor/UI/screens/ui_Screen1.o: \
- ../vendor/UI/screens/ui_Screen1.c ../vendor/UI/screens/../ui.h \
+vendor/UI/screens/ui_Screen2.d vendor/UI/screens/ui_Screen2.o: \
+ ../vendor/UI/screens/ui_Screen2.c ../vendor/UI/screens/../ui.h \
  ../vendor/UI/screens/../../lvgl/lvgl.h \
  ../vendor/UI/screens/../../lvgl/src/misc/lv_log.h \
  ../vendor/UI/screens/../../lvgl/src/misc/../lv_conf_internal.h \

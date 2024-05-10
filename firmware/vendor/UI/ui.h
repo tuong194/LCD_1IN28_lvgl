@@ -15,16 +15,18 @@ extern "C" {
 #include "ui_helpers.h"
 #include "ui_events.h"
 
-// SCREEN: ui_Screen1
-void ui_Screen1_screen_init(void);
-extern lv_obj_t * ui_Screen1;
-void ui_event_Arc2(lv_event_t * e);
-extern lv_obj_t * ui_Arc2;
-extern lv_obj_t * ui_Panel2;
-extern lv_obj_t * ui_lbNum;
+// SCREEN: ui_Screen2
+void ui_Screen2_screen_init(void);
+extern lv_obj_t * ui_Screen2;
+extern lv_obj_t * ui_giay;
+extern lv_obj_t * ui_gio;
+extern lv_obj_t * ui_phut;
 extern lv_obj_t * ui____initial_actions0;
 
 
+LV_IMG_DECLARE(ui_img_s_png);    // assets/s.png
+LV_IMG_DECLARE(ui_img_h_png);    // assets/h.png
+LV_IMG_DECLARE(ui_img_m_png);    // assets/m.png
 
 
 

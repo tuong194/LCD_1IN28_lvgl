@@ -34,12 +34,15 @@
 #include "../tuong/LCD_128.h"
 #include "../tuong/LCD_lvgl.h"
 #include "../tuong/switch.h"
-//#include "../lvgl/demos/benchmark/lv_demo_benchmark.h"
+#include "../lvgl/demos/benchmark/lv_demo_benchmark.h"
+//#include "../lvgl/demos/music/lv_demo_music.h"
 #include "../lvgl/examples/lv_examples.h"
+
 
 #include "../UI/ui.h"
 
-#include <stdio.h>
+
+
 
 
 
@@ -114,7 +117,7 @@ char swx;
 int16_t indx;
 u8 dim_set;
 
-
+u8 gio, phut, giay;
 
 
 #if (HCI_ACCESS==HCI_USE_UART)
@@ -332,22 +335,25 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		user_init();
 
 
-		uart_init(UART0,12,15,UART_PARITY_NONE,UART_STOP_BIT_ONE); // sysclock = 24M
-		uart_set_pin(UART0_TX_PB2,UART0_RX_PB3);
+		//uart_init(UART0,12,15,UART_PARITY_NONE,UART_STOP_BIT_ONE); // sysclock = 24M
+	//	uart_set_pin(UART0_TX_PB2,UART0_RX_PB3);
 
 		SPI_Config();
 		Pin_Switch_Config();
 
 		lv_init();
 		lv_port_disp_init();
+		//LCD_Clear(RED);
+		//LCD_Clear(BLUE);
 
+		//lv_demo_benchmark();
+		//lv_demo_music();
+	//	lv_example_anim_2();
 
 		ui_init();
-		indx=50;
-		dim_set= 50;
-
-
-
+		gio=12;phut=33;giay=0;
+//		indx=50;
+//		dim_set= 50;
 	}
 
     irq_enable();
@@ -357,7 +363,14 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 
 	//lv_tick_set_cb();
 
-	unsigned char buff[8];
+//	unsigned char buff[8];
+
+
+	void setRotation(u8 gio, u8 phut, u8 giay){
+		lv_img_set_angle(ui_gio, gio*60);
+		lv_img_set_angle(ui_phut, phut*60);
+		lv_img_set_angle(ui_giay, giay*60);
+	}
 
 	while (1) {
 #if (MODULE_WATCHDOG_ENABLE)
@@ -365,9 +378,26 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 #endif
 		main_loop ();
 		lv_timer_handler();
-		
-		swx = ReadSW();
 
+		setRotation(gio,phut,giay);
+		sleep_ms(100);
+		giay++;
+		if(giay == 60){
+			phut++;
+			giay=0;
+			if(phut == 60){
+				phut=0;
+			}
+			if(phut%12 == 0){
+				gio++;
+			}
+			if(gio==60){
+				gio=0;
+			}
+		}
+
+/*
+		swx = ReadSW();
 
 		if(swx == '2'){
 			ONLED2;
@@ -401,7 +431,7 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 			access_cmd_set_light_ctl_100(LED_ADDR, 2 ,0,0, 0);
 		}
 
-
+*/
 
 	}
 	return 0;

@@ -42,6 +42,7 @@ drivers/B91/ext_driver \
 drivers/B91/flash \
 proj/common \
 vendor/UI/components \
+vendor/UI/images \
 vendor/UI/screens \
 vendor/UI \
 vendor/common \

@@ -39,6 +39,7 @@ RM := rm -rf
 -include drivers/B91/flash/subdir.mk
 -include proj/common/subdir.mk
 -include vendor/UI/components/subdir.mk
+-include vendor/UI/images/subdir.mk
 -include vendor/UI/screens/subdir.mk
 -include vendor/UI/subdir.mk
 -include vendor/common/subdir.mk

@@ -228,7 +228,10 @@ vendor/lvgl/demos/benchmark/lv_demo_benchmark.d vendor/lvgl/demos/benchmark/lv_d
  ../vendor/lvgl/demos/benchmark/../../src/extra/widgets/imgbtn/lv_imgbtn.h \
  /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
  ../vendor/lvgl/demos/benchmark/../../src/extra/widgets/span/lv_span.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h
+ /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/demos/benchmark/../benchmark/lv_demo_benchmark.h \
+ ../vendor/lvgl/demos/benchmark/../music/lv_demo_music.h \
+ ../vendor/lvgl/demos/benchmark/../music/../lv_demos.h
 
 ../vendor/lvgl/demos/benchmark/lv_demo_benchmark.h:
 
@@ -687,3 +690,9 @@ vendor/lvgl/demos/benchmark/lv_demo_benchmark.d vendor/lvgl/demos/benchmark/lv_d
 ../vendor/lvgl/demos/benchmark/../../src/extra/widgets/span/lv_span.h:
 
 /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+
+../vendor/lvgl/demos/benchmark/../benchmark/lv_demo_benchmark.h:
+
+../vendor/lvgl/demos/benchmark/../music/lv_demo_music.h:
+
+../vendor/lvgl/demos/benchmark/../music/../lv_demos.h:

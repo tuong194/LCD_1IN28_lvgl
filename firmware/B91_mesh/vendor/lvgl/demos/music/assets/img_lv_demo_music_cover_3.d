@@ -228,7 +228,10 @@ vendor/lvgl/demos/music/assets/img_lv_demo_music_cover_3.d vendor/lvgl/demos/mus
  ../vendor/lvgl/demos/music/assets/../../../src/extra/widgets/imgbtn/lv_imgbtn.h \
  /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
  ../vendor/lvgl/demos/music/assets/../../../src/extra/widgets/span/lv_span.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h
+ /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/demos/music/assets/../../benchmark/lv_demo_benchmark.h \
+ ../vendor/lvgl/demos/music/assets/../../benchmark/../lv_demos.h \
+ ../vendor/lvgl/demos/music/assets/../../music/lv_demo_music.h
 
 ../vendor/lvgl/demos/music/assets/../lv_demo_music.h:
 
@@ -687,3 +690,9 @@ vendor/lvgl/demos/music/assets/img_lv_demo_music_cover_3.d vendor/lvgl/demos/mus
 ../vendor/lvgl/demos/music/assets/../../../src/extra/widgets/span/lv_span.h:
 
 /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+
+../vendor/lvgl/demos/music/assets/../../benchmark/lv_demo_benchmark.h:
+
+../vendor/lvgl/demos/music/assets/../../benchmark/../lv_demos.h:
+
+../vendor/lvgl/demos/music/assets/../../music/lv_demo_music.h:
