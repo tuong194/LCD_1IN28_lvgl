@@ -471,7 +471,7 @@ extern "C" {
 #define LIGHT_TYPE_SEL				LIGHT_TYPE_PANEL
 		#endif
 	#else
-#define LIGHT_TYPE_SEL				LIGHT_TYPE_PANEL	// T_Note
+#define LIGHT_TYPE_SEL				LIGHT_TYPE_CT	// 
 	#endif
 #endif
 #endif
@@ -825,7 +825,7 @@ extern "C" {
 #define ELE_CNT_EVERY_LIGHT         4
         #endif
     #else
-#define ELE_CNT_EVERY_LIGHT         1 // T_Note: ELE_CNT_EVERY_LIGHT
+#define ELE_CNT_EVERY_LIGHT         1
     #endif
 #endif
 

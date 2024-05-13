@@ -115,7 +115,6 @@ void rtc_cal_init(u8 tick_start)
 
 void system_timer_handle_ms()
 {
-
 #if MD_SERVER_EN
 	light_transition_proc();
 #endif

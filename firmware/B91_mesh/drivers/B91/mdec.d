@@ -24,16 +24,16 @@ drivers/B91/mdec.d drivers/B91/mdec.o: ../drivers/B91/mdec.c \
  ../drivers/B91/reg_include/mdec_reg.h \
  ../drivers/B91/reg_include/swire_reg.h ../drivers/B91/dma.h \
  ../common/compiler.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/config/user_config.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/user_config.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/proj/mcu/config.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/config.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/mesh/app_config_B91.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/version.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mesh_config.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/user_app/user_app_config.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/user_app/user_app_default.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/default_config.h \
+ /cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/common/config/user_config.h \
+ /cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/common/user_config.h \
+ /cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/proj/mcu/config.h \
+ /cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/config.h \
+ /cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/mesh/app_config_B91.h \
+ /cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/common/version.h \
+ /cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/common/mesh_config.h \
+ /cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/user_app/user_app_config.h \
+ /cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/user_app/user_app_default.h \
+ /cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/common/default_config.h \
  ../drivers/B91/clock.h
 
 ../drivers/B91/mdec.h:
@@ -94,24 +94,24 @@ drivers/B91/mdec.d drivers/B91/mdec.o: ../drivers/B91/mdec.c \
 
 ../common/compiler.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/common/config/user_config.h:
+/cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/common/config/user_config.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/user_config.h:
+/cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/common/user_config.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/proj/mcu/config.h:
+/cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/proj/mcu/config.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/config.h:
+/cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/config.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/mesh/app_config_B91.h:
+/cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/mesh/app_config_B91.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/version.h:
+/cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/common/version.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mesh_config.h:
+/cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/common/mesh_config.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/user_app/user_app_config.h:
+/cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/user_app/user_app_config.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/user_app/user_app_default.h:
+/cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/user_app/user_app_default.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/default_config.h:
+/cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/common/default_config.h:
 
 ../drivers/B91/clock.h:

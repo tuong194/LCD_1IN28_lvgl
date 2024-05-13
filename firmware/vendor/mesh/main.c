@@ -30,6 +30,7 @@
 #include "proj_lib/ble/ll/ll.h"
 #include "proj_lib/sig_mesh/app_mesh.h"
 
+
 #include "../lvgl/lvgl.h"
 #include "../tuong/LCD_128.h"
 #include "../tuong/LCD_lvgl.h"
@@ -41,15 +42,14 @@
 
 #include "../UI/ui.h"
 
-
-
-
-
-
 extern void user_init();
 extern void main_loop ();
 void blc_pm_select_none();
 
+
+u8 gio, phut, giay;
+u8 dim;
+#define LED_ADDR 0xFFFF
 
 unsigned int get_sys_elapse(void)
 {
@@ -70,54 +70,6 @@ unsigned int get_sys_elapse(void)
 	return (ms + elapseFullCnt * (0xFFFFFFFF/24000));
 }
 
-
-
-#define GATEWAYADDRESS 0x0002
-void RD_Send_Relay_Stt(uint8_t Relay_ID, uint8_t Relay_Stt)
-{
-	uint8_t Mess_Buff[8] = {0};
-	uint16_t Element_Add = 0x0000;
-
-	Mess_Buff[0]		= Relay_Stt;
-	Element_Add 		= ele_adr_primary + (Relay_ID-1);
-
-	mesh_tx_cmd2normal(G_ONOFF_STATUS, Mess_Buff, 1, Element_Add, GATEWAYADDRESS, 2);
-
-//	char UART_TempSend[128];
-//	sprintf(UART_TempSend,"Messenger On-Off Gw:0x%x- Relay: %d--%d--%d--%d  \n",RD_GATEWAYADDRESS, relay_Stt[0], relay_Stt[1], relay_Stt[2], relay_Stt[3]);
-//	uart_CSend(UART_TempSend);
-}
-
-typedef struct {
-	uint8_t Header[2];
-	uint8_t Length;
-	uint8_t OpCode[2];
-	uint8_t Dim_Stt;
-	uint8_t Cct_Stt;
-	uint8_t CRC;
-} Struct_OPCODE_SET_DIMCCT_t;
-#define LED_ADDR 0xFFFF
-
-/*
-static void RD_Model_OPCODE_SET_DIMCCT(void)
-{
-	Struct_OPCODE_SET_DIMCCT_t *mess_buff;
-
-	mess_buff = (Struct_OPCODE_SET_DIMCCT_t*) vrts_GWIF_IncomeMessage;
-
-	u8 dim_set	= mess_buff->Dim_Stt;
-	u8 cct_set = mess_buff->Cct_Stt;
-
-	//rdPrintf("OPCODE SET dim: %d% cct:%d %", dim_set, cct_set);
-	access_cmd_set_light_ctl_100(LED_ADDR, 2 , dim_set, cct_set, 0);
-	//access_cmd_set_light_ctl(0xffff, 2 , lum2_lightness(dim_set), cct_set, 0, &TTS_CTRL_DF);
-}
-*/
-char swx;
-int16_t indx;
-u8 dim_set;
-
-u8 gio, phut, giay;
 
 
 #if (HCI_ACCESS==HCI_USE_UART)
@@ -333,38 +285,22 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 #endif
 	{
 		user_init();
-
-
-		//uart_init(UART0,12,15,UART_PARITY_NONE,UART_STOP_BIT_ONE); // sysclock = 24M
-	//	uart_set_pin(UART0_TX_PB2,UART0_RX_PB3);
-
 		SPI_Config();
 		Pin_Switch_Config();
 
 		lv_init();
 		lv_port_disp_init();
-		//LCD_Clear(RED);
-		//LCD_Clear(BLUE);
 
-		//lv_demo_benchmark();
-		//lv_demo_music();
-	//	lv_example_anim_2();
 
 		ui_init();
 		gio=12;phut=33;giay=0;
-//		indx=50;
-//		dim_set= 50;
+		dim =0;
 	}
 
     irq_enable();
 	#if (DEBUG_LOG_SETTING_DEVELOP_MODE_EN || (MESH_USER_DEFINE_MODE == MESH_IRONMAN_MENLO_ENABLE))
 	LOG_USER_MSG_INFO(0, 0,"[mesh] Start from SIG Mesh", 0);
 	#endif
-
-	//lv_tick_set_cb();
-
-//	unsigned char buff[8];
-
 
 	void setRotation(u8 gio, u8 phut, u8 giay){
 		lv_img_set_angle(ui_gio, gio*60);
@@ -394,45 +330,13 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 			if(gio==60){
 				gio=0;
 			}
+			dim++;
+			if(dim == 100){
+				dim = 0;
+			}
+			access_cmd_set_light_ctl_100(LED_ADDR, 2 , dim,0, 0);
+
 		}
-
-/*
-		swx = ReadSW();
-
-		if(swx == '2'){
-			ONLED2;
-			RD_Send_Relay_Stt(2,1);
-
-
-			indx++;
-		    if(indx >= 100){
-		    	indx = 100;
-		    }
-		    lv_arc_set_value(ui_Arc2, indx);
-		    sprintf(buff,"%d",indx);
-		    lv_label_set_text(ui_lbNum, buff);
-		    access_cmd_set_light_ctl_100(LED_ADDR, 2 , (u8)indx,0, 0);
-
-		}else if(swx == '3'){
-			OFFLED2;
-			RD_Send_Relay_Stt(2,0);
-			indx--;
-			if(indx <= 0) indx =0;
-			lv_arc_set_value(ui_Arc2, indx);
-			sprintf(buff,"%d",indx);
-			lv_label_set_text(ui_lbNum, buff);
-			access_cmd_set_light_ctl_100(LED_ADDR, 2 , (u8)indx,0, 0);
-
-		}else if(swx == '4'){
-			ONLED1;
-			indx = 0;
-			lv_arc_set_value(ui_Arc2, 0);
-			lv_label_set_text(ui_lbNum, "0");
-			access_cmd_set_light_ctl_100(LED_ADDR, 2 ,0,0, 0);
-		}
-
-*/
-
 	}
 	return 0;
 }

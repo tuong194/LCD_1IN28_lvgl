@@ -772,7 +772,7 @@ typedef struct{
 #define LIGHT_CNT						(4) 	// means instance count
 		#endif
 	#else
-#define LIGHT_CNT                       (2)     // means instance count //T_NOTE: LIGHT_CNT
+#define LIGHT_CNT                       (3)     // means instance count
 	#endif
 #else
 #define LIGHT_CNT                       (1)     // means instance count

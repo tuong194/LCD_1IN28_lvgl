@@ -1,6 +1,6 @@
 vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
  ../vendor/lvgl/src/font/lv_font_loader.c \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
+ /cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
  ../vendor/lvgl/src/font/../lvgl.h ../vendor/lvgl/src/font/../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/misc/lv_log.h \
  ../vendor/lvgl/src/font/../../src/misc/../lv_conf_internal.h \
@@ -23,10 +23,10 @@ vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
  ../vendor/lvgl/src/font/../../src/hal/../draw/../lv_conf_internal.h \
  ../vendor/lvgl/src/font/../../src/hal/../draw/../misc/lv_style.h \
  ../vendor/lvgl/src/font/../../src/hal/../draw/../misc/../font/lv_font.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/lvgl/src/font/../../src/hal/../draw/../misc/../font/../lv_conf_internal.h \
  ../vendor/lvgl/src/font/../../src/hal/../draw/../misc/../font/lv_symbol_def.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/lvgl/src/font/../../src/hal/../draw/../misc/../font/../misc/lv_area.h \
+ /cygdrive/c/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/lvgl/src/lv_conf_internal.h \
  ../vendor/lvgl/src/font/../../src/hal/../draw/../misc/lv_color.h \
  ../vendor/lvgl/src/font/../../src/hal/../draw/../misc/../lv_conf_internal.h \
  ../vendor/lvgl/src/font/../../src/hal/../draw/../misc/lv_assert.h \
@@ -166,70 +166,70 @@ vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
  ../vendor/lvgl/src/font/../../src/extra/libs/tiny_ttf/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/others/lv_others.h \
  ../vendor/lvgl/src/font/../../src/extra/others/snapshot/lv_snapshot.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/src/font/../../src/extra/others/snapshot/../../../lv_conf_internal.h \
+ ../vendor/lvgl/src/font/../../src/extra/others/snapshot/../../../core/lv_obj.h \
  ../vendor/lvgl/src/font/../../src/extra/others/monkey/lv_monkey.h \
  ../vendor/lvgl/src/font/../../src/extra/others/monkey/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/others/gridnav/lv_gridnav.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/src/font/../../src/extra/others/gridnav/../../../core/lv_obj.h \
  ../vendor/lvgl/src/font/../../src/extra/others/fragment/lv_fragment.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/lvgl/src/font/../../src/extra/others/fragment/../../../lv_conf_internal.h \
  ../vendor/lvgl/src/font/../../src/extra/others/imgfont/lv_imgfont.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/src/font/../../src/extra/others/imgfont/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/others/msg/lv_msg.h \
  ../vendor/lvgl/src/font/../../src/extra/others/msg/../../../core/lv_obj.h \
  ../vendor/lvgl/src/font/../../src/extra/others/ime/lv_ime_pinyin.h \
  ../vendor/lvgl/src/font/../../src/extra/others/ime/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/themes/lv_themes.h \
  ../vendor/lvgl/src/font/../../src/extra/themes/default/lv_theme_default.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/src/font/../../src/extra/themes/default/../../../core/lv_obj.h \
  ../vendor/lvgl/src/font/../../src/extra/themes/mono/lv_theme_mono.h \
  ../vendor/lvgl/src/font/../../src/extra/themes/mono/../../../core/lv_obj.h \
  ../vendor/lvgl/src/font/../../src/extra/themes/basic/lv_theme_basic.h \
  ../vendor/lvgl/src/font/../../src/extra/themes/basic/../../../core/lv_obj.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/lv_widgets.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/animimg/lv_animimg.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/src/font/../../src/extra/widgets/animimg/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/calendar/lv_calendar.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_btnmatrix.h \
+ ../vendor/lvgl/src/font/../../src/extra/widgets/calendar/../../../widgets/lv_btnmatrix.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/calendar/lv_calendar_header_arrow.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/src/font/../../src/extra/widgets/calendar/../../../core/lv_obj.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/calendar/lv_calendar_header_dropdown.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/chart/lv_chart.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/chart/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/keyboard/lv_keyboard.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_btnmatrix.h \
+ ../vendor/lvgl/src/font/../../src/extra/widgets/keyboard/../../../widgets/lv_btnmatrix.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/list/lv_list.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/list/../../../core/lv_obj.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/list/../../layouts/flex/lv_flex.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/menu/lv_menu.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/menu/../../../core/lv_obj.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/msgbox/lv_msgbox.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/src/font/../../src/extra/widgets/msgbox/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/meter/lv_meter.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/meter/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/spinbox/lv_spinbox.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/src/font/../../src/extra/widgets/spinbox/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/spinner/lv_spinner.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/src/font/../../src/extra/widgets/spinner/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/tabview/lv_tabview.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/src/font/../../src/extra/widgets/tabview/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/tileview/lv_tileview.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/src/font/../../src/extra/widgets/tileview/../../../core/lv_obj.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/win/lv_win.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/win/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/colorwheel/lv_colorwheel.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/src/font/../../src/extra/widgets/colorwheel/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/led/lv_led.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/led/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/imgbtn/lv_imgbtn.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/src/font/../../src/extra/widgets/imgbtn/../../../lvgl.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/span/lv_span.h \
  ../vendor/lvgl/src/font/../../src/extra/widgets/span/../../../lvgl.h \
  ../vendor/lvgl/src/font/../misc/lv_fs.h \
  ../vendor/lvgl/src/font/lv_font_loader.h
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
+/cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
 
 ../vendor/lvgl/src/font/../lvgl.h:
 
@@ -277,13 +277,13 @@ vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
 
 ../vendor/lvgl/src/font/../../src/hal/../draw/../misc/../font/lv_font.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/src/font/../../src/hal/../draw/../misc/../font/../lv_conf_internal.h:
 
 ../vendor/lvgl/src/font/../../src/hal/../draw/../misc/../font/lv_symbol_def.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h:
+../vendor/lvgl/src/font/../../src/hal/../draw/../misc/../font/../misc/lv_area.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+/cygdrive/c/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/lvgl/src/lv_conf_internal.h:
 
 ../vendor/lvgl/src/font/../../src/hal/../draw/../misc/lv_color.h:
 
@@ -563,9 +563,9 @@ vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
 
 ../vendor/lvgl/src/font/../../src/extra/others/snapshot/lv_snapshot.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/src/font/../../src/extra/others/snapshot/../../../lv_conf_internal.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/src/font/../../src/extra/others/snapshot/../../../core/lv_obj.h:
 
 ../vendor/lvgl/src/font/../../src/extra/others/monkey/lv_monkey.h:
 
@@ -573,15 +573,15 @@ vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
 
 ../vendor/lvgl/src/font/../../src/extra/others/gridnav/lv_gridnav.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/src/font/../../src/extra/others/gridnav/../../../core/lv_obj.h:
 
 ../vendor/lvgl/src/font/../../src/extra/others/fragment/lv_fragment.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/src/font/../../src/extra/others/fragment/../../../lv_conf_internal.h:
 
 ../vendor/lvgl/src/font/../../src/extra/others/imgfont/lv_imgfont.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/src/font/../../src/extra/others/imgfont/../../../lvgl.h:
 
 ../vendor/lvgl/src/font/../../src/extra/others/msg/lv_msg.h:
 
@@ -595,7 +595,7 @@ vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
 
 ../vendor/lvgl/src/font/../../src/extra/themes/default/lv_theme_default.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/src/font/../../src/extra/themes/default/../../../core/lv_obj.h:
 
 ../vendor/lvgl/src/font/../../src/extra/themes/mono/lv_theme_mono.h:
 
@@ -609,15 +609,15 @@ vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/animimg/lv_animimg.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/src/font/../../src/extra/widgets/animimg/../../../lvgl.h:
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/calendar/lv_calendar.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_btnmatrix.h:
+../vendor/lvgl/src/font/../../src/extra/widgets/calendar/../../../widgets/lv_btnmatrix.h:
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/calendar/lv_calendar_header_arrow.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/src/font/../../src/extra/widgets/calendar/../../../core/lv_obj.h:
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/calendar/lv_calendar_header_dropdown.h:
 
@@ -627,7 +627,7 @@ vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/keyboard/lv_keyboard.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_btnmatrix.h:
+../vendor/lvgl/src/font/../../src/extra/widgets/keyboard/../../../widgets/lv_btnmatrix.h:
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/list/lv_list.h:
 
@@ -641,7 +641,7 @@ vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/msgbox/lv_msgbox.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/src/font/../../src/extra/widgets/msgbox/../../../lvgl.h:
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/meter/lv_meter.h:
 
@@ -649,19 +649,19 @@ vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/spinbox/lv_spinbox.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/src/font/../../src/extra/widgets/spinbox/../../../lvgl.h:
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/spinner/lv_spinner.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/src/font/../../src/extra/widgets/spinner/../../../lvgl.h:
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/tabview/lv_tabview.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/src/font/../../src/extra/widgets/tabview/../../../lvgl.h:
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/tileview/lv_tileview.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/src/font/../../src/extra/widgets/tileview/../../../core/lv_obj.h:
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/win/lv_win.h:
 
@@ -669,7 +669,7 @@ vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/colorwheel/lv_colorwheel.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/src/font/../../src/extra/widgets/colorwheel/../../../lvgl.h:
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/led/lv_led.h:
 
@@ -677,7 +677,7 @@ vendor/lvgl/src/font/lv_font_loader.d vendor/lvgl/src/font/lv_font_loader.o: \
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/imgbtn/lv_imgbtn.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/src/font/../../src/extra/widgets/imgbtn/../../../lvgl.h:
 
 ../vendor/lvgl/src/font/../../src/extra/widgets/span/lv_span.h:
 
