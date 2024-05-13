@@ -974,7 +974,7 @@ extern "C" {
 #define			LGT_CMD_LEFT_KEY				0x14//internal use
 #define			LGT_CMD_RIGHT_KEY				0x15//internal use
 
-#define			IRQ_TIMER1_ENABLE  			    0
+#define			IRQ_TIMER1_ENABLE  			    1
 #define			IRQ_TIME1_INTERVAL			    (1000) // unit: us
 #define			IRQ_GPIO_ENABLE  			    0
 

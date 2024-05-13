@@ -30,15 +30,11 @@
 #include "proj_lib/ble/ll/ll.h"
 #include "proj_lib/sig_mesh/app_mesh.h"
 
-
 #include "../lvgl/lvgl.h"
 #include "../tuong/LCD_128.h"
 #include "../tuong/LCD_lvgl.h"
-#include "../tuong/switch.h"
 #include "../lvgl/demos/benchmark/lv_demo_benchmark.h"
-//#include "../lvgl/demos/music/lv_demo_music.h"
 #include "../lvgl/examples/lv_examples.h"
-
 
 #include "../UI/ui.h"
 
@@ -46,9 +42,10 @@ extern void user_init();
 extern void main_loop ();
 void blc_pm_select_none();
 
-
 u8 gio, phut, giay;
 u8 dim;
+u32 nowtime=0;
+
 #define LED_ADDR 0xFFFF
 
 unsigned int get_sys_elapse(void)
@@ -70,6 +67,11 @@ unsigned int get_sys_elapse(void)
 	return (ms + elapseFullCnt * (0xFFFFFFFF/24000));
 }
 
+void setRotation(u8 gio, u8 phut, u8 giay){
+	lv_img_set_angle(ui_gio, gio*60);
+	lv_img_set_angle(ui_phut, phut*60);
+	lv_img_set_angle(ui_giay, giay*60);
+}
 
 
 #if (HCI_ACCESS==HCI_USE_UART)
@@ -103,6 +105,19 @@ _attribute_ram_code_ void irq_uart_handle()
 #endif
 
 #if IRQ_TIMER1_ENABLE
+	#if __TLSR_RISCV_EN__
+int timer1_irq_cnt = 0;
+_attribute_ram_code_sec_ void timer1_irq_handler(void)
+{
+	if(timer_get_irq_status(TMR_STA_TMR1))
+	{
+		lv_tick_inc(1);
+		timer_clr_irq_status(TMR_STA_TMR1);
+		timer1_irq_cnt++;
+		//gpio_write(GPIO_PA1, timer1_irq_cnt%2);
+	}
+}
+	#else
 _attribute_ram_code_ void irq_timer_handle()
 {
     u32 src = reg_irq_src;
@@ -113,10 +128,30 @@ _attribute_ram_code_ void irq_timer_handle()
        gpio_write(GPIO_PA1,A_debug_irq_cnt%2);
     }
 }
+	#endif
 #endif
 
 #if	IRQ_GPIO_ENABLE
+#if __TLSR_RISCV_EN__
+volatile int gpio_irq_cnt = 0, gpio_irq_risc0_cnt = 0, gpio_irq_risc1_cnt = 0;
+_attribute_ram_code_sec_noinline_ void gpio_irq_handler(void)
+{
+	gpio_irq_cnt++;
+	gpio_clr_irq_status(FLD_GPIO_IRQ_CLR);
+}
 
+_attribute_ram_code_sec_noinline_ void gpio_risc0_irq_handler(void)
+{
+	gpio_irq_risc0_cnt++;
+	gpio_clr_irq_status(FLD_GPIO_IRQ_GPIO2RISC0_CLR);
+}
+
+_attribute_ram_code_sec_noinline_ void gpio_risc1_irq_handler(void)
+{
+	gpio_irq_risc1_cnt++;
+	gpio_clr_irq_status(FLD_GPIO_IRQ_GPIO2RISC1_CLR);
+}
+#else
 void irq_gpio_handle()
 {
 	u32 src = reg_irq_src;
@@ -144,6 +179,7 @@ void irq_gpio_handle()
 	#endif
 }
 #endif
+#endif
 
 _attribute_ram_code_ void irq_handler(void)
 {
@@ -159,7 +195,7 @@ _attribute_ram_code_ void irq_handler(void)
 		irq_blt_sdk_handler ();  //ble irq proc
 	}
 
-#if IRQ_TIMER1_ENABLE
+#if (IRQ_TIMER1_ENABLE && !__TLSR_RISCV_EN__)
 	irq_timer_handle();
 #endif
 
@@ -286,15 +322,15 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 	{
 		user_init();
 		SPI_Config();
-		Pin_Switch_Config();
-
 		lv_init();
 		lv_port_disp_init();
 
+		//lv_demo_benchmark();
 
 		ui_init();
 		gio=12;phut=33;giay=0;
 		dim =0;
+		//system_time_init();
 	}
 
     irq_enable();
@@ -302,40 +338,39 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 	LOG_USER_MSG_INFO(0, 0,"[mesh] Start from SIG Mesh", 0);
 	#endif
 
-	void setRotation(u8 gio, u8 phut, u8 giay){
-		lv_img_set_angle(ui_gio, gio*60);
-		lv_img_set_angle(ui_phut, phut*60);
-		lv_img_set_angle(ui_giay, giay*60);
-	}
-
 	while (1) {
 #if (MODULE_WATCHDOG_ENABLE)
 		wd_clear(); //clear watch dog
 #endif
 		main_loop ();
 		lv_timer_handler();
+		//system_time_run();
 
 		setRotation(gio,phut,giay);
-		sleep_ms(100);
-		giay++;
-		if(giay == 60){
-			phut++;
-			giay=0;
-			if(phut == 60){
-				phut=0;
-			}
-			if(phut%12 == 0){
-				gio++;
-			}
-			if(gio==60){
-				gio=0;
-			}
-			dim++;
-			if(dim == 100){
-				dim = 0;
-			}
-			access_cmd_set_light_ctl_100(LED_ADDR, 2 , dim,0, 0);
+		//sleep_ms(1000);
 
+
+		if(get_sys_elapse() - nowtime >=1000){
+			giay++;
+			if(giay == 60){
+				phut++;
+				giay=0;
+				if(phut == 60){
+					phut=0;
+				}
+				if(phut%12 == 0){
+					gio++;
+				}
+				if(gio==60){
+					gio=0;
+				}
+				dim++;
+				if(dim == 100){
+					dim = 0;
+				}
+				//access_cmd_set_light_ctl_100(LED_ADDR, 2 , dim,0, 0);
+			}
+			nowtime = get_sys_elapse();
 		}
 	}
 	return 0;

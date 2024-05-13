@@ -1,7 +1,7 @@
 vendor/lvgl/src/core/lv_group.d vendor/lvgl/src/core/lv_group.o: \
  ../vendor/lvgl/src/core/lv_group.c ../vendor/lvgl/src/core/lv_group.h \
  ../vendor/lvgl/src/core/../lv_conf_internal.h \
- /cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
  ../vendor/lvgl/src/core/../lv_conf_kconfig.h \
  ../vendor/lvgl/src/core/../../lv_conf.h \
  ../vendor/lvgl/src/core/../misc/lv_ll.h \
@@ -107,7 +107,7 @@ vendor/lvgl/src/core/lv_group.d vendor/lvgl/src/core/lv_group.o: \
 
 ../vendor/lvgl/src/core/../lv_conf_internal.h:
 
-/cygdrive/C/TelinkV323/9218/B91_SIG_Mesh_SDK/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
 
 ../vendor/lvgl/src/core/../lv_conf_kconfig.h:
 
