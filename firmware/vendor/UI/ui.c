@@ -15,6 +15,7 @@ lv_obj_t * ui_Screen2;
 lv_obj_t * ui_giay;
 lv_obj_t * ui_gio;
 lv_obj_t * ui_phut;
+lv_obj_t * ui_Image1;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////

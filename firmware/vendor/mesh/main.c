@@ -45,6 +45,7 @@ void blc_pm_select_none();
 u8 gio, phut, giay;
 u8 dim;
 u32 nowtime=0;
+u8 check;
 
 #define LED_ADDR 0xFFFF
 
@@ -326,12 +327,22 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		lv_port_disp_init();
 
 		//lv_demo_benchmark();
+		//LCD_showImg2();
+
+		//lv_example_anim_2();
 
 		ui_init();
 		gio=12;phut=33;giay=0;
-		dim =0;
-		//system_time_init();
+		setRotation(gio,phut,giay);
+
+		nowtime=0;
+		check=1;
+		//blc_pm_select_internal_32k_crystal();
+
+
 	}
+
+
 
     irq_enable();
 	#if (DEBUG_LOG_SETTING_DEVELOP_MODE_EN || (MESH_USER_DEFINE_MODE == MESH_IRONMAN_MENLO_ENABLE))
@@ -344,34 +355,48 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 #endif
 		main_loop ();
 		lv_timer_handler();
-		//system_time_run();
 
-		setRotation(gio,phut,giay);
-		//sleep_ms(1000);
+		LCD_Clear(BLUE);
+		sleep_ms(5000);
+		lv_disp_load_scr(ui_Screen2);
+		sleep_ms(5000);
 
 
-		if(get_sys_elapse() - nowtime >=1000){
-			giay++;
-			if(giay == 60){
-				phut++;
-				giay=0;
-				if(phut == 60){
-					phut=0;
-				}
-				if(phut%12 == 0){
-					gio++;
-				}
-				if(gio==60){
-					gio=0;
-				}
-				dim++;
-				if(dim == 100){
-					dim = 0;
-				}
-				//access_cmd_set_light_ctl_100(LED_ADDR, 2 , dim,0, 0);
+/*			if(get_32k_tick() - nowtime>=320000){
+				check ++;
+				check %=2;
 			}
-			nowtime = get_sys_elapse();
-		}
+			if(check == 0){
+					if(get_32k_tick() - nowtime >=32000){
+						giay+=(get_32k_tick()-nowtime)/32000;
+						if(giay == 60){
+							phut++;
+							giay=0;
+							if(phut == 60){
+								phut=0;
+							}
+							if(phut%12 == 0){
+								gio++;
+							}
+							if(gio==60){
+								gio=0;
+							}
+							dim++;
+							if(dim == 100){
+								dim = 0;
+							}
+							//access_cmd_set_light_ctl_100(LED_ADDR, 2 , dim,0, 0);
+						}
+						nowtime = get_32k_tick();
+					}
+					lv_disp_load_scr(ui_Screen2);
+					setRotation(gio,phut,giay);
+			}
+			else if(check == 1){
+				LCD_Clear(GREEN);
+			}*/
+
+		//pm_tim_recover_32k_xtal(pm_get_32k_tick());
 	}
 	return 0;
 }

@@ -4,16 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../vendor/UI/images/ui_img_background_png.c \
 ../vendor/UI/images/ui_img_h_png.c \
 ../vendor/UI/images/ui_img_m_png.c \
 ../vendor/UI/images/ui_img_s_png.c 
 
 OBJS += \
+./vendor/UI/images/ui_img_background_png.o \
 ./vendor/UI/images/ui_img_h_png.o \
 ./vendor/UI/images/ui_img_m_png.o \
 ./vendor/UI/images/ui_img_s_png.o 
 
 C_DEPS += \
+./vendor/UI/images/ui_img_background_png.d \
 ./vendor/UI/images/ui_img_h_png.d \
 ./vendor/UI/images/ui_img_m_png.d \
 ./vendor/UI/images/ui_img_s_png.d 
