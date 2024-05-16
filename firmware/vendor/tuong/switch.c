@@ -54,6 +54,7 @@ static char read_col(u8 row){
 
 u8 count = 0;
 
+
 char ReadSW(void){
 	char check;
 
@@ -65,6 +66,8 @@ char ReadSW(void){
 		count =0;
 		stateSW = 1;
 		return check;
+	}else if(READ_COL1==0 && READ_COL2==0){ // press '1' & '2'
+		return '5';
 	}
 
 	//check row 2

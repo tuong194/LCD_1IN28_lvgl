@@ -15,7 +15,14 @@ lv_obj_t * ui_Screen2;
 lv_obj_t * ui_giay;
 lv_obj_t * ui_gio;
 lv_obj_t * ui_phut;
-lv_obj_t * ui_Image1;
+
+
+// SCREEN: ui_Screen1
+void ui_Screen1_screen_init(void);
+lv_obj_t * ui_Screen1;
+lv_obj_t * ui_Arc1;
+lv_obj_t * ui_Panel1;
+lv_obj_t * ui_Label1;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -39,6 +46,7 @@ void ui_init(void)
                                                true, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
     ui_Screen2_screen_init();
+    ui_Screen1_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_Screen2);
 }

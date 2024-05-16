@@ -516,9 +516,6 @@ void gpio_set_up_down_res(gpio_pin_e pin, gpio_pull_type_e up_down_res);
 void gpio_set_pullup_res_30k(gpio_pin_e pin);
 
 
-void gpio_set_interrupt_init(gpio_pin_e pin, gpio_pull_type_e up_down, gpio_irq_trigger_type_e falling, irq_source_e irq_mask);
-
-
 #endif
 
 

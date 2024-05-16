@@ -46,12 +46,4 @@ void ui_Screen2_screen_init(void)
     lv_obj_clear_flag(ui_phut, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_img_set_pivot(ui_phut, 5, 80);
 
-//    ui_Image1 = lv_img_create(ui_Screen2);
-//    lv_img_set_src(ui_Image1, &ui_img_background_png);
-//    lv_obj_set_width(ui_Image1, LV_SIZE_CONTENT);   /// 240
-//    lv_obj_set_height(ui_Image1, LV_SIZE_CONTENT);    /// 240
-//    lv_obj_set_align(ui_Image1, LV_ALIGN_CENTER);
-//    lv_obj_add_flag(ui_Image1, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-//    lv_obj_clear_flag(ui_Image1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
 }

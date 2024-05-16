@@ -404,7 +404,6 @@ static inline void pwm_set_pwm0_tcmp_and_tmax_shadow(unsigned short max_tick, un
  */
 static inline void pwm_set_pwm0_pulse_num(unsigned short pulse_num){
 		reg_pwm0_pulse_num = pulse_num;
-
 }
 
 

@@ -13,9 +13,9 @@
 
 
 
-#define RST_Pin GPIO_PE0 //GPIO_PA1
+#define RST_Pin  GPIO_PA1
 #define func  AS_GPIO
-#define DC_Pin  GPIO_PE2 //GPIO_PA3
+#define DC_Pin   GPIO_PA3
 
 #define HORIZONTAL 0 //ngang
 #define VERTICAL   1 //doc
@@ -24,6 +24,7 @@
 #define LCD_WIDTH 240
 
 #define SPI_CLOCK 12000000
+#define PWM_CLOCK 96000
 
 typedef struct{
 	u16 WIDTH;

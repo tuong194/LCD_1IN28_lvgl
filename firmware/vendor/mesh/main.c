@@ -33,21 +33,34 @@
 #include "../lvgl/lvgl.h"
 #include "../tuong/LCD_128.h"
 #include "../tuong/LCD_lvgl.h"
+#include "../tuong/switch.h"
 #include "../lvgl/demos/benchmark/lv_demo_benchmark.h"
+//#include "../lvgl/demos/music/lv_demo_music.h"
 #include "../lvgl/examples/lv_examples.h"
 
+
 #include "../UI/ui.h"
+
+
+
+
+
 
 extern void user_init();
 extern void main_loop ();
 void blc_pm_select_none();
 
-u8 gio, phut, giay;
-u8 dim;
-u32 nowtime=0;
-u8 check;
+char swx;
+int16_t indx;
+u32 dim_set;
 
-#define LED_ADDR 0xFFFF
+u8 gio, phut, giay;
+
+u32 nowtime; u32 timeScene; u32 timeKickout;
+u32 sumSec;u32 sumMin; u32 sumHour;
+
+u8 checkScene;
+u8 checkKickout=0;
 
 unsigned int get_sys_elapse(void)
 {
@@ -68,11 +81,50 @@ unsigned int get_sys_elapse(void)
 	return (ms + elapseFullCnt * (0xFFFFFFFF/24000));
 }
 
-void setRotation(u8 gio, u8 phut, u8 giay){
-	lv_img_set_angle(ui_gio, gio*60);
-	lv_img_set_angle(ui_phut, phut*60);
-	lv_img_set_angle(ui_giay, giay*60);
+
+
+#define GATEWAYADDRESS 0xFFFF
+void RD_Send_Relay_Stt(uint8_t Relay_ID, uint8_t Relay_Stt)
+{
+	uint8_t Mess_Buff[8] = {0};
+	uint16_t Element_Add = 0x0000;
+
+	Mess_Buff[0]		= Relay_Stt;
+	Element_Add 		= ele_adr_primary + (Relay_ID-1);
+
+	mesh_tx_cmd2normal(G_ONOFF_STATUS, Mess_Buff, 1, Element_Add, GATEWAYADDRESS, 2);
+
+//	char UART_TempSend[128];
+//	sprintf(UART_TempSend,"Messenger On-Off Gw:0x%x- Relay: %d--%d--%d--%d  \n",RD_GATEWAYADDRESS, relay_Stt[0], relay_Stt[1], relay_Stt[2], relay_Stt[3]);
+//	uart_CSend(UART_TempSend);
 }
+
+typedef struct {
+	uint8_t Header[2];
+	uint8_t Length;
+	uint8_t OpCode[2];
+	uint8_t Dim_Stt;
+	uint8_t Cct_Stt;
+	uint8_t CRC;
+} Struct_OPCODE_SET_DIMCCT_t;
+#define LED_ADDR 0xFFFF
+
+/*
+static void RD_Model_OPCODE_SET_DIMCCT(void)
+{
+	Struct_OPCODE_SET_DIMCCT_t *mess_buff;
+
+	mess_buff = (Struct_OPCODE_SET_DIMCCT_t*) vrts_GWIF_IncomeMessage;
+
+	u8 dim_set	= mess_buff->Dim_Stt;
+	u8 cct_set = mess_buff->Cct_Stt;
+
+	//rdPrintf("OPCODE SET dim: %d% cct:%d %", dim_set, cct_set);
+	access_cmd_set_light_ctl_100(LED_ADDR, 2 , dim_set, cct_set, 0);
+	//access_cmd_set_light_ctl(0xffff, 2 , lum2_lightness(dim_set), cct_set, 0, &TTS_CTRL_DF);
+}
+*/
+
 
 
 #if (HCI_ACCESS==HCI_USE_UART)
@@ -106,19 +158,6 @@ _attribute_ram_code_ void irq_uart_handle()
 #endif
 
 #if IRQ_TIMER1_ENABLE
-	#if __TLSR_RISCV_EN__
-int timer1_irq_cnt = 0;
-_attribute_ram_code_sec_ void timer1_irq_handler(void)
-{
-	if(timer_get_irq_status(TMR_STA_TMR1))
-	{
-		lv_tick_inc(1);
-		timer_clr_irq_status(TMR_STA_TMR1);
-		timer1_irq_cnt++;
-		//gpio_write(GPIO_PA1, timer1_irq_cnt%2);
-	}
-}
-	#else
 _attribute_ram_code_ void irq_timer_handle()
 {
     u32 src = reg_irq_src;
@@ -129,30 +168,10 @@ _attribute_ram_code_ void irq_timer_handle()
        gpio_write(GPIO_PA1,A_debug_irq_cnt%2);
     }
 }
-	#endif
 #endif
 
 #if	IRQ_GPIO_ENABLE
-#if __TLSR_RISCV_EN__
-volatile int gpio_irq_cnt = 0, gpio_irq_risc0_cnt = 0, gpio_irq_risc1_cnt = 0;
-_attribute_ram_code_sec_noinline_ void gpio_irq_handler(void)
-{
-	gpio_irq_cnt++;
-	gpio_clr_irq_status(FLD_GPIO_IRQ_CLR);
-}
 
-_attribute_ram_code_sec_noinline_ void gpio_risc0_irq_handler(void)
-{
-	gpio_irq_risc0_cnt++;
-	gpio_clr_irq_status(FLD_GPIO_IRQ_GPIO2RISC0_CLR);
-}
-
-_attribute_ram_code_sec_noinline_ void gpio_risc1_irq_handler(void)
-{
-	gpio_irq_risc1_cnt++;
-	gpio_clr_irq_status(FLD_GPIO_IRQ_GPIO2RISC1_CLR);
-}
-#else
 void irq_gpio_handle()
 {
 	u32 src = reg_irq_src;
@@ -180,7 +199,6 @@ void irq_gpio_handle()
 	#endif
 }
 #endif
-#endif
 
 _attribute_ram_code_ void irq_handler(void)
 {
@@ -196,7 +214,7 @@ _attribute_ram_code_ void irq_handler(void)
 		irq_blt_sdk_handler ();  //ble irq proc
 	}
 
-#if (IRQ_TIMER1_ENABLE && !__TLSR_RISCV_EN__)
+#if IRQ_TIMER1_ENABLE
 	irq_timer_handle();
 #endif
 
@@ -322,32 +340,46 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 #endif
 	{
 		user_init();
+
+
+		//uart_init(UART0,12,15,UART_PARITY_NONE,UART_STOP_BIT_ONE); // sysclock = 24M
+	//	uart_set_pin(UART0_TX_PB2,UART0_RX_PB3);
+
+
+		PWM_Confing();
 		SPI_Config();
+		Pin_Switch_Config();
+
 		lv_init();
 		lv_port_disp_init();
 
-		//lv_demo_benchmark();
-		//LCD_showImg2();
-
-		//lv_example_anim_2();
 
 		ui_init();
 		gio=12;phut=33;giay=0;
-		setRotation(gio,phut,giay);
 
-		nowtime=0;
-		check=1;
-		//blc_pm_select_internal_32k_crystal();
-
-
+		nowtime = 0;
+		checkScene = 0;
+		blc_pm_select_external_32k_crystal();
+		dim_set=0;
+//		indx=50;
+//		dim_set= 50;
 	}
-
-
 
     irq_enable();
 	#if (DEBUG_LOG_SETTING_DEVELOP_MODE_EN || (MESH_USER_DEFINE_MODE == MESH_IRONMAN_MENLO_ENABLE))
 	LOG_USER_MSG_INFO(0, 0,"[mesh] Start from SIG Mesh", 0);
 	#endif
+
+	//lv_tick_set_cb();
+
+//	unsigned char buff[8];
+
+
+	void setRotation(u8 gio, u8 phut, u8 giay){
+		lv_img_set_angle(ui_gio, gio*60);
+		lv_img_set_angle(ui_phut, phut*60);
+		lv_img_set_angle(ui_giay, giay*60);
+	}
 
 	while (1) {
 #if (MODULE_WATCHDOG_ENABLE)
@@ -356,47 +388,146 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		main_loop ();
 		lv_timer_handler();
 
-		LCD_Clear(BLUE);
-		sleep_ms(5000);
-		lv_disp_load_scr(ui_Screen2);
-		sleep_ms(5000);
 
 
-/*			if(get_32k_tick() - nowtime>=320000){
-				check ++;
-				check %=2;
-			}
-			if(check == 0){
-					if(get_32k_tick() - nowtime >=32000){
-						giay+=(get_32k_tick()-nowtime)/32000;
-						if(giay == 60){
-							phut++;
-							giay=0;
-							if(phut == 60){
-								phut=0;
-							}
-							if(phut%12 == 0){
-								gio++;
-							}
-							if(gio==60){
-								gio=0;
-							}
-							dim++;
-							if(dim == 100){
-								dim = 0;
-							}
-							//access_cmd_set_light_ctl_100(LED_ADDR, 2 , dim,0, 0);
-						}
-						nowtime = get_32k_tick();
+		if(!checkScene){
+			if(pm_get_32k_tick() - nowtime >=32000){
+				giay++;
+				if(giay == 60){
+					phut++;
+					giay=0;
+					if(phut == 60){
+						phut=0;
 					}
-					lv_disp_load_scr(ui_Screen2);
-					setRotation(gio,phut,giay);
+					if(phut%12 == 0){
+						gio++;
+					}
+					if(gio==60){
+						gio=0;
+					}
+				}
+				timeScene = nowtime = pm_get_32k_tick();
+				 if(!checkKickout){
+					 timeKickout=nowtime;
+				 }
 			}
-			else if(check == 1){
-				LCD_Clear(GREEN);
-			}*/
+			setRotation(gio,phut,giay);
+		}
 
-		//pm_tim_recover_32k_xtal(pm_get_32k_tick());
+		swx = ReadSW();
+		if(swx == '5' ){
+			checkKickout = 1;
+			if(checkScene == 0 && (pm_get_32k_tick() - timeKickout >= (32000*3))){
+				ONLED1;
+				//kick_out(0);
+				checkKickout = 0;
+			}
+
+		}else if(swx == '4'){
+			ONLED2;
+			checkScene = 1;
+			ui_Screen1_screen_init();
+			lv_disp_load_scr(ui_Screen1);
+		}else if(swx == '3'){
+			OFFLED2;
+			ui_Screen2_screen_init();
+			lv_disp_load_scr(ui_Screen2);
+
+			sumSec = (pm_get_32k_tick()-nowtime)/32000;
+
+			if(giay + sumSec <60){
+				giay += (sumSec);
+			}else{
+				giay = (giay+sumSec) % 60 ;
+				sumMin = (giay+sumSec) / 60;
+				if(phut + sumMin < 60){
+					phut += sumMin;
+				}else{
+					phut = (phut + sumMin)%60;
+					sumHour = (phut + sumMin) / 60;
+					if(gio + sumHour <24){
+						gio += sumHour;
+					}else{
+						gio = (gio+sumHour)%24;
+					}
+				}
+			}
+			checkScene = 0;
+		}else if(swx == SW_NOT_PRESS){
+			checkKickout = 0;
+		}
+
+
+
+
+		/*if(checkScene == 1){
+			ui_Screen1_screen_init();
+			lv_disp_load_scr(ui_Screen1);
+
+			if(get_32k_tick() - timeScene >= 160000){
+				ui_Screen2_screen_init();
+				lv_disp_load_scr(ui_Screen2);
+
+				sumSec = (get_32k_tick()-nowtime)/32000;
+
+			if(giay + sumSec <60){
+				giay += (sumSec-1);
+			}else{
+				giay = (giay+sumSec) % 60 -1;
+				sumMin = (giay+sumSec) / 60;
+				if(phut + sumMin < 60){
+					phut += sumMin;
+				}else{
+					phut = (phut + sumMin)%60;
+					sumHour = (phut + sumMin) / 60;
+					if(gio + sumHour <24){
+						gio += sumHour;
+					}else{
+						gio = (gio+sumHour)%24;
+					}
+				}
+			}
+				checkScene = 0;
+			}
+		}*/
+
+	/*	swx = ReadSW();
+		 if(swx == '3'){
+			OFFLED2;
+			checkScene = 1;
+
+			ui_Screen1_screen_init();
+			lv_disp_load_scr(ui_Screen1);
+
+		}else if(swx == '4'){
+			ONLED2;
+			ui_Screen2_screen_init();
+			lv_disp_load_scr(ui_Screen2);
+
+			sumSec = (pm_get_32k_tick()-nowtime)/32000;
+
+			if(giay + sumSec <60){
+				giay += (sumSec);
+			}else{
+				giay = (giay+sumSec) % 60 ;
+				sumMin = (giay+sumSec) / 60;
+				if(phut + sumMin < 60){
+					phut += sumMin;
+				}else{
+					phut = (phut + sumMin)%60;
+					sumHour = (phut + sumMin) / 60;
+					if(gio + sumHour <24){
+						gio += sumHour;
+					}else{
+						gio = (gio+sumHour)%24;
+					}
+				}
+			}
+
+			checkScene = 0;
+		}*/
+
+
 	}
 	return 0;
 }

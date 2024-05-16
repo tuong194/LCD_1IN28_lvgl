@@ -3,7 +3,7 @@ vendor/lvgl/src/draw/renesas/lv_gpu_d2_ra6m3.d vendor/lvgl/src/draw/renesas/lv_g
  ../vendor/lvgl/src/draw/renesas/lv_gpu_d2_ra6m3.h \
  ../vendor/lvgl/src/draw/renesas/../../misc/lv_color.h \
  ../vendor/lvgl/src/draw/renesas/../../misc/../lv_conf_internal.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
+ /cygdrive/C/TelinkV323/9518/LCD_1IN28/LCD_1IN28_lvgl-tuong194/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
  ../vendor/lvgl/src/draw/renesas/../../misc/../lv_conf_kconfig.h \
  ../vendor/lvgl/src/draw/renesas/../../misc/../../lv_conf.h \
  ../vendor/lvgl/src/draw/renesas/../../misc/lv_assert.h \
@@ -19,7 +19,7 @@ vendor/lvgl/src/draw/renesas/lv_gpu_d2_ra6m3.d vendor/lvgl/src/draw/renesas/lv_g
  ../vendor/lvgl/src/draw/renesas/../../core/../misc/../font/../lv_conf_internal.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../misc/../font/lv_symbol_def.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../misc/../font/../misc/lv_area.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/lvgl/src/draw/renesas/../../core/../misc/../font/../misc/../lv_conf_internal.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../misc/lv_color.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../misc/lv_area.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../misc/lv_anim.h \
@@ -46,16 +46,16 @@ vendor/lvgl/src/draw/renesas/lv_gpu_d2_ra6m3.d vendor/lvgl/src/draw/renesas/lv_g
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/../misc/lv_color.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/../misc/lv_area.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/../misc/lv_fs.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/../misc/../lv_conf_internal.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/../misc/lv_types.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/lv_img_cache.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/lv_draw_rect.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/sw/lv_draw_sw_gradient.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_color.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_style.h \
+ ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/sw/../../misc/lv_color.h \
+ ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/sw/../../misc/lv_style.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/sw/lv_draw_sw_dither.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj_pos.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h \
+ ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/sw/../../core/lv_obj_pos.h \
+ ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/sw/../../core/../misc/lv_area.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/lv_draw_label.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/../misc/lv_bidi.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/lv_draw_img.h \
@@ -72,7 +72,7 @@ vendor/lvgl/src/draw/renesas/lv_gpu_d2_ra6m3.d vendor/lvgl/src/draw/renesas/lv_g
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../misc/lv_timer.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../misc/../lv_conf_internal.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../misc/../hal/lv_hal_tick.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/lvgl/src/draw/renesas/../../core/../hal/../misc/../hal/../lv_conf_internal.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/lv_hal_indev.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/../lv_conf_internal.h \
  ../vendor/lvgl/src/draw/renesas/../../core/../hal/lv_hal_tick.h \
@@ -96,7 +96,7 @@ vendor/lvgl/src/draw/renesas/lv_gpu_d2_ra6m3.d vendor/lvgl/src/draw/renesas/lv_g
 
 ../vendor/lvgl/src/draw/renesas/../../misc/../lv_conf_internal.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
+/cygdrive/C/TelinkV323/9518/LCD_1IN28/LCD_1IN28_lvgl-tuong194/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
 
 ../vendor/lvgl/src/draw/renesas/../../misc/../lv_conf_kconfig.h:
 
@@ -128,7 +128,7 @@ vendor/lvgl/src/draw/renesas/lv_gpu_d2_ra6m3.d vendor/lvgl/src/draw/renesas/lv_g
 
 ../vendor/lvgl/src/draw/renesas/../../core/../misc/../font/../misc/lv_area.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/src/draw/renesas/../../core/../misc/../font/../misc/../lv_conf_internal.h:
 
 ../vendor/lvgl/src/draw/renesas/../../core/../misc/lv_color.h:
 
@@ -182,7 +182,7 @@ vendor/lvgl/src/draw/renesas/lv_gpu_d2_ra6m3.d vendor/lvgl/src/draw/renesas/lv_g
 
 ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/../misc/lv_fs.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/../misc/../lv_conf_internal.h:
 
 ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/../misc/lv_types.h:
 
@@ -192,15 +192,15 @@ vendor/lvgl/src/draw/renesas/lv_gpu_d2_ra6m3.d vendor/lvgl/src/draw/renesas/lv_g
 
 ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/sw/lv_draw_sw_gradient.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_color.h:
+../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/sw/../../misc/lv_color.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_style.h:
+../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/sw/../../misc/lv_style.h:
 
 ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/sw/lv_draw_sw_dither.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj_pos.h:
+../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/sw/../../core/lv_obj_pos.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h:
+../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/sw/../../core/../misc/lv_area.h:
 
 ../vendor/lvgl/src/draw/renesas/../../core/../hal/../draw/lv_draw_label.h:
 
@@ -234,7 +234,7 @@ vendor/lvgl/src/draw/renesas/lv_gpu_d2_ra6m3.d vendor/lvgl/src/draw/renesas/lv_g
 
 ../vendor/lvgl/src/draw/renesas/../../core/../hal/../misc/../hal/lv_hal_tick.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/src/draw/renesas/../../core/../hal/../misc/../hal/../lv_conf_internal.h:
 
 ../vendor/lvgl/src/draw/renesas/../../core/../hal/lv_hal_indev.h:
 

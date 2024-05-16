@@ -4,13 +4,13 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
  ../vendor/lvgl/examples/widgets/keyboard/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/lv_log.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/../lv_conf_internal.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
+ /cygdrive/C/TelinkV323/9518/LCD_1IN28/LCD_1IN28_lvgl-tuong194/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/../lv_conf_kconfig.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/lv_conf.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/../../lv_conf.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/lv_types.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/lv_timer.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/../hal/lv_hal_tick.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/../hal/../lv_conf_internal.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/lv_math.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/lv_mem.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/lv_async.h \
@@ -21,48 +21,49 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/lv_hal_disp.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/lv_hal.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_style.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/font/lv_font.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/font/lv_symbol_def.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_color.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_assert.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_log.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_mem.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_math.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_types.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_anim.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_txt.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_printf.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_bidi.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_style_gen.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_txt.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../lv_conf_internal.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_style.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/../font/lv_font.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/../font/../lv_conf_internal.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/../font/lv_symbol_def.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/../font/../misc/lv_area.h \
+ /cygdrive/c/TelinkV323/9518/LCD_1IN28/LCD_1IN28_lvgl-tuong194/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_color.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/../lv_conf_internal.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_assert.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_log.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_mem.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_math.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_types.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_area.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_anim.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_txt.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_printf.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_bidi.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_style_gen.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_txt.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_img_decoder.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_img_buf.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_color.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_fs.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_types.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_color.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_area.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_fs.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_types.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_img_cache.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_rect.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/sw/lv_draw_sw_gradient.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_color.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_style.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/sw/../../misc/lv_color.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/sw/../../misc/lv_style.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/sw/lv_draw_sw_dither.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj_pos.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/sw/../../core/lv_obj_pos.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/sw/../../core/../misc/lv_area.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_label.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_bidi.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_bidi.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_img.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_line.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_triangle.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_arc.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_mask.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_math.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_math.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_transform.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_layer.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../misc/lv_color.h \
@@ -107,33 +108,33 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/font/lv_font_fmt_txt.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/font/lv_font.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_arc.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../lv_conf_internal.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../core/lv_obj.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_btn.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_img.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_fs.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/draw/lv_draw.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../misc/lv_fs.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../draw/lv_draw.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_label.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/font/lv_font.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/font/lv_symbol_def.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_txt.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../font/lv_font.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../font/lv_symbol_def.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../misc/lv_txt.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_line.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_table.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_label.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_checkbox.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_bar.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_anim.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../misc/lv_anim.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_btn.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_slider.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_bar.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_btnmatrix.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_dropdown.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_label.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../widgets/lv_label.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_roller.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_textarea.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_canvas.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_img.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/draw/lv_draw_img.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../widgets/lv_img.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../draw/lv_draw_img.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_switch.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/draw/lv_draw.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/lv_api_map.h \
@@ -141,92 +142,92 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/lv_extra.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/layouts/lv_layouts.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/layouts/flex/lv_flex.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/layouts/flex/../../../core/lv_obj.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/layouts/grid/lv_grid.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/layouts/grid/../../../core/lv_obj.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/lv_libs.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/bmp/lv_bmp.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/bmp/../../../lv_conf_internal.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/fsdrv/lv_fsdrv.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/fsdrv/../../../lv_conf_internal.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/png/lv_png.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/png/../../../lv_conf_internal.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/gif/lv_gif.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/gif/../../../lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/gif/../../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/qrcode/lv_qrcode.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/qrcode/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/sjpg/lv_sjpg.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/freetype/lv_freetype.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/freetype/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/rlottie/lv_rlottie.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/rlottie/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/ffmpeg/lv_ffmpeg.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/ffmpeg/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/tiny_ttf/lv_tiny_ttf.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/tiny_ttf/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/lv_others.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/snapshot/lv_snapshot.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/snapshot/../../../lv_conf_internal.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/snapshot/../../../core/lv_obj.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/monkey/lv_monkey.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/monkey/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/gridnav/lv_gridnav.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/gridnav/../../../core/lv_obj.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/fragment/lv_fragment.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/fragment/../../../lv_conf_internal.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/imgfont/lv_imgfont.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/imgfont/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/msg/lv_msg.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/msg/../../../core/lv_obj.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/ime/lv_ime_pinyin.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/ime/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/lv_themes.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/default/lv_theme_default.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/default/../../../core/lv_obj.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/mono/lv_theme_mono.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/mono/../../../core/lv_obj.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/basic/lv_theme_basic.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/basic/../../../core/lv_obj.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/lv_widgets.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/animimg/lv_animimg.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/animimg/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/calendar/lv_calendar.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_btnmatrix.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/calendar/../../../widgets/lv_btnmatrix.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/calendar/lv_calendar_header_arrow.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/calendar/../../../core/lv_obj.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/calendar/lv_calendar_header_dropdown.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/chart/lv_chart.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/chart/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/keyboard/lv_keyboard.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_btnmatrix.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/keyboard/../../../widgets/lv_btnmatrix.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/list/lv_list.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/extra/layouts/flex/lv_flex.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/list/../../../core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/list/../../layouts/flex/lv_flex.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/menu/lv_menu.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/menu/../../../core/lv_obj.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/msgbox/lv_msgbox.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/msgbox/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/meter/lv_meter.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/meter/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/spinbox/lv_spinbox.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/spinbox/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/spinner/lv_spinner.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/spinner/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/tabview/lv_tabview.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/tabview/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/tileview/lv_tileview.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/tileview/../../../core/lv_obj.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/win/lv_win.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/win/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/colorwheel/lv_colorwheel.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ /cygdrive/c/TelinkV323/9518/LCD_1IN28/LCD_1IN28_lvgl-tuong194/firmware/vendor/lvgl/src/lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/led/lv_led.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/led/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/imgbtn/lv_imgbtn.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/imgbtn/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/span/lv_span.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/span/../../../lvgl.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../styles/lv_example_style.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../get_started/lv_example_get_started.h \
  ../vendor/lvgl/examples/widgets/keyboard/../../widgets/lv_example_widgets.h \
@@ -262,11 +263,11 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/../lv_conf_internal.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
+/cygdrive/C/TelinkV323/9518/LCD_1IN28/LCD_1IN28_lvgl-tuong194/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/../lv_conf_kconfig.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/lv_conf.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/../../lv_conf.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/lv_types.h:
 
@@ -274,7 +275,7 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/../hal/lv_hal_tick.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/../hal/../lv_conf_internal.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/misc/lv_math.h:
 
@@ -296,57 +297,59 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../lv_conf_internal.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_style.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_style.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/font/lv_font.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/../font/lv_font.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/../font/../lv_conf_internal.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/font/lv_symbol_def.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/../font/lv_symbol_def.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/../font/../misc/lv_area.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+/cygdrive/c/TelinkV323/9518/LCD_1IN28/LCD_1IN28_lvgl-tuong194/firmware/vendor/lvgl/src/lv_conf_internal.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_color.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_color.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_assert.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/../lv_conf_internal.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_log.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_assert.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_mem.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_log.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_math.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_mem.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_types.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_math.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_types.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_anim.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_area.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_txt.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_anim.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_printf.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_txt.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_bidi.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_printf.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_style_gen.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_bidi.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_txt.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_style_gen.h:
+
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_txt.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_img_decoder.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_img_buf.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_color.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_color.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_area.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_fs.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_fs.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_types.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_types.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_img_cache.h:
 
@@ -354,19 +357,19 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/sw/lv_draw_sw_gradient.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_color.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/sw/../../misc/lv_color.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_style.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/sw/../../misc/lv_style.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/sw/lv_draw_sw_dither.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj_pos.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/sw/../../core/lv_obj_pos.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/sw/../../core/../misc/lv_area.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_label.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_bidi.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_bidi.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_img.h:
 
@@ -378,7 +381,7 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_mask.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_math.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/../misc/lv_math.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/hal/../draw/lv_draw_transform.h:
 
@@ -468,25 +471,25 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_arc.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../lv_conf_internal.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../core/lv_obj.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_btn.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_img.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_fs.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../misc/lv_fs.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/draw/lv_draw.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../draw/lv_draw.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_label.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/font/lv_font.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../font/lv_font.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/font/lv_symbol_def.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../font/lv_symbol_def.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_txt.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../misc/lv_txt.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_line.h:
 
@@ -498,7 +501,7 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_bar.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_anim.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../misc/lv_anim.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_btn.h:
 
@@ -510,7 +513,7 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_dropdown.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_label.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../widgets/lv_label.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_roller.h:
 
@@ -518,9 +521,9 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_canvas.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_img.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../widgets/lv_img.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/draw/lv_draw_img.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/../draw/lv_draw_img.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/widgets/lv_switch.h:
 
@@ -536,177 +539,177 @@ vendor/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.d vendor/lvgl/exampl
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/layouts/flex/lv_flex.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/layouts/flex/../../../core/lv_obj.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/layouts/grid/lv_grid.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/layouts/grid/../../../core/lv_obj.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/lv_libs.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/bmp/lv_bmp.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/bmp/../../../lv_conf_internal.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/fsdrv/lv_fsdrv.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/fsdrv/../../../lv_conf_internal.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/png/lv_png.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/png/../../../lv_conf_internal.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/gif/lv_gif.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/gif/../../../lvgl.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/gif/../../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/qrcode/lv_qrcode.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/qrcode/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/sjpg/lv_sjpg.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/freetype/lv_freetype.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/freetype/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/rlottie/lv_rlottie.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/rlottie/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/ffmpeg/lv_ffmpeg.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/ffmpeg/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/tiny_ttf/lv_tiny_ttf.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/libs/tiny_ttf/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/lv_others.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/snapshot/lv_snapshot.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/snapshot/../../../lv_conf_internal.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/snapshot/../../../core/lv_obj.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/monkey/lv_monkey.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/monkey/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/gridnav/lv_gridnav.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/gridnav/../../../core/lv_obj.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/fragment/lv_fragment.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/fragment/../../../lv_conf_internal.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/imgfont/lv_imgfont.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/imgfont/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/msg/lv_msg.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/msg/../../../core/lv_obj.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/ime/lv_ime_pinyin.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/others/ime/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/lv_themes.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/default/lv_theme_default.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/default/../../../core/lv_obj.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/mono/lv_theme_mono.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/mono/../../../core/lv_obj.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/basic/lv_theme_basic.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/themes/basic/../../../core/lv_obj.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/lv_widgets.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/animimg/lv_animimg.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/animimg/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/calendar/lv_calendar.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_btnmatrix.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/calendar/../../../widgets/lv_btnmatrix.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/calendar/lv_calendar_header_arrow.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/calendar/../../../core/lv_obj.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/calendar/lv_calendar_header_dropdown.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/chart/lv_chart.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/chart/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/keyboard/lv_keyboard.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_btnmatrix.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/keyboard/../../../widgets/lv_btnmatrix.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/list/lv_list.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/list/../../../core/lv_obj.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/extra/layouts/flex/lv_flex.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/list/../../layouts/flex/lv_flex.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/menu/lv_menu.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/menu/../../../core/lv_obj.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/msgbox/lv_msgbox.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/msgbox/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/meter/lv_meter.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/meter/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/spinbox/lv_spinbox.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/spinbox/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/spinner/lv_spinner.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/spinner/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/tabview/lv_tabview.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/tabview/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/tileview/lv_tileview.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/tileview/../../../core/lv_obj.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/win/lv_win.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/win/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/colorwheel/lv_colorwheel.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+/cygdrive/c/TelinkV323/9518/LCD_1IN28/LCD_1IN28_lvgl-tuong194/firmware/vendor/lvgl/src/lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/led/lv_led.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/led/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/imgbtn/lv_imgbtn.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/imgbtn/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/span/lv_span.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/lvgl/examples/widgets/keyboard/../../../src/extra/widgets/span/../../../lvgl.h:
 
 ../vendor/lvgl/examples/widgets/keyboard/../../styles/lv_example_style.h:
 

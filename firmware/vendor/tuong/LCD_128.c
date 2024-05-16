@@ -7,8 +7,8 @@
 
 
 void PWM_Confing(void){
-	pwm_set_pin(PWM_PWM2_N_PD2);
-	pwm_set_clk((unsigned char) (sys_clk.pclk*1000*1000/24000000-1));//24M
+	pwm_set_pin(PWM_PWM0_PE3);
+	pwm_set_clk(sys_clk.pclk*1000*1000/PWM_CLOCK-1);
 	pwm_set_pwm0_mode(PWM_NORMAL_MODE);
 	pwm_set_tcmp(PWM0_ID,1);
 	pwm_set_tmax(PWM0_ID,2);

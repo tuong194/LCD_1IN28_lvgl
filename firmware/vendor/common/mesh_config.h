@@ -471,7 +471,7 @@ extern "C" {
 #define LIGHT_TYPE_SEL				LIGHT_TYPE_PANEL
 		#endif
 	#else
-#define LIGHT_TYPE_SEL				LIGHT_TYPE_CT	// 
+#define LIGHT_TYPE_SEL				LIGHT_TYPE_PANEL	// T_Note
 	#endif
 #endif
 #endif
@@ -825,7 +825,7 @@ extern "C" {
 #define ELE_CNT_EVERY_LIGHT         4
         #endif
     #else
-#define ELE_CNT_EVERY_LIGHT         1
+#define ELE_CNT_EVERY_LIGHT         1 // T_Note: ELE_CNT_EVERY_LIGHT
     #endif
 #endif
 
@@ -974,7 +974,7 @@ extern "C" {
 #define			LGT_CMD_LEFT_KEY				0x14//internal use
 #define			LGT_CMD_RIGHT_KEY				0x15//internal use
 
-#define			IRQ_TIMER1_ENABLE  			    1
+#define			IRQ_TIMER1_ENABLE  			    0
 #define			IRQ_TIME1_INTERVAL			    (1000) // unit: us
 #define			IRQ_GPIO_ENABLE  			    0
 

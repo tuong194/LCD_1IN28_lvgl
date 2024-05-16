@@ -611,23 +611,12 @@ _attribute_no_inline_ void main_loop () // must add no inline, or it will be inl
 }
 
 #if IRQ_TIMER1_ENABLE
-	#if __TLSR_RISCV_EN__
-void light_hw_timer1_config(void)
-{
-	plic_interrupt_enable(IRQ3_TIMER1);
-	timer_set_init_tick(TIMER1, 0);
-	timer_set_cap_tick(TIMER1, IRQ_TIME1_INTERVAL * sys_clk.pclk);
-	timer_set_mode(TIMER1, TIMER_MODE_SYSCLK);
-    timer_start(TIMER1);
-}
-	#else
 void light_hw_timer1_config(void){
     reg_irq_mask |= FLD_IRQ_TMR1_EN;
     reg_tmr1_tick = 0;
     reg_tmr1_capt = CLOCK_MCU_RUN_CODE_1US * IRQ_TIME1_INTERVAL ;
     reg_tmr_ctrl |= FLD_TMR1_EN;
 }
-	#endif
 #endif
 #if 0 // ecc verify 
 void test_ecdsa_sig_verify2()
@@ -904,7 +893,7 @@ _attribute_no_inline_ void user_init() // must add no inline, or it will be inli
     light_hw_timer1_config();
 #endif
 #if IRQ_GPIO_ENABLE
-	gpio_set_interrupt_init(IRQ_GPIO_SELECT, PM_PIN_PULLUP_10K, INTR_FALLING_EDGE, IRQ25_GPIO); // An interrupt is triggered when PD2 is low
+	gpio_set_interrupt_init(SW1_GPIO, PM_PIN_PULLUP_1M, 1, FLD_IRQ_GPIO_EN);
 #endif
 #if (BLT_SOFTWARE_TIMER_ENABLE)
 	blt_soft_timer_init();

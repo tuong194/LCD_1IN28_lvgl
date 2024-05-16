@@ -276,12 +276,7 @@ extern "C" {
 
 #define PULL_WAKEUP_SRC_PC3     PM_PIN_PULLDOWN_100K	//btn	// TL_Key3 // change key matrix to button
 #define PULL_WAKEUP_SRC_PC1     PM_PIN_UP_DOWN_FLOAT	//btn	// TL_Key4 // change key matrix to button
-
-#if	IRQ_GPIO_ENABLE
-#define IRQ_GPIO_SELECT			GPIO_PD2
-#endif
-
-#elif (PCBA_B91_SEL == PCBA_C1T213A16_V13_PA_DONGLE)
+#elif (PCBA_B91_SEL == PCBA_ADK80D_C1T213A16_V13)
 #define PULL_WAKEUP_SRC_PB2     PM_PIN_PULLUP_1M	//btn
 #define PULL_WAKEUP_SRC_PB1     PM_PIN_PULLUP_1M	//btn
 #define PB2_INPUT_ENABLE		1

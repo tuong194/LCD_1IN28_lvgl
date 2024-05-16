@@ -425,29 +425,6 @@ void gpio_set_pullup_res_30k(gpio_pin_e pin)
 	}
 }
 
-void gpio_set_interrupt_init(gpio_pin_e pin, gpio_pull_type_e up_down, gpio_irq_trigger_type_e falling, irq_source_e irq_mask)
-{
-	if(irq_mask & (~(IRQ25_GPIO | IRQ26_GPIO2RISC0 | IRQ27_GPIO2RISC1))){ // B91 don't have FLD_IRQ_GPIO_RISC2_EN
-		return;
-	}	
-	
-	gpio_function_en(pin);
-	gpio_output_dis(pin);
-	gpio_input_en(pin);
-	gpio_set_up_down_res(pin, up_down);
-	// core_interrupt_enable(); // don't enable here, will be enable at the end of "user init()".
-
-	if(IRQ25_GPIO == irq_mask){
-		gpio_set_irq(pin, falling);
-	}else if(IRQ26_GPIO2RISC0 == irq_mask){
-		gpio_set_gpio2risc0_irq(pin, falling);	
-	}else if(IRQ27_GPIO2RISC1 == irq_mask){
-		gpio_set_gpio2risc1_irq(pin, falling);
-	}
-	
-	plic_interrupt_enable(irq_mask);
-}
-
 
 /**********************************************************************************************************************
   *                    						local function implementation                                             *

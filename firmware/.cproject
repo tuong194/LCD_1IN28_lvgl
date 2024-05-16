@@ -443,111 +443,113 @@
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="9518_UART1_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="B91_mesh_gw"/>
 		<configuration configurationName="B91_master_kma_dongle">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_SPI_Demo">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_GPIO_Demo">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_TRNG_Demo"/>
 		<configuration configurationName="PWM_DEMO"/>
 		<configuration configurationName="9518_I2C_Demo"/>
 		<configuration configurationName="9518_HSPI_Demo">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
+		<configuration configurationName="B91_mesh_switch"/>
 		<configuration configurationName="B91_ble_sample">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_ALG_REG_Demo">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="TIMER_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="UART0_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_PWM_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="B91_debug_demo">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="B91_hci">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_Flash_Demo">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_UART_DEMO"/>
 		<configuration configurationName="9518_RF_DEMO"/>
 		<configuration configurationName="9518_USB_Speaker_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_UART0_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="B91_feature_test">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="B91_internal_test">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_s7816_Demo">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_USB_MIC_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="Debug">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="Release">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="UART_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_Base_Test_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="Base_Test_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_PSPI_Demo">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_USB_Mouse_Demo">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="B91_ble_remote">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_Debug_Demo">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="9518_NPE_Demo">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="B91_mesh">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="B91_module"/>
 		<configuration configurationName="IIC_DEMO"/>
 		<configuration configurationName="9518_TIMER_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
+		<configuration configurationName="B91_mesh_LPN"/>
 		<configuration configurationName="GPIO_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 		<configuration configurationName="PSRAM_DEMO">
-			<resource resourceType="PROJECT" workspacePath="/Eagle_Ble_Src"/>
+			<resource resourceType="PROJECT" workspacePath="/b91m_ble_single_conn_src"/>
 		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>

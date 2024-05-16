@@ -2754,7 +2754,7 @@ void mesh_pro_rc_beacon_dispatch(pro_PB_ADV *p_adv,u8 *p_mac){
 	if(memcmp(gateway_connect_filter,p_mac,sizeof(gateway_connect_filter))){
 		return ;
 	}
-	// whether the provisioner interal para set or not 
+	// whether the provisioner interal para set or not
 	if(!is_provision_success()){
 		return ;
 	}

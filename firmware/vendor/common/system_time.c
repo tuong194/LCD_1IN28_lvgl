@@ -59,7 +59,7 @@ u32 system_time_s = 0;
 u32 system_time_tick;
 
 #ifndef RTC_USE_32K_RC_ENABLE
-#define RTC_USE_32K_RC_ENABLE		0 // T_NOTE
+#define RTC_USE_32K_RC_ENABLE		0 // enable should be better when pm enable
 #endif
 
 #if __PROJECT_MESH_SWITCH__
@@ -115,6 +115,7 @@ void rtc_cal_init(u8 tick_start)
 
 void system_timer_handle_ms()
 {
+
 #if MD_SERVER_EN
 	light_transition_proc();
 #endif
@@ -158,7 +159,7 @@ void system_time_run(){
 	#else
     u32 clock_tmp = clock_time();
 	#endif
-    u32 t_delta = clock_tmp - system_time_tick;
+    u32 t_delta = clock_tmp - system_time_tick;	
 	#if RTC_USE_32K_RC_ENABLE
 	if(t_delta < BIT(31))
 	#else

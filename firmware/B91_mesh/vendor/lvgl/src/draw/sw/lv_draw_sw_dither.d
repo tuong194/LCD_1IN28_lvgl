@@ -4,7 +4,7 @@ vendor/lvgl/src/draw/sw/lv_draw_sw_dither.d vendor/lvgl/src/draw/sw/lv_draw_sw_d
  ../vendor/lvgl/src/draw/sw/../../core/lv_obj_pos.h \
  ../vendor/lvgl/src/draw/sw/../../core/../misc/lv_area.h \
  ../vendor/lvgl/src/draw/sw/../../core/../misc/../lv_conf_internal.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
+ /cygdrive/C/TelinkV323/9518/LCD_1IN28/LCD_1IN28_lvgl-tuong194/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
  ../vendor/lvgl/src/draw/sw/../../core/../misc/../lv_conf_kconfig.h \
  ../vendor/lvgl/src/draw/sw/../../core/../misc/../../lv_conf.h \
  ../vendor/lvgl/src/draw/sw/lv_draw_sw_gradient.h \
@@ -36,7 +36,7 @@ vendor/lvgl/src/draw/sw/lv_draw_sw_dither.d vendor/lvgl/src/draw/sw/lv_draw_sw_d
 
 ../vendor/lvgl/src/draw/sw/../../core/../misc/../lv_conf_internal.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
+/cygdrive/C/TelinkV323/9518/LCD_1IN28/LCD_1IN28_lvgl-tuong194/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
 
 ../vendor/lvgl/src/draw/sw/../../core/../misc/../lv_conf_kconfig.h:
 
