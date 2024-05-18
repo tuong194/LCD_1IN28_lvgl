@@ -39,7 +39,11 @@ int mesh_reset_network(u8 provision_enable);
 
 extern u8 manual_factory_reset;
 
-#define FACTORY_RESET_LOG_EN        0
+#define ADDR_START 0x20FFE000
+
+
+
+
 
 #if !WIN32
 static int adr_reset_cnt_idx = 0;
@@ -495,6 +499,16 @@ void kick_out(int led_en){
 	mesh_fast_prov_val_init();
 #endif
 #else
+	//T_NOTE
+	/*********************************************/
+//	flash_erase_sector(ADDR_START);
+//	buf[0] = gio;
+//	buf[1] = phut;
+//	buf[2] = giay;
+//	buf[3] = stateLed;
+//	buf[4] = stateLed1;
+//	flash_write_page(ADDR_START,5,buf);
+	/*******************************************/
 	factory_reset();
     #if !WIN32
     if(led_en){

@@ -55,7 +55,6 @@
  	except_handler();
  }
 
-
 void stimer_irq_handler(void) __attribute__((weak, alias("default_irq_handler")));
 void analog_irq_handler(void) __attribute__((weak, alias("default_irq_handler")));
 void timer1_irq_handler(void) __attribute__((weak, alias("default_irq_handler")));

@@ -42,25 +42,28 @@
 #include "../UI/ui.h"
 
 
-
-
-
-
 extern void user_init();
 extern void main_loop ();
 void blc_pm_select_none();
 
+#define ADDR_START 0x20FFE000
+
 char swx;
 int16_t indx;
-u32 dim_set;
+u8 dim_set;
 
+u8 stateLed2,stateLed1;
 u8 gio, phut, giay;
+u8 buf[10];
 
 u32 nowtime; u32 timeScene; u32 timeKickout;
 u32 sumSec;u32 sumMin; u32 sumHour;
 
+
 u8 checkScene;
 u8 checkKickout=0;
+u8 checkProvision = 0;
+
 
 unsigned int get_sys_elapse(void)
 {
@@ -341,10 +344,10 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 	{
 		user_init();
 
+		//timer0_irq_handler();
 
-		//uart_init(UART0,12,15,UART_PARITY_NONE,UART_STOP_BIT_ONE); // sysclock = 24M
-	//	uart_set_pin(UART0_TX_PB2,UART0_RX_PB3);
-
+		uart_init(UART0,12,15,UART_PARITY_NONE,UART_STOP_BIT_ONE); // sysclock = 24M
+		uart_set_pin(UART0_TX_PD2,UART0_RX_PD3);
 
 		PWM_Confing();
 		SPI_Config();
@@ -353,27 +356,49 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		lv_init();
 		lv_port_disp_init();
 
-
 		ui_init();
-		gio=12;phut=33;giay=0;
 
 		nowtime = 0;
 		checkScene = 0;
 		blc_pm_select_external_32k_crystal();
 		dim_set=0;
-//		indx=50;
-//		dim_set= 50;
+
+		ONLED1;
+		sleep_ms(300);
+		wd_clear();
+		OFFLED1;
+		sleep_ms(300);
+		wd_clear();
+
+		ONLED1;
+		sleep_ms(300);
+		wd_clear();
+		OFFLED1;
+		sleep_ms(300);
+		wd_clear();
+
+		ONLED1;
+		sleep_ms(300);
+		wd_clear();
+		OFFLED1;
+		sleep_ms(300);
+		wd_clear();
+
+		flash_read_page(ADDR_START,5,buf);
+		stateLed1 = buf[0];
+		stateLed2 = buf[1];
+		gio = buf[2];
+		phut = buf[3];
+		giay = buf[4];
+		gpio_write(LED1,stateLed1); //Green
+		gpio_write(LED2,stateLed2);  //red
+
 	}
 
     irq_enable();
 	#if (DEBUG_LOG_SETTING_DEVELOP_MODE_EN || (MESH_USER_DEFINE_MODE == MESH_IRONMAN_MENLO_ENABLE))
 	LOG_USER_MSG_INFO(0, 0,"[mesh] Start from SIG Mesh", 0);
 	#endif
-
-	//lv_tick_set_cb();
-
-//	unsigned char buff[8];
-
 
 	void setRotation(u8 gio, u8 phut, u8 giay){
 		lv_img_set_angle(ui_gio, gio*60);
@@ -388,7 +413,12 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		main_loop ();
 		lv_timer_handler();
 
-
+		if(is_provision_success()){
+			if(checkProvision == 0){
+				ONLED2;
+				checkProvision =1;
+			}
+		}
 
 		if(!checkScene){
 			if(pm_get_32k_tick() - nowtime >=32000){
@@ -406,69 +436,26 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 						gio=0;
 					}
 				}
+//				if(!checkProvision){
+//					gpio_write(LED2,stateLed);
+//					stateLed = !stateLed;
+//				}
 				timeScene = nowtime = pm_get_32k_tick();
+
 				 if(!checkKickout){
 					 timeKickout=nowtime;
 				 }
 			}
 			setRotation(gio,phut,giay);
-		}
-
-		swx = ReadSW();
-		if(swx == '5' ){
-			checkKickout = 1;
-			if(checkScene == 0 && (pm_get_32k_tick() - timeKickout >= (32000*3))){
-				ONLED1;
-				//kick_out(0);
-				checkKickout = 0;
-			}
-
-		}else if(swx == '4'){
-			ONLED2;
-			checkScene = 1;
-			ui_Screen1_screen_init();
-			lv_disp_load_scr(ui_Screen1);
-		}else if(swx == '3'){
-			OFFLED2;
-			ui_Screen2_screen_init();
-			lv_disp_load_scr(ui_Screen2);
-
-			sumSec = (pm_get_32k_tick()-nowtime)/32000;
-
-			if(giay + sumSec <60){
-				giay += (sumSec);
-			}else{
-				giay = (giay+sumSec) % 60 ;
-				sumMin = (giay+sumSec) / 60;
-				if(phut + sumMin < 60){
-					phut += sumMin;
-				}else{
-					phut = (phut + sumMin)%60;
-					sumHour = (phut + sumMin) / 60;
-					if(gio + sumHour <24){
-						gio += sumHour;
-					}else{
-						gio = (gio+sumHour)%24;
-					}
-				}
-			}
-			checkScene = 0;
-		}else if(swx == SW_NOT_PRESS){
-			checkKickout = 0;
-		}
-
-
-
-
-		/*if(checkScene == 1){
+		}else{
 			ui_Screen1_screen_init();
 			lv_disp_load_scr(ui_Screen1);
 
-			if(get_32k_tick() - timeScene >= 160000){
+			if(pm_get_32k_tick() - timeScene >= 160000){ //5s
 				ui_Screen2_screen_init();
 				lv_disp_load_scr(ui_Screen2);
 
-				sumSec = (get_32k_tick()-nowtime)/32000;
+				sumSec = (pm_get_32k_tick()-nowtime)/32000;
 
 			if(giay + sumSec <60){
 				giay += (sumSec-1);
@@ -489,44 +476,56 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 			}
 				checkScene = 0;
 			}
-		}*/
+		}
+		swx = ReadSW();
+		if(swx == '5' ){
+			checkKickout = 1;
+			// press 1 & 2 in 3 sec -> kickout
+			if(checkScene == 0 && (pm_get_32k_tick() - timeKickout >= (32000*3))){
 
-	/*	swx = ReadSW();
-		 if(swx == '3'){
-			OFFLED2;
+				flash_erase_sector(ADDR_START);
+
+				buf[0] = stateLed1;
+				buf[1] = stateLed2;
+				buf[2] = gio;
+				buf[3] = phut;
+				buf[4] = giay;
+				flash_write_page(ADDR_START,5,buf);
+
+				checkKickout = 0;
+				checkProvision = 0;
+
+				kick_out(0);
+
+			}
+		}else if(swx == '4'){
+
 			checkScene = 1;
 
-			ui_Screen1_screen_init();
-			lv_disp_load_scr(ui_Screen1);
 
-		}else if(swx == '4'){
-			ONLED2;
-			ui_Screen2_screen_init();
-			lv_disp_load_scr(ui_Screen2);
 
-			sumSec = (pm_get_32k_tick()-nowtime)/32000;
-
-			if(giay + sumSec <60){
-				giay += (sumSec);
+		}else if(swx == '3'){
+			if(!gpio_read(GPIO_PB5)){
+				stateLed1 = 0;
 			}else{
-				giay = (giay+sumSec) % 60 ;
-				sumMin = (giay+sumSec) / 60;
-				if(phut + sumMin < 60){
-					phut += sumMin;
-				}else{
-					phut = (phut + sumMin)%60;
-					sumHour = (phut + sumMin) / 60;
-					if(gio + sumHour <24){
-						gio += sumHour;
-					}else{
-						gio = (gio+sumHour)%24;
-					}
-				}
+				stateLed1 = 1;
 			}
 
-			checkScene = 0;
-		}*/
+			if(!gpio_read(GPIO_PB7)){
+				stateLed2 = 0;
+			}else{
+				stateLed2 = 1;
+			}
+			uart_send_byte(UART0,'G');
+			uart_send_byte(UART0,stateLed1); // led1
+			uart_send_byte(UART0,'R');
+			uart_send_byte(UART0,stateLed2); //led2
+//			ui_Screen2_screen_init();
+//			lv_disp_load_scr(ui_Screen2);
 
+		}else if(swx == SW_NOT_PRESS){
+			checkKickout = 0;
+		}
 
 	}
 	return 0;

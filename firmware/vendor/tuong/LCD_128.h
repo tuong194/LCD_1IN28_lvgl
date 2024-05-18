@@ -24,7 +24,7 @@
 #define LCD_WIDTH 240
 
 #define SPI_CLOCK 12000000
-#define PWM_CLOCK 96000
+#define PWM_CLOCK PWM_PCLK_SPEED
 
 typedef struct{
 	u16 WIDTH;

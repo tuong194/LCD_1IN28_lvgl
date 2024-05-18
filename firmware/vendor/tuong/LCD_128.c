@@ -10,8 +10,8 @@ void PWM_Confing(void){
 	pwm_set_pin(PWM_PWM0_PE3);
 	pwm_set_clk(sys_clk.pclk*1000*1000/PWM_CLOCK-1);
 	pwm_set_pwm0_mode(PWM_NORMAL_MODE);
-	pwm_set_tcmp(PWM0_ID,1);
-	pwm_set_tmax(PWM0_ID,2);
+	pwm_set_tcmp(PWM0_ID,50 * CLOCK_PWM_CLOCK_1US);
+	pwm_set_tmax(PWM0_ID,1000*CLOCK_PWM_CLOCK_1US);
 	pwm_start(PWM0_ID);
 }
 
@@ -58,7 +58,9 @@ void SPI2_Config(void){
 }
 
 void LCD_SetBacklight(int value){
-	pwm_set_pwm0_pulse_num(value);
+	//pwm_set_pwm0_pulse_num(value);
+	pwm_set_tcmp(PWM0_ID,value);
+
 }
 
 void LCD_RST(void){
