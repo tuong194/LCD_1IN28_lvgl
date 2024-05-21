@@ -15,9 +15,6 @@
 #ifndef VENDOR_MESH_MAIN_H_
 #define VENDOR_MESH_MAIN_H_
 
- u8 stateLed,stateLed1;
- u8 gio, phut, giay;
- u8 buf[10];
 
 unsigned int get_sys_elapse(void);
 

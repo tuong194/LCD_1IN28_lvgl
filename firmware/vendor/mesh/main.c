@@ -48,18 +48,19 @@ void blc_pm_select_none();
 
 #define ADDR_START 0x20FFE000
 
+extern u8 	ui_ota_is_working;
 char swx;
 int16_t indx;
 u8 dim_set;
 
-u8 stateLed2,stateLed1;
+u8 stateLed1,stateLed2;
 u8 gio, phut, giay;
 u8 buf[10];
 
 u32 nowtime; u32 timeScene; u32 timeKickout;
 u32 sumSec;u32 sumMin; u32 sumHour;
 
-
+u8 checkOTA ;
 u8 checkScene;
 u8 checkKickout=0;
 u8 checkProvision = 0;
@@ -359,7 +360,7 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		ui_init();
 
 		nowtime = 0;
-		checkScene = 0;
+		checkScene = 0;checkOTA=1;
 		blc_pm_select_external_32k_crystal();
 		dim_set=0;
 
@@ -405,7 +406,8 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		lv_img_set_angle(ui_phut, phut*60);
 		lv_img_set_angle(ui_giay, giay*60);
 	}
-
+u8 otaValue;
+u8 buffOTA[10];
 	while (1) {
 #if (MODULE_WATCHDOG_ENABLE)
 		wd_clear(); //clear watch dog
@@ -413,78 +415,74 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		main_loop ();
 		lv_timer_handler();
 
+			if(ui_ota_is_working==1 && checkOTA == 1){
+					checkScene = 2;
+
+					ui_Screen1_screen_init();
+					lv_disp_load_scr(ui_Screen1);
+					uart_send_byte(UART0,ui_ota_is_working);
+					lv_label_set_text(ui_Label1, "ota working");
+					checkOTA = 0;
+				}
+
 		if(is_provision_success()){
 			if(checkProvision == 0){
 				ONLED2;
 				checkProvision =1;
 			}
 		}
-
-		if(!checkScene){
-			if(pm_get_32k_tick() - nowtime >=32000){
-				giay++;
-				if(giay == 60){
-					phut++;
-					giay=0;
-					if(phut == 60){
-						phut=0;
-					}
-					if(phut%12 == 0){
-						gio++;
-					}
-					if(gio==60){
-						gio=0;
-					}
+		if(pm_get_32k_tick() - nowtime >=32000){
+			uart_send_byte(UART0,ui_ota_is_working);
+			giay++;
+			if(giay == 60){
+				phut++;
+				giay=0;
+				if(phut == 60){
+					phut=0;
 				}
-//				if(!checkProvision){
-//					gpio_write(LED2,stateLed);
-//					stateLed = !stateLed;
-//				}
-				timeScene = nowtime = pm_get_32k_tick();
-
-				 if(!checkKickout){
-					 timeKickout=nowtime;
-				 }
+				if(phut%12 == 0){
+					gio++;
+				}
+				if(gio==60){
+					gio=0;
+				}
 			}
+			 nowtime = pm_get_32k_tick();
+
+			 if(!checkKickout){
+				 timeKickout=nowtime;
+			 }
+		}
+		if(checkScene == 0){
+			timeScene = pm_get_32k_tick();
 			setRotation(gio,phut,giay);
-		}else{
+		}else if(checkScene == 1){
 			ui_Screen1_screen_init();
 			lv_disp_load_scr(ui_Screen1);
-
+			lv_label_set_text(ui_Label1, "wait for 5s");
 			if(pm_get_32k_tick() - timeScene >= 160000){ //5s
 				ui_Screen2_screen_init();
 				lv_disp_load_scr(ui_Screen2);
 
-				sumSec = (pm_get_32k_tick()-nowtime)/32000;
-
-			if(giay + sumSec <60){
-				giay += (sumSec-1);
-			}else{
-				giay = (giay+sumSec) % 60 -1;
-				sumMin = (giay+sumSec) / 60;
-				if(phut + sumMin < 60){
-					phut += sumMin;
-				}else{
-					phut = (phut + sumMin)%60;
-					sumHour = (phut + sumMin) / 60;
-					if(gio + sumHour <24){
-						gio += sumHour;
-					}else{
-						gio = (gio+sumHour)%24;
-					}
-				}
-			}
 				checkScene = 0;
+			}
+		}else if(checkScene == 2){
+			if(!ui_ota_is_working){
+				lv_label_set_text(ui_Label1, "ota success");
+				ui_Screen2_screen_init();
+				lv_disp_load_scr(ui_Screen2);
+				checkOTA = 1;
+				checkScene=0;
 			}
 		}
 		swx = ReadSW();
 		if(swx == '5' ){
 			checkKickout = 1;
+
 			// press 1 & 2 in 3 sec -> kickout
 			if(checkScene == 0 && (pm_get_32k_tick() - timeKickout >= (32000*3))){
 
 				flash_erase_sector(ADDR_START);
-
 				buf[0] = stateLed1;
 				buf[1] = stateLed2;
 				buf[2] = gio;
@@ -501,27 +499,6 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		}else if(swx == '4'){
 
 			checkScene = 1;
-
-
-
-		}else if(swx == '3'){
-			if(!gpio_read(GPIO_PB5)){
-				stateLed1 = 0;
-			}else{
-				stateLed1 = 1;
-			}
-
-			if(!gpio_read(GPIO_PB7)){
-				stateLed2 = 0;
-			}else{
-				stateLed2 = 1;
-			}
-			uart_send_byte(UART0,'G');
-			uart_send_byte(UART0,stateLed1); // led1
-			uart_send_byte(UART0,'R');
-			uart_send_byte(UART0,stateLed2); //led2
-//			ui_Screen2_screen_init();
-//			lv_disp_load_scr(ui_Screen2);
 
 		}else if(swx == SW_NOT_PRESS){
 			checkKickout = 0;

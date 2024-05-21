@@ -34,7 +34,11 @@
 #define ONLED2  gpio_write(LED2, 1)
 #define OFFLED2 gpio_write(LED2, 0)
 
+#define READ_LED1 gpio_read(LED1)
+#define READ_LED2 gpio_read(LED2)
+
 u8 stateSW;
+
 
 void Pin_Switch_Config(void);
 char ReadSW(void);

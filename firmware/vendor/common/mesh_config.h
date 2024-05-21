@@ -976,7 +976,7 @@ extern "C" {
 
 #define			IRQ_TIMER1_ENABLE  			    0
 #define			IRQ_TIME1_INTERVAL			    (1000) // unit: us
-#define			IRQ_GPIO_ENABLE  			    1
+#define			IRQ_GPIO_ENABLE  			    0
 
 #if __TLSR_RISCV_EN__
 	#if __PROJECT_MESH__ || __PROJECT_MESH_PRO__ 	// only for B91 mesh and gateway project

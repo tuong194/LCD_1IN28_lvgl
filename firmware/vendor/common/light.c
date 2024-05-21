@@ -33,6 +33,11 @@
 #include "vendor/common/generic_model.h"
 #include "vendor/common/scene.h"
 #include "light.h"
+
+//T_NOTE
+#include "../UI/ui.h"
+
+
 #if HOMEKIT_EN
 #include "vendor/common/led_cfg.h"
 #endif
@@ -1593,6 +1598,10 @@ _USER_CAN_REDEFINE_ void show_ota_result(int result)
 		// nothing
 	}else if(result == OTA_SUCCESS){
 		light_ev_with_sleep(3, 1000*1000);	//0.5Hz shine for  6 second
+		//T_NOTE
+		//ui_Screen1_screen_init();
+		//lv_disp_load_scr(ui_Screen1);
+
 	}else{
 		light_ev_with_sleep(30, 100*1000);	//5Hz shine for  6 second
 		//write_reg8(0x8000,result); ;while(1);  //debug which err lead to OTA fail

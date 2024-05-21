@@ -41,7 +41,7 @@ extern u8 manual_factory_reset;
 
 #define ADDR_START 0x20FFE000
 
-
+u8 buf[10];
 
 
 
@@ -499,14 +499,14 @@ void kick_out(int led_en){
 	mesh_fast_prov_val_init();
 #endif
 #else
-	//T_NOTE
+	//T_NOTE: write data into flash
 	/*********************************************/
 //	flash_erase_sector(ADDR_START);
-//	buf[0] = gio;
-//	buf[1] = phut;
-//	buf[2] = giay;
-//	buf[3] = stateLed;
-//	buf[4] = stateLed1;
+//	buf[0] = 0;
+//	buf[1] = 1;
+//	buf[2] = 12;
+//	buf[3] = 30;
+//	buf[4] = 10;
 //	flash_write_page(ADDR_START,5,buf);
 	/*******************************************/
 	factory_reset();
