@@ -42,7 +42,9 @@ extern u8 manual_factory_reset;
 #define ADDR_START 0x20FFE000
 
 u8 buf[10];
-
+extern u8 stateLed1,stateLed2;
+extern u8 gio, phut, giay;
+extern u8 checkProvision;
 
 
 #if !WIN32
@@ -501,13 +503,14 @@ void kick_out(int led_en){
 #else
 	//T_NOTE: write data into flash
 	/*********************************************/
-//	flash_erase_sector(ADDR_START);
-//	buf[0] = 0;
-//	buf[1] = 1;
-//	buf[2] = 12;
-//	buf[3] = 30;
-//	buf[4] = 10;
-//	flash_write_page(ADDR_START,5,buf);
+	flash_erase_sector(ADDR_START);
+	buf[0] = stateLed1;
+	buf[1] = stateLed2;
+	buf[2] = gio;
+	buf[3] = phut;
+	buf[4] = giay;
+	buf[5] = checkProvision;
+	flash_write_page(ADDR_START,6,buf);
 	/*******************************************/
 	factory_reset();
     #if !WIN32

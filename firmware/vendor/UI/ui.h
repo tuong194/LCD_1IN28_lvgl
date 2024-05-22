@@ -21,18 +21,27 @@ extern lv_obj_t * ui_Screen2;
 extern lv_obj_t * ui_giay;
 extern lv_obj_t * ui_gio;
 extern lv_obj_t * ui_phut;
+extern lv_obj_t * ui_Colorwheel1;
 // SCREEN: ui_Screen1
 void ui_Screen1_screen_init(void);
 extern lv_obj_t * ui_Screen1;
 extern lv_obj_t * ui_Arc1;
 extern lv_obj_t * ui_Panel1;
 extern lv_obj_t * ui_Label1;
+// SCREEN: ui_Screen3
+void ui_Screen3_screen_init(void);
+extern lv_obj_t * ui_Screen3;
+extern lv_obj_t * ui_Colorwheel2;
+extern lv_obj_t * ui_Image3;
+extern lv_obj_t * ui_Panel2;
 extern lv_obj_t * ui____initial_actions0;
 
 
 LV_IMG_DECLARE(ui_img_s_png);    // assets/s.png
 LV_IMG_DECLARE(ui_img_h_png);    // assets/h.png
 LV_IMG_DECLARE(ui_img_m_png);    // assets/m.png
+LV_IMG_DECLARE(ui_img_31572172);    // assets/rect3-9.png
+LV_IMG_DECLARE(ui_img_rect7541_png);    // assets/rect7541.png
 
 
 

@@ -38,7 +38,7 @@
 //#include "../lvgl/demos/music/lv_demo_music.h"
 #include "../lvgl/examples/lv_examples.h"
 
-
+// 9518
 #include "../UI/ui.h"
 
 
@@ -48,12 +48,18 @@ void blc_pm_select_none();
 
 #define ADDR_START 0x20FFE000
 
-extern u8 	ui_ota_is_working;
+extern u8 ui_ota_is_working;
+extern u8 ota_reboot_type;
+
 char swx;
-int16_t indx;
+
+lv_color_t color;
+u16 hsvH;
 u8 dim_set;
 
+u32 timeProvision;
 u8 stateLed1,stateLed2;
+u8 countBlinkLed2;
 u8 gio, phut, giay;
 u8 buf[10];
 
@@ -63,7 +69,7 @@ u32 sumSec;u32 sumMin; u32 sumHour;
 u8 checkOTA ;
 u8 checkScene;
 u8 checkKickout=0;
-u8 checkProvision = 0;
+u8 checkProvision;
 
 
 unsigned int get_sys_elapse(void)
@@ -345,7 +351,6 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 	{
 		user_init();
 
-		//timer0_irq_handler();
 
 		uart_init(UART0,12,15,UART_PARITY_NONE,UART_STOP_BIT_ONE); // sysclock = 24M
 		uart_set_pin(UART0_TX_PD2,UART0_RX_PD3);
@@ -358,41 +363,43 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		lv_port_disp_init();
 
 		ui_init();
+		hsvH = 0;
+
+		blc_pm_select_external_32k_crystal();
 
 		nowtime = 0;
 		checkScene = 0;checkOTA=1;
-		blc_pm_select_external_32k_crystal();
-		dim_set=0;
+		countBlinkLed2 = 0;
+				ONLED1;
+				sleep_ms(300);
+				wd_clear();
+				OFFLED1;
+				sleep_ms(300);
+				wd_clear();
 
-		ONLED1;
-		sleep_ms(300);
-		wd_clear();
-		OFFLED1;
-		sleep_ms(300);
-		wd_clear();
+				ONLED1;
+				sleep_ms(300);
+				wd_clear();
+				OFFLED1;
+				sleep_ms(300);
+				wd_clear();
 
-		ONLED1;
-		sleep_ms(300);
-		wd_clear();
-		OFFLED1;
-		sleep_ms(300);
-		wd_clear();
+				ONLED1;
+				sleep_ms(300);
+				wd_clear();
+				OFFLED1;
+				sleep_ms(300);
+				wd_clear();
 
-		ONLED1;
-		sleep_ms(300);
-		wd_clear();
-		OFFLED1;
-		sleep_ms(300);
-		wd_clear();
-
-		flash_read_page(ADDR_START,5,buf);
-		stateLed1 = buf[0];
-		stateLed2 = buf[1];
-		gio = buf[2];
-		phut = buf[3];
-		giay = buf[4];
-		gpio_write(LED1,stateLed1); //Green
-		gpio_write(LED2,stateLed2);  //red
+				flash_read_page(ADDR_START,6,buf);
+				stateLed1 = buf[0];
+				stateLed2 = buf[1];
+				gio = buf[2];
+				phut = buf[3];
+				giay = buf[4];
+				checkProvision= buf[5];
+				gpio_write(LED1,stateLed1); //Green
+				gpio_write(LED2,stateLed2);  //red
 
 	}
 
@@ -406,8 +413,7 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		lv_img_set_angle(ui_phut, phut*60);
 		lv_img_set_angle(ui_giay, giay*60);
 	}
-u8 otaValue;
-u8 buffOTA[10];
+
 	while (1) {
 #if (MODULE_WATCHDOG_ENABLE)
 		wd_clear(); //clear watch dog
@@ -415,94 +421,129 @@ u8 buffOTA[10];
 		main_loop ();
 		lv_timer_handler();
 
-			if(ui_ota_is_working==1 && checkOTA == 1){
-					checkScene = 2;
 
-					ui_Screen1_screen_init();
-					lv_disp_load_scr(ui_Screen1);
-					uart_send_byte(UART0,ui_ota_is_working);
-					lv_label_set_text(ui_Label1, "ota working");
-					checkOTA = 0;
-				}
+		if(ui_ota_is_working==1 && checkOTA == 1){
+				checkScene = 3;
 
-		if(is_provision_success()){
-			if(checkProvision == 0){
-				ONLED2;
-				checkProvision =1;
-			}
+				ui_Screen1_screen_init();
+				lv_disp_load_scr(ui_Screen1);
+				//uart_send_byte(UART0,ui_ota_is_working);
+				lv_label_set_text(ui_Label1, "ota working");
+				checkOTA = 0;
 		}
-		if(pm_get_32k_tick() - nowtime >=32000){
-			uart_send_byte(UART0,ui_ota_is_working);
-			giay++;
-			if(giay == 60){
-				phut++;
-				giay=0;
-				if(phut == 60){
-					phut=0;
+
+	if(is_provision_success()){
+			if(checkProvision){
+				if(pm_get_32k_tick() - timeProvision >= 10000){
+					stateLed2 = !stateLed2;
+					gpio_write(LED2,stateLed2);
+					countBlinkLed2++;
+					uart_send_byte(UART0,(u8)countBlinkLed2);
+					timeProvision = pm_get_32k_tick();
 				}
-				if(phut%12 == 0){
-					gio++;
-				}
-				if(gio==60){
-					gio=0;
+				if(countBlinkLed2 == 6){
+					countBlinkLed2 = 0;
+					checkProvision =0;
 				}
 			}
-			 nowtime = pm_get_32k_tick();
+	}
 
-			 if(!checkKickout){
-				 timeKickout=nowtime;
-			 }
+	if(pm_get_32k_tick() - nowtime >=32000){
+//		uart_send_byte(UART0,ui_ota_is_working);
+//		uart_send_byte(UART0,'x');
+//		uart_send_byte(UART0,ota_condition_enable());
+		giay++;
+		if(giay == 60){
+			phut++;
+			giay=0;
+			if(phut == 60){
+				phut=0;
+			}
+			if(phut%12 == 0){
+				gio++;
+			}
+			if(gio==60){
+				gio=0;
+			}
 		}
-		if(checkScene == 0){
+		 nowtime = pm_get_32k_tick();
+
+		 if(!checkKickout){
+			 timeKickout=nowtime;
+		 }
+	}
+	if(checkScene == 0){
+		timeScene = pm_get_32k_tick();
+		setRotation(gio,phut,giay);
+	}else if(checkScene == 1){
+		ui_Screen1_screen_init();
+		lv_disp_load_scr(ui_Screen1);
+		lv_label_set_text(ui_Label1, "wait for 5s");
+		if(pm_get_32k_tick() - timeScene >= 160000){ //5s
+			ui_Screen2_screen_init();
+			lv_disp_load_scr(ui_Screen2);
+
+			checkScene = 0;
+		}
+	}else if(checkScene == 2){
+		if(pm_get_32k_tick() - timeScene >=8000){
+			if(hsvH == 360){
+				hsvH = 0;
+			}
+			lv_img_set_angle(ui_Image3, hsvH*10);
+			if(hsvH<=180){
+				color = lv_color_hsv_to_rgb(180-hsvH,100,100);
+			}else{
+				color = lv_color_hsv_to_rgb(540-hsvH,100,100);
+			}
+
+			lv_obj_set_style_bg_color(ui_Panel2, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+			hsvH++;
 			timeScene = pm_get_32k_tick();
-			setRotation(gio,phut,giay);
-		}else if(checkScene == 1){
-			ui_Screen1_screen_init();
-			lv_disp_load_scr(ui_Screen1);
-			lv_label_set_text(ui_Label1, "wait for 5s");
-			if(pm_get_32k_tick() - timeScene >= 160000){ //5s
-				ui_Screen2_screen_init();
-				lv_disp_load_scr(ui_Screen2);
-
-				checkScene = 0;
-			}
-		}else if(checkScene == 2){
-			if(!ui_ota_is_working){
-				lv_label_set_text(ui_Label1, "ota success");
-				ui_Screen2_screen_init();
-				lv_disp_load_scr(ui_Screen2);
-				checkOTA = 1;
-				checkScene=0;
-			}
 		}
-		swx = ReadSW();
-		if(swx == '5' ){
-			checkKickout = 1;
+	}
+	else if(checkScene == 3){
+		if(!ui_ota_is_working){
+			lv_label_set_text(ui_Label1, "ota success");
+			ui_Screen2_screen_init();
+			lv_disp_load_scr(ui_Screen2);
+			checkOTA = 1;
+			checkScene=0;
+		}
+	}
+	swx = ReadSW();
+	if(swx == '5' ){
+		checkKickout = 1;
 
-			// press 1 & 2 in 3 sec -> kickout
-			if(checkScene == 0 && (pm_get_32k_tick() - timeKickout >= (32000*3))){
+		// press 1 & 2 in 3 sec -> kickout
+		if(checkScene == 0 && (pm_get_32k_tick() - timeKickout >= (32000*3))){
 
-				flash_erase_sector(ADDR_START);
-				buf[0] = stateLed1;
-				buf[1] = stateLed2;
-				buf[2] = gio;
-				buf[3] = phut;
-				buf[4] = giay;
-				flash_write_page(ADDR_START,5,buf);
-
-				checkKickout = 0;
-				checkProvision = 0;
-
-				kick_out(0);
-
-			}
-		}else if(swx == '4'){
-
-			checkScene = 1;
-
-		}else if(swx == SW_NOT_PRESS){
 			checkKickout = 0;
+			checkProvision = 1;
+
+			kick_out(0);
+
 		}
+	}else if(swx == '4'){
+		checkScene = 1;
+
+
+	}else if(swx == '3'){
+		checkScene = 2;
+		ui_Screen3_screen_init();
+		lv_disp_load_scr(ui_Screen3);
+	}
+	else if(swx == '2'){
+		ui_Screen2_screen_init();
+		lv_disp_load_scr(ui_Screen2);
+		lv_obj_set_style_bg_color(ui_Screen2, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+		checkScene = 0;
+	}
+	else if(swx == SW_NOT_PRESS){
+		checkKickout = 0;
+	}
+
+
 
 	}
 	return 0;
