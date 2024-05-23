@@ -509,7 +509,7 @@ void kick_out(int led_en){
 	buf[2] = gio;
 	buf[3] = phut;
 	buf[4] = giay;
-	buf[5] = checkProvision;
+	buf[5] = 0;
 	flash_write_page(ADDR_START,6,buf);
 	/*******************************************/
 	factory_reset();

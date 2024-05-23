@@ -456,9 +456,12 @@ vendor/mesh/main.d vendor/mesh/main.o: ../vendor/mesh/main.c \
  ../vendor/mesh/../lvgl/examples/libs/freetype/lv_example_freetype.h \
  ../vendor/mesh/../lvgl/examples/libs/rlottie/lv_example_rlottie.h \
  ../vendor/mesh/../lvgl/examples/libs/ffmpeg/lv_example_ffmpeg.h \
- ../vendor/mesh/../UI/ui.h ../vendor/mesh/../UI/../lvgl/lvgl.h \
- ../vendor/mesh/../UI/ui_helpers.h ../vendor/mesh/../UI/ui.h \
- ../vendor/mesh/../UI/ui_events.h
+ ../vendor/mesh/../tuong/RD_Secure.h \
+ ../vendor/mesh/../tuong/my_Function.h ../vendor/mesh/../tuong/../UI/ui.h \
+ ../vendor/mesh/../tuong/../UI/../lvgl/lvgl.h \
+ ../vendor/mesh/../tuong/../UI/ui_helpers.h \
+ ../vendor/mesh/../tuong/../UI/ui.h \
+ ../vendor/mesh/../tuong/../UI/ui_events.h ../vendor/mesh/../UI/ui.h
 
 /cygdrive/C/TelinkV323/9518/LCD_1IN28/LCD_1IN28_lvgl-tuong194/firmware/tl_common.h:
 
@@ -1396,12 +1399,18 @@ vendor/mesh/main.d vendor/mesh/main.o: ../vendor/mesh/main.c \
 
 ../vendor/mesh/../lvgl/examples/libs/ffmpeg/lv_example_ffmpeg.h:
 
+../vendor/mesh/../tuong/RD_Secure.h:
+
+../vendor/mesh/../tuong/my_Function.h:
+
+../vendor/mesh/../tuong/../UI/ui.h:
+
+../vendor/mesh/../tuong/../UI/../lvgl/lvgl.h:
+
+../vendor/mesh/../tuong/../UI/ui_helpers.h:
+
+../vendor/mesh/../tuong/../UI/ui.h:
+
+../vendor/mesh/../tuong/../UI/ui_events.h:
+
 ../vendor/mesh/../UI/ui.h:
-
-../vendor/mesh/../UI/../lvgl/lvgl.h:
-
-../vendor/mesh/../UI/ui_helpers.h:
-
-../vendor/mesh/../UI/ui.h:
-
-../vendor/mesh/../UI/ui_events.h:

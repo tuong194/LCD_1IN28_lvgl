@@ -4,27 +4,30 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../vendor/tuong/LCDControl.c \
 ../vendor/tuong/LCD_128.c \
 ../vendor/tuong/LCD_lvgl.c \
+../vendor/tuong/RD_Secure.c \
 ../vendor/tuong/font.c \
 ../vendor/tuong/image.c \
+../vendor/tuong/my_Function.c \
 ../vendor/tuong/switch.c 
 
 OBJS += \
-./vendor/tuong/LCDControl.o \
 ./vendor/tuong/LCD_128.o \
 ./vendor/tuong/LCD_lvgl.o \
+./vendor/tuong/RD_Secure.o \
 ./vendor/tuong/font.o \
 ./vendor/tuong/image.o \
+./vendor/tuong/my_Function.o \
 ./vendor/tuong/switch.o 
 
 C_DEPS += \
-./vendor/tuong/LCDControl.d \
 ./vendor/tuong/LCD_128.d \
 ./vendor/tuong/LCD_lvgl.d \
+./vendor/tuong/RD_Secure.d \
 ./vendor/tuong/font.d \
 ./vendor/tuong/image.d \
+./vendor/tuong/my_Function.d \
 ./vendor/tuong/switch.d 
 
 

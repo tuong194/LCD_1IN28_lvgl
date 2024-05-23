@@ -33,6 +33,9 @@
 #include "proj_lib/sig_mesh/app_mesh.h"
 #include "vendor_model.h"
 #include "fast_provision_model.h"
+
+#include "vendor/tuong/RD_Secure.h"
+
 #if DU_ENABLE
 #include "user_du.h"
 #endif
@@ -968,6 +971,9 @@ mesh_cmd_sig_func_t mesh_cmd_vd_func[] = {
     CMD_NO_STR(VD_LPN_SENSOR_STATUS, 1, VENDOR_MD_LIGHT_S, VENDOR_MD_LIGHT_C, cb_vd_lpn_sensor_sts, STATUS_NONE),
     #endif
 #endif
+
+	//T_NOTE: edit vender opcode
+	{RD_OPCODE_TYPE_SEND,0,VENDOR_MD_LIGHT_C,VENDOR_MD_LIGHT_S,RD_Messenger_ProcessCommingProcess_Type ,RD_OPCODE_TYPE_RSP},
 
     USER_MESH_CMD_VD_ARRAY
 };
