@@ -11,10 +11,10 @@ void ui_Screen3_screen_init(void)
     lv_obj_clear_flag(ui_Screen3, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
     ui_Colorwheel2 = lv_colorwheel_create(ui_Screen3, true);
-    lv_obj_set_width(ui_Colorwheel2, 235);
-    lv_obj_set_height(ui_Colorwheel2, 235);
+    lv_obj_set_width(ui_Colorwheel2, 260);
+    lv_obj_set_height(ui_Colorwheel2, 260);
     lv_obj_set_align(ui_Colorwheel2, LV_ALIGN_CENTER);
-    lv_obj_set_style_arc_width(ui_Colorwheel2, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_arc_width(ui_Colorwheel2, 35, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_set_style_pad_left(ui_Colorwheel2, -5, LV_PART_KNOB | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_right(ui_Colorwheel2, -5, LV_PART_KNOB | LV_STATE_DEFAULT);

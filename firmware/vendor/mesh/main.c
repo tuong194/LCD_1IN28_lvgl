@@ -76,51 +76,6 @@ unsigned int get_sys_elapse(void)
 }
 
 
-
-#define GATEWAYADDRESS 0xFFFF
-void RD_Send_Relay_Stt(uint8_t Relay_ID, uint8_t Relay_Stt)
-{
-	uint8_t Mess_Buff[8] = {0};
-	uint16_t Element_Add = 0x0000;
-
-	Mess_Buff[0]		= Relay_Stt;
-	Element_Add 		= ele_adr_primary + (Relay_ID-1);
-
-	mesh_tx_cmd2normal(G_ONOFF_STATUS, Mess_Buff, 1, Element_Add, GATEWAYADDRESS, 2);
-
-//	char UART_TempSend[128];
-//	sprintf(UART_TempSend,"Messenger On-Off Gw:0x%x- Relay: %d--%d--%d--%d  \n",RD_GATEWAYADDRESS, relay_Stt[0], relay_Stt[1], relay_Stt[2], relay_Stt[3]);
-//	uart_CSend(UART_TempSend);
-}
-
-typedef struct {
-	uint8_t Header[2];
-	uint8_t Length;
-	uint8_t OpCode[2];
-	uint8_t Dim_Stt;
-	uint8_t Cct_Stt;
-	uint8_t CRC;
-} Struct_OPCODE_SET_DIMCCT_t;
-#define LED_ADDR 0xFFFF
-
-/*
-static void RD_Model_OPCODE_SET_DIMCCT(void)
-{
-	Struct_OPCODE_SET_DIMCCT_t *mess_buff;
-
-	mess_buff = (Struct_OPCODE_SET_DIMCCT_t*) vrts_GWIF_IncomeMessage;
-
-	u8 dim_set	= mess_buff->Dim_Stt;
-	u8 cct_set = mess_buff->Cct_Stt;
-
-	//rdPrintf("OPCODE SET dim: %d% cct:%d %", dim_set, cct_set);
-	access_cmd_set_light_ctl_100(LED_ADDR, 2 , dim_set, cct_set, 0);
-	//access_cmd_set_light_ctl(0xffff, 2 , lum2_lightness(dim_set), cct_set, 0, &TTS_CTRL_DF);
-}
-*/
-
-
-
 #if (HCI_ACCESS==HCI_USE_UART)
 #include "proj/drivers/uart.h"
 extern my_fifo_t hci_rx_fifo;
@@ -345,7 +300,6 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 
 		lv_init();
 		lv_port_disp_init();
-
 		ui_init();
 
 		blc_pm_select_external_32k_crystal();
@@ -373,7 +327,6 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 
 		check_OTA();
 		check_provision();
-
 		displayClock();
 		check_Scene();
 		read_sw();

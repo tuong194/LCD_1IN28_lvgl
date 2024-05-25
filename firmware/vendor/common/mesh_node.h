@@ -653,6 +653,7 @@ typedef struct{
 	u8 delay;
 }transition_par_t;
 
+
 #define GET_TRANSITION_STEP(val)	(val & 0x3f)
 static inline int is_transition_need(u8 transit_t, u8 delay)
 {

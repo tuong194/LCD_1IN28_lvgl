@@ -488,7 +488,7 @@ extern "C" {
 #if (LIGHT_TYPE_SEL == LIGHT_TYPE_HSL) || (LIGHT_TYPE_SEL == LIGHT_TYPE_CT_HSL)
 #define LIGHT_TYPE_HSL_EN           1
 #else
-#define LIGHT_TYPE_HSL_EN           0
+#define LIGHT_TYPE_HSL_EN           1
 #endif
 #endif
 
