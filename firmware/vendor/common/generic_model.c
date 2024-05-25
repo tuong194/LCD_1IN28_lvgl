@@ -52,6 +52,7 @@
 #include "solicitation_rpl_cfg_model.h"
 
 #include"../tuong/switch.h" //T_NOTE: include led
+#include"../tuong/my_Function.h"
 
 extern u8 stateLed1,stateLed2;
 /** @addtogroup Mesh_Common
@@ -217,14 +218,22 @@ int g_onoff_set(mesh_cmd_g_onoff_set_t *p_set, int par_len, int force_last, int 
 		if(!err){
 			/****************************/
 			// T_NOTE
+			transition_par_t trs_par = {0};
+			trs_par.transit_t = 10;
 			if(idx == 0){
 				gpio_write(LED1,p_set->onoff);
 				set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);
 				stateLed1 = p_set->onoff;
+
 			}else if(idx == 1){
 				gpio_write(LED2, p_set->onoff);
 				set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);
 				stateLed2 = p_set->onoff;
+				if(stateLed2){
+					access_cmd_set_lightness(LED_ADDR,2,lum2_lightness(100),0, &trs_par);
+				}else{
+					access_cmd_set_lightness(LED_ADDR,2,0,0, &trs_par);
+				}
 			}
 			/******************************/
 		   // set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);

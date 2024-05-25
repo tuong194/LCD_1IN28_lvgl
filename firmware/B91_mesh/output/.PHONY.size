@@ -1,2 +1,2 @@
    text	   code	 rodata	   data	    bss	    dec	    hex	filename
- 428256	 316920	 111336	    652	  72482	 501390	  7a68e	B91_mesh.elf
+ 419752	 309108	 110644	    632	  70882	 491266	  77f02	B91_mesh.elf

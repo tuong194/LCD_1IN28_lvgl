@@ -47,14 +47,8 @@ extern void user_init();
 extern void main_loop ();
 void blc_pm_select_none();
 
-u32 timeOut;
-u8 checkTimeOut;
-uint8_t para[8];
 
-extern u8 fw_ota_value;
 
-u8 stateLed1,stateLed2;
-u8 gio, phut, giay;
 
 unsigned int get_sys_elapse(void)
 {
@@ -305,8 +299,9 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		blc_pm_select_external_32k_crystal();
 
 		setValue();
-		BlinkLed1(3);
+		//BlinkLed1(3);
 		getValue();
+
 
 	}
 
@@ -324,6 +319,8 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 #endif
 		main_loop ();
 		lv_timer_handler();
+
+		Reset_main();
 
 		check_OTA();
 		check_provision();

@@ -43,8 +43,8 @@ extern u8 manual_factory_reset;
 
 u8 buf[10];
 extern u8 stateLed1,stateLed2;
-extern u8 gio, phut, giay;
-extern u8 checkProvision;
+extern u8 dim_set;
+extern u8 ctt_set;
 
 
 #if !WIN32
@@ -506,11 +506,10 @@ void kick_out(int led_en){
 	flash_erase_sector(ADDR_START);
 	buf[0] = stateLed1;
 	buf[1] = stateLed2;
-	buf[2] = gio;
-	buf[3] = phut;
-	buf[4] = giay;
-	buf[5] = 0;
-	flash_write_page(ADDR_START,6,buf);
+	buf[2] = 0;  // checkProvision = 0
+	buf[3] = dim_set;
+	buf[4] = ctt_set;
+	flash_write_page(ADDR_START,5,buf);
 	/*******************************************/
 	factory_reset();
     #if !WIN32
