@@ -35,6 +35,7 @@
 #include "fast_provision_model.h"
 
 #include "vendor/tuong/RD_Secure.h"
+#include "vendor/tuong/Message_Control.h"
 
 #if DU_ENABLE
 #include "user_du.h"
@@ -974,6 +975,7 @@ mesh_cmd_sig_func_t mesh_cmd_vd_func[] = {
 
 	//T_NOTE: edit vender opcode
 	{RD_OPCODE_TYPE_SEND,0,VENDOR_MD_LIGHT_C,VENDOR_MD_LIGHT_S,RD_Messenger_ProcessCommingProcess_Type ,RD_OPCODE_TYPE_RSP},
+	{OPCODE1,0,VENDOR_MD_LIGHT_C,VENDOR_MD_LIGHT_S,a ,RD_OPCODE_TYPE_RSP},
 
     USER_MESH_CMD_VD_ARRAY
 };

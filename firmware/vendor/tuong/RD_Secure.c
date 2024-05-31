@@ -95,7 +95,6 @@ void RD_Handle_MessType(uint8_t par[8], uint16_t Gw_Add_Buff)
 }
 int RD_Messenger_ProcessCommingProcess_Type(u8 *par, int par_len, mesh_cb_fun_par_t *cb_par){
 
-
 	uint16_t Gw_Add_Buff =0x00;
 	Gw_Add_Buff = cb_par->adr_src;
 

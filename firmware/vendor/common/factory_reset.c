@@ -28,6 +28,8 @@
 #include "stack/ble/ble.h"
 #include "app_beacon.h"
 
+#include "../tuong/my_Function.h"
+
 //FLASH_ADDRESS_EXTERN;
 
 //////////////////Factory Reset///////////////////////////////////////////////////////////////////////
@@ -39,12 +41,10 @@ int mesh_reset_network(u8 provision_enable);
 
 extern u8 manual_factory_reset;
 
-#define ADDR_START 0x20FFE000
+
 
 u8 buf[10];
-extern u8 stateLed1,stateLed2;
-extern u8 dim_set;
-extern u8 ctt_set;
+
 
 
 #if !WIN32
@@ -502,6 +502,7 @@ void kick_out(int led_en){
 #endif
 #else
 	//T_NOTE: write data into flash
+	Blink2Led(3);
 	/*********************************************/
 	flash_erase_sector(ADDR_START);
 	buf[0] = stateLed1;
@@ -509,7 +510,8 @@ void kick_out(int led_en){
 	buf[2] = 0;  // checkProvision = 0
 	buf[3] = dim_set;
 	buf[4] = ctt_set;
-	flash_write_page(ADDR_START,5,buf);
+	buf[5] = hsvH;
+	flash_write_page(ADDR_START,6,buf);
 	/*******************************************/
 	factory_reset();
     #if !WIN32

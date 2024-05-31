@@ -2153,7 +2153,7 @@ void ble_mac_init()
 		#elif((MCU_CORE_TYPE == MCU_CORE_8278)||(MCU_CORE_TYPE == MCU_CORE_9518))
 			tbl_mac[3] = 0xD1;             //company id: 0xC119D1
 			tbl_mac[4] = 0x19;
-			tbl_mac[5] = 0xC5;
+			tbl_mac[5] = 0xC4;
 		#endif
 
 		flash_write_page (flash_sector_mac_address, 6, tbl_mac);

@@ -10,21 +10,26 @@
 #include "switch.h"
 
 
+extern u8 value_start;
 extern u8 ui_ota_is_working;
-
-
 
 extern u8 get_ota_check_type();
 extern int access_cmd_set_light_hsl(u16 adr, u8 rsp_max, u16 lightness, u16 hue, u16 sat, int ack, transition_par_t *trs_par);
 
-u8 buf[10];
+u8 kick_out_flag; u32 time_out_kick_out;
+u8 check_press;
+
+
 u8 mode=0;
 u8 state_led2_blink = 0;
 u8 check_reset;
 
+u8 hsvH1,hsvH2;
 char swx;
 u8 checkSuccess;u8 checkPro;
 unsigned char buff[8];
+
+
 
 void BlinkLed1(u8 number){
 	for(u8 i=0;i<number; i++){
@@ -36,12 +41,74 @@ void BlinkLed1(u8 number){
 		wd_clear();
 	}
 }
+void Blink2Led(u8 number){
+	for(u8 i=0;i<number; i++){
+		ONLED1;
+		ONLED2;
+		sleep_ms(300);
+		wd_clear();
+		OFFLED1;
+		OFFLED2;
+		sleep_ms(300);
+		wd_clear();
+	}
+}
+
+void Setting_stt_led(void){
+	transition_par_t trs_par = {0};
+	trs_par.transit_t = 10;
+	if(value_start == 0){
+		gpio_write(LED1,0);
+		gpio_write(LED2,0);
+		access_cmd_set_lightness(LED_ADDR,2,0,0, &trs_par);
+	}else if(value_start == 1){
+		gpio_write(LED1,1);
+		gpio_write(LED1,1);
+		access_cmd_set_lightness(LED_ADDR,2,lum2_lightness(100),0, &trs_par);
+	}else if(value_start == 2){
+		gpio_write(LED1,stateLed1);
+		gpio_write(LED2,stateLed2);
+		if(stateLed2 == 1){
+			access_cmd_set_lightness(LED_ADDR,2,lum2_lightness(dim_set),0, &trs_par);
+		}else if(stateLed2 == 0){
+			access_cmd_set_lightness(LED_ADDR,2,0,0, &trs_par);
+		}
+
+	}
+}
+
+void checkHSV(void){
+	if(hsvH<=255){
+		hsvH1 = hsvH;
+		hsvH2 = 0;
+	}else{
+		hsvH1 = 255;
+		hsvH2 = (u8)hsvH;
+	}
+	uart_send_byte(UART0,hsvH1);
+	uart_send_byte(UART0,hsvH2);
+}
+
 void getValue(void){
 	Read_Data_Flash();
-	gpio_write(LED1,stateLed1); //Green
-	gpio_write(LED2,stateLed2);  //red
-	Relay_On_Off(stateLed2);
-	RD_Send_Relay_Stt(2,stateLed2);
+	hsvH = hsvH1 + hsvH2;
+
+//	gpio_write(LED1,stateLed1); //green
+//	gpio_write(LED2,stateLed2);  //red
+//	Relay_On_Off(stateLed2);
+//	RD_Send_Relay_Stt(2,stateLed2);
+
+
+	uart_send_byte(UART0,'x');
+	uart_send_byte(UART0,stateLed1);
+	uart_send_byte(UART0,stateLed2);
+	uart_send_byte(UART0,checkProvision);
+	uart_send_byte(UART0,dim_set);
+	uart_send_byte(UART0,ctt_set);
+	uart_send_byte(UART0,hsvH1);
+	uart_send_byte(UART0,hsvH2);
+	uart_send_byte(UART0,hsvH);
+
 }
 
 void setValue(void){
@@ -52,26 +119,42 @@ void setValue(void){
 	countBlinkLed2 = 0;
 	checkPro = 1;      // Proved
 	checkSuccess = 1;  // provision success
-	hsvH = 0;
 	check_reset = 1;
+	kick_out_flag = 0;
 }
 
 void Reset_main(void){
-	if(check_reset){
-		if(pm_get_32k_tick() - timeProvision >= 6400){
-			state_led2_blink = !state_led2_blink;
-			gpio_write(LED2,state_led2_blink);
-			gpio_write(LED1,state_led2_blink);
-			countBlinkLed2++;
-			timeProvision = pm_get_32k_tick();
-		}
-		if(countBlinkLed2 == 6){ // done!
-			countBlinkLed2 = 0;
+	if(check_reset == 1){
+
+		if(checkProvision ==0){
+			if(pm_get_32k_tick() - timeProvision >= 6400){
+				state_led2_blink = !state_led2_blink;
+				gpio_write(LED2,state_led2_blink);
+				gpio_write(LED1,state_led2_blink);
+				countBlinkLed2++;
+				timeProvision = pm_get_32k_tick();
+
+			}
+			if(countBlinkLed2 == 6){ // done!
+				countBlinkLed2 = 0;
+				check_reset =0;
+				Setting_stt_led();
+
+//				gpio_write(LED1,stateLed1);
+//				Relay_On_Off(stateLed1);
+//				RD_Send_Relay_Stt(1,stateLed1);
+//
+//				gpio_write(LED2,stateLed2);
+//				Relay_On_Off(stateLed2);
+//				RD_Send_Relay_Stt(2,stateLed2);
+			}
+		}else if(checkProvision == 1){
 			check_reset =0;
-			gpio_write(LED2,stateLed2);
-			Relay_On_Off(stateLed2);
-			RD_Send_Relay_Stt(2,stateLed2);
+//			gpio_write(LED2,stateLed2);
+//			Relay_On_Off(stateLed2);
+//			RD_Send_Relay_Stt(2,stateLed2);
 		}
+
 	}
 }
 
@@ -100,11 +183,11 @@ void check_provision(void){
 			para[i] = 0;
 		}
 		checkPro = 1;
-		if(pm_get_32k_tick() - timeProvision >= 16000){
+		/*if(pm_get_32k_tick() - timeProvision >= 16000){
 			state_led2_blink = !state_led2_blink;
 			gpio_write(LED2,state_led2_blink);
 			timeProvision = pm_get_32k_tick();
-		}
+		}*/
 	}
 	if(!checkProvision){
 		if(get_provision_state() == STATE_DEV_PROVING){
@@ -115,14 +198,16 @@ void check_provision(void){
 				}
 		}else if(get_provision_state() == STATE_DEV_PROVED){
 			if(checkPro == 1){
+
 				if(pm_get_32k_tick() - timeProvision >= 6400){
 					state_led2_blink = !state_led2_blink;
 					gpio_write(LED2,state_led2_blink);
 					countBlinkLed2++;
 					timeProvision = pm_get_32k_tick();
 				}
-				if(countBlinkLed2 == 10){ // done!
+				if(countBlinkLed2 == 4){ // done!
 					countBlinkLed2 = 0;
+					checkProvision = 1; ///////////////////
 					checkPro =0;
 					gpio_write(LED2,stateLed2);
 					Relay_On_Off(stateLed2);
@@ -131,7 +216,7 @@ void check_provision(void){
 				timeOut = pm_get_32k_tick();
 			}
 
-			checkProvision = 1;
+
 			/**********check Secure************/
 			//		if(pm_get_32k_tick() - timeOut >= 32000*TIMEOUT_SECURE){
 			//			if(para[0] == 0 && para[1] == 0 && para[2] == 0 && para[3] == 0 && para[4] == 0 && para[5] == 0 && para[6] == 0 && para[7] == 0){
@@ -149,18 +234,20 @@ void check_provision(void){
 	}else if(checkProvision == 1){
 		if(checkSuccess == 1){
 			Write_Data_Flash();
-			uart_send_byte(UART0,'1');
+			//uart_send_byte(UART0,'1');
 			checkSuccess = 0;
 		}
 	}
 }
 
+
 void displayClock(void){
 	if(pm_get_32k_tick() - nowtime >=32000){
-		uart_send_byte(UART0, 'x');
-		uart_send_byte(UART0, get_ota_check_type());
-		uart_send_byte(UART0, 'z');
-		uart_send_byte(UART0, checkProvision);
+
+		if(flag_flash){
+			Write_Data_Flash();
+			flag_flash = 0;
+		}
 
 		giay++;
 		if(giay == 60){
@@ -192,26 +279,8 @@ void setRotation(u8 gio, u8 phut, u8 giay){
 
 void check_Scene(void){
 		if(checkScene == 0){
-			timeScene = pm_get_32k_tick();
+			//timeScene = pm_get_32k_tick();
 			setRotation(gio,phut,giay);
-		}else if(checkScene == 1){
-			if(mode == MODE_RGB_SET){
-				if(pm_get_32k_tick() - timeScene >=8000){
-					if(hsvH == 360){
-						hsvH = 0;
-					}
-					lv_img_set_angle(ui_Image3, hsvH*10);
-					if(hsvH<=180){
-						color = lv_color_hsv_to_rgb(180-hsvH,100,100); //H,S,V
-					}else{
-						color = lv_color_hsv_to_rgb(540-hsvH,100,100);
-					}
-
-					lv_obj_set_style_bg_color(ui_Panel2, color, LV_PART_MAIN | LV_STATE_DEFAULT);
-					hsvH++;
-					timeScene = pm_get_32k_tick();
-				}
-			}
 		}
 		else if(checkScene == 3){
 			if(get_ota_check_type() == OTA_SUCCESS){
@@ -222,7 +291,15 @@ void check_Scene(void){
 			}
 		}
 }
-
+void set_RGB_panel(u16 hsvH){
+	lv_img_set_angle(ui_Image3, hsvH*10);
+	if(hsvH<=180){
+		color = lv_color_hsv_to_rgb(180-hsvH,100,100); //H,S,V
+	}else{
+		color = lv_color_hsv_to_rgb(540-hsvH,100,100);
+	}
+	lv_obj_set_style_bg_color(ui_Panel2, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+}
 void Set_RGB(void){
 	transition_par_t trs_par = {0};
 	trs_par.transit_t = 10;
@@ -273,16 +350,30 @@ void Relay_On_Off(u8 stateLed){
 	}
 }
 
+void press_sw_kick_out(void){
+
+	if(kick_out_flag == 3){
+		kick_out(0);
+	}
+	if(pm_get_32k_tick() - time_out_kick_out >= 32000*10){
+		kick_out_flag = 0;
+	}
+}
+
 void read_sw(void){
 	swx = ReadSW();
 	if(swx == '5' ){
 		checkKickout = 1;
 		// press 1 & 2 in 3 sec -> kickout
-		if(checkScene == 0 && (pm_get_32k_tick() - timeKickout >= (32000*3))){
-			checkKickout = 0;
-			checkProvision = 1;
-
-			kick_out(0);
+		if( (pm_get_32k_tick() - timeKickout >= (32000*3))){
+			if(!check_press){
+				BlinkLed1(3);
+				kick_out_flag++;
+				check_press = 1;
+				uart_send_byte(UART0, kick_out_flag);
+			}
+			time_out_kick_out = pm_get_32k_tick();
+			timeKickout = pm_get_32k_tick();
 		}
 	}else if(swx == '4'){
 		if(checkScene == 1){
@@ -303,9 +394,26 @@ void read_sw(void){
 				sprintf(buff,"%d",ctt_set);
 				lv_label_set_text(ui_Label1, buff);
 				access_cmd_set_light_ctl_temp_100(LED_ADDR,2,ctt_set,0);
+			}else if(mode == MODE_RGB_SET){
+				hsvH--;
+				if(hsvH > 360) hsvH = 360;
+				checkHSV();
+				set_RGB_panel(hsvH);
+				Set_RGB();
 			}
-			Write_Data_Flash();
+
+		}else if(checkScene == 0){
+			transition_par_t trs_par = {0};
+			trs_par.transit_t = 10;
+			stateLed2 = !stateLed2;
+			gpio_write(LED2, stateLed2);
+			if(stateLed2){
+				access_cmd_set_lightness(LED_ADDR,2,lum2_lightness(dim_set),0, &trs_par);
+			}else{
+				access_cmd_set_lightness(LED_ADDR,2,0,0, &trs_par);
+			}
 		}
+		Write_Data_Flash();
 	}else if(swx == '3'){
 		if(checkScene == 1){
 			if(mode == MODE_DIM_SET){
@@ -325,16 +433,29 @@ void read_sw(void){
 				sprintf(buff,"%d",ctt_set);
 				lv_label_set_text(ui_Label1, buff);
 				access_cmd_set_light_ctl_temp_100(LED_ADDR,2,ctt_set,0);
+			}else if(mode == MODE_RGB_SET){
+				hsvH++;
+				if(hsvH >= 360) hsvH = 0;
+				checkHSV();
+				set_RGB_panel(hsvH);
+				Set_RGB();
 			}
-			Write_Data_Flash();
+
+		}else if(checkScene == 0){
+			stateLed1 = !stateLed1;
+			gpio_write(LED1, stateLed1);
 		}
+		Write_Data_Flash();
 	}
 	else if(swx == '2'){
+
 		checkScene = 0;
 		ui_Screen2_screen_init();
 		lv_disp_load_scr(ui_Screen2);
-		lv_obj_set_style_bg_color(ui_Screen2, color, LV_PART_MAIN | LV_STATE_DEFAULT);
-		Set_RGB();
+		//lv_obj_set_style_bg_color(ui_Screen2, color, LV_PART_MAIN | LV_STATE_DEFAULT);
+		//Set_RGB();
+
+
 
 	}else if(swx == '1'){
 		checkScene = 1;
@@ -345,21 +466,30 @@ void read_sw(void){
 			lv_disp_load_scr(ui_Screen1);
 			lv_label_set_text(ui_Label1, "dim");
 			lv_arc_set_value(ui_Arc1, dim_set);
+			access_set_lum(LED_ADDR,2,dim_set,0);
 
 		}if(mode == MODE_CTT_SET){
 			ui_Screen1_screen_init();
 			lv_disp_load_scr(ui_Screen1);
 			lv_label_set_text(ui_Label1, "ctt");
 			lv_arc_set_value(ui_Arc1, ctt_set);
+			access_cmd_set_light_ctl_temp_100(LED_ADDR,2,ctt_set,0);
 
 		}if(mode == MODE_RGB_SET){
 			ui_Screen3_screen_init();
 			lv_disp_load_scr(ui_Screen3);
+			set_RGB_panel(hsvH);
+			Set_RGB();
 		}
 	}
 	else if(swx == SW_NOT_PRESS){
+
 		checkKickout = 0;
+
+		check_press = 0;
 	}
+
+	press_sw_kick_out(); // kick out
 }
 
 void Write_Data_Flash(void){
@@ -369,13 +499,25 @@ void Write_Data_Flash(void){
 	buf[2] = checkProvision;
 	buf[3] = dim_set;
 	buf[4] = ctt_set;
-	flash_write_page(ADDR_START,5,buf);
+	buf[5] = hsvH1;
+	buf[6] = hsvH2;
+	buf[7] = value_start;
+	flash_write_page(ADDR_START,8,buf);
+	//uart_send_byte(UART0, 'W');
+
 }
+
 void Read_Data_Flash(void){
-	flash_read_page(ADDR_START,5,buf);
+	flash_read_page(ADDR_START,8,buf);
 	stateLed1 = buf[0];
 	stateLed2 = buf[1];
 	checkProvision = buf[2];
 	dim_set = buf[3];
 	ctt_set = buf[4];
+	hsvH1 = buf[5];
+	hsvH2 = buf[6];
+	value_start = buf[7];
+	uart_send_byte(UART0, 'R');
+	//uart_send_byte(UART0, buf[0]);
 }
+

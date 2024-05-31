@@ -54,7 +54,15 @@
 #include"../tuong/switch.h" //T_NOTE: include led
 #include"../tuong/my_Function.h"
 
-extern u8 stateLed1,stateLed2;
+//#define LED_ADDR 0xFFFF
+//#define ADDR_START	0xF7000
+//u8 stateLed1;
+//u8 stateLed2;
+//
+//extern u8 dim_set;
+//
+//u8 buf[10];
+
 /** @addtogroup Mesh_Common
   * @{
   */
@@ -224,17 +232,51 @@ int g_onoff_set(mesh_cmd_g_onoff_set_t *p_set, int par_len, int force_last, int 
 				gpio_write(LED1,p_set->onoff);
 				set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);
 				stateLed1 = p_set->onoff;
+				//Write_Data_Flash();
 
 			}else if(idx == 1){
 				gpio_write(LED2, p_set->onoff);
 				set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);
 				stateLed2 = p_set->onoff;
 				if(stateLed2){
-					access_cmd_set_lightness(LED_ADDR,2,lum2_lightness(100),0, &trs_par);
+					access_cmd_set_lightness(LED_ADDR,2,lum2_lightness(dim_set),0, &trs_par);
 				}else{
 					access_cmd_set_lightness(LED_ADDR,2,0,0, &trs_par);
 				}
 			}
+			flag_flash = 1;
+			//flash_erase_sector(ADDR_START);
+//			buf[0] = stateLed1;
+//			buf[1] = stateLed2;
+//			flash_write_page(ADDR_START,2,buf);
+
+//			uart_send_byte(UART0,'8');
+//			Write_Data_Flash();
+//			uart_send_byte(UART0,'y');
+//
+//
+//			gpio_write(LED2,1);
+//			sleep_ms(200);
+//			wd_clear();
+//			gpio_write(LED2,0);
+//			sleep_ms(200);
+//			wd_clear();
+//			gpio_write(LED2,1);
+//			sleep_ms(200);
+//			wd_clear();
+//			gpio_write(LED2,0);
+//			sleep_ms(200);
+//			wd_clear();
+//			gpio_write(LED2,1);
+//			sleep_ms(200);
+//			wd_clear();
+//			gpio_write(LED2,0);
+//			sleep_ms(200);
+//			wd_clear();
+//
+//			int x =1;
+
+
 			/******************************/
 		   // set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);
 		}

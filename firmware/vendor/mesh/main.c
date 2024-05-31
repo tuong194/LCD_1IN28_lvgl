@@ -301,6 +301,7 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		setValue();
 		//BlinkLed1(3);
 		getValue();
+		Setting_stt_led();
 
 
 	}

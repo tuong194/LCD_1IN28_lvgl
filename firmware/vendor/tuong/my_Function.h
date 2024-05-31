@@ -18,10 +18,10 @@
 
 #include "../UI/ui.h"
 
-#define ADDR_START  0x20FFE000  //sector1: 4kB
-#define ADDR_START2 0x20FFF000 //sector2: 4kB
+//#define ADDR_START  0x201F7000  //sector1: 4kB
+#define ADDR_START	0xF7000
 
-#define GATEWAY_ADDRESS 0xFFFF
+#define GATEWAY_ADDRESS 0x0001
 #define LED_ADDR 0xFFFF
 
 #define TIMEOUT_SECURE 30   // 30s
@@ -29,12 +29,18 @@
 #define MODE_DIM_SET 0
 #define MODE_CTT_SET 1
 #define MODE_RGB_SET 2
+
+
+u8 flag_flash;
+
 u8 dim_set;
 u8 ctt_set;
 
+u8 buf[10];
 uint8_t para[8];
 
-u8 stateLed1, stateLed2;
+u8 stateLed1;
+u8 stateLed2;
 u8 gio,phut,giay;
 
 
@@ -42,7 +48,7 @@ lv_color_t color;
 u16 hsvH;
 
 u8 countBlinkLed2;
-u32 nowtime; u32 timeScene; u32 timeKickout; u32 timeProvision;
+u32 nowtime;  u32 timeKickout; u32 timeProvision;
 u32 timeOut;  // time out provision
 
 u8 checkOTA ;
@@ -62,6 +68,8 @@ typedef struct {
 
 void Reset_main(void);
 void BlinkLed1(u8 number);
+void Blink2Led(u8 number);
+void Setting_stt_led(void);
 void getValue(void);
 void setValue(void);
 void check_OTA(void);
@@ -73,6 +81,7 @@ void Set_RGB(void);
 void Relay_On_Off(u8 stateLed);
 void RD_Send_Relay_Stt(uint8_t Relay_ID, uint8_t Relay_Stt);
 void Write_Data_Flash(void);
+void Write_Data_Flash2(uint8_t led1_stt);
 void Read_Data_Flash(void);
 
 #endif /* VENDOR_TUONG_MY_FUNCTION_H_ */

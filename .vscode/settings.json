@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "ui.h": "c",
-        "lv_examples.h": "c",
-        "rd_secure.h": "c",
-        "my_function.h": "c"
-    }
-}

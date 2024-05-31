@@ -30,6 +30,7 @@ extern unsigned char RD_key[16];
 
 #define RD_OPCODE_TYPE_SEND				(0xE0)
 #define RD_OPCODE_TYPE_RSP				(0xE1)
+
 #define RD_HEADER_SET_TYPE_DEVICE		(0x0001)
 #define RD_HEADER_SAVE_GW_ADD			(0x0002)
 #define RD_HEADER_RSP_TYPE_DEVICE		(0x0003)
