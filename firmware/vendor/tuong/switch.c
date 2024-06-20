@@ -7,80 +7,65 @@
 
 #include "switch.h"
 
-#define SET_ROW1 gpio_write(TL_Key1,1)
-#define SET_ROW2 gpio_write(TL_Key2,1)
+u8 checkPress = 0 ;
 
-#define RESET_ROW1 gpio_write(TL_Key1,0)
-#define RESET_ROW2 gpio_write(TL_Key2,0)
+void Pin_SW_Conf(void){
+	gpio_set_func(SW1, AS_GPIO);
+	gpio_input_en(SW1);
+	gpio_set_up_down_res(SW1,GPIO_PIN_PULLUP_10K);
 
-#define READ_COL1 gpio_read(TL_Key3)
-#define READ_COL2 gpio_read(TL_Key4)
+	gpio_set_func(SW2, AS_GPIO);
+	gpio_input_en(SW2);
+	gpio_set_up_down_res(SW2,GPIO_PIN_PULLUP_10K);
 
-void Pin_Switch_Config(void){
-	gpio_set_func(LED1, FUNC);
-	gpio_output_en(LED1);
-	gpio_set_func(LED2, FUNC);
-	gpio_output_en(LED2);
+	gpio_set_func(SW3, AS_GPIO);
+	gpio_input_en(SW3);
+	gpio_set_up_down_res(SW3,GPIO_PIN_PULLUP_10K);
 
-	gpio_set_func(TL_Key1, FUNC);
-	gpio_output_en(TL_Key1);
-
-	gpio_set_func(TL_Key2, FUNC);
-	gpio_output_en(TL_Key2);
-
-	gpio_set_func(TL_Key3, FUNC);
-	gpio_input_en(TL_Key3);
-	gpio_set_up_down_res(TL_Key3,GPIO_PIN_PULLUP_10K);
-
-	gpio_set_func(TL_Key4, FUNC);
-	gpio_input_en(TL_Key4);
-	gpio_set_up_down_res(TL_Key4,GPIO_PIN_PULLUP_10K);
+	gpio_set_func(SW4, AS_GPIO);
+	gpio_input_en(SW4);
+	gpio_set_up_down_res(SW4,GPIO_PIN_PULLUP_10K);
 }
-
-char sw[2][2] = {
-		{'1','2'},
-		{'3','4'},
-};
-
-static char read_col(u8 row){
-	if(!READ_COL1){
-		return sw[row-1][0];   // hang row cot 0
-	}
-	if(!READ_COL2){
-		return sw[row-1][1];
-	}
-	return SW_NOT_PRESS;
-}
-
-u8 count = 0;
 
 char ReadSW(void){
-	char check;
 
-	// check row 1
-	SET_ROW2;
-	RESET_ROW1;
-	check = read_col(1);
-	if(check != SW_NOT_PRESS && count == 250){
-		count =0;
-		stateSW = 1;
-		return check;
+	if(gpio_read(SW1)==0 && gpio_read(SW2) == 0){
+		checkPress = 5;
+		//uart_send_byte(UART0, '5');
+		return '5';
 	}
 
-	//check row 2
-	SET_ROW1;
-	RESET_ROW2;
-	check = read_col(2);
-	if(check != SW_NOT_PRESS && count == 250){
-		count = 0;
-		stateSW = 1;
-		return check;
+	if(!gpio_read(SW1)){
+		checkPress = 1;
+
+	}else if(!gpio_read(SW2)){
+		checkPress = 2;
+
+	}else if(!gpio_read(SW3)){
+		checkPress = 3;
+
+	}else if(!gpio_read(SW4)){
+		checkPress = 4;
+
 	}
-	if(stateSW == 0){
-		count++;
+
+	//wd_clear();
+
+	if(gpio_read(SW1) == 1 && checkPress == 1){
+		checkPress = 0;
+		return '1';
+	}else if(gpio_read(SW2) == 1 && checkPress == 2){
+		checkPress = 0;
+		return '2';
+	}else if(gpio_read(SW3) == 1 && checkPress == 3){
+		checkPress = 0;
+		return '3';
+	}else if(gpio_read(SW4) == 1 && checkPress == 4){
+		checkPress = 0;
+		return '4';
 	}
-	stateSW = 0;
 
 	return SW_NOT_PRESS;
 }
+
 

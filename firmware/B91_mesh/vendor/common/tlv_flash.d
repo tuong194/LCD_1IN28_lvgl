@@ -181,10 +181,12 @@ vendor/common/tlv_flash.d vendor/common/tlv_flash.o: \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mesh_common.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/battery_check.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/chip_adapt_layer/app_audio.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/chip_adapt_layer/my_resample.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/proj_lib/ble/service/ble_ll_ota.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/drivers/B91/ext_driver/mcu_boot.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/stack/ble/service/ota/ota_stack.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/stack/ble/service/ota/ota.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/stack/ble/service/ota/ota_server.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/mesh/app.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/mesh/app_buffer.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/user_app/user_app.h \
@@ -194,7 +196,8 @@ vendor/common/tlv_flash.d vendor/common/tlv_flash.o: \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/fast_provision_model.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/cmd_interface.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/sensors_model.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/op_agg_model.h
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/op_agg_model.h \
+ ../vendor/common/gw_node_info.h
 
 ../vendor/common/tlv_flash.h:
 
@@ -576,6 +579,8 @@ vendor/common/tlv_flash.d vendor/common/tlv_flash.o: \
 
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/chip_adapt_layer/app_audio.h:
 
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/chip_adapt_layer/my_resample.h:
+
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/proj_lib/ble/service/ble_ll_ota.h:
 
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/drivers/B91/ext_driver/mcu_boot.h:
@@ -583,6 +588,8 @@ vendor/common/tlv_flash.d vendor/common/tlv_flash.o: \
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/stack/ble/service/ota/ota_stack.h:
 
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/stack/ble/service/ota/ota.h:
+
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/stack/ble/service/ota/ota_server.h:
 
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/mesh/app.h:
 
@@ -603,3 +610,5 @@ vendor/common/tlv_flash.d vendor/common/tlv_flash.o: \
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/sensors_model.h:
 
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/op_agg_model.h:
+
+../vendor/common/gw_node_info.h:

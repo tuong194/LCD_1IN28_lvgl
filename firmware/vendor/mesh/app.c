@@ -64,7 +64,7 @@
 #include "mible_log.h"
 #endif 
 #if (HCI_ACCESS==HCI_USE_UART)
-#include "proj/drivers/uart.h"
+#include "drivers.h"
 #endif
 
 #if DU_ENABLE
@@ -381,7 +381,6 @@ void proc_ui()
 
 	#if AUDIO_MESH_EN
 	proc_ui_audio();
-	
 	return ;
 	#endif
 	
@@ -654,6 +653,9 @@ void test_ecdsa_sig_verify2()
 
 _attribute_no_inline_ void user_init() // must add no inline, or it will be inline to main_() which is ramcode.
 {
+	#if (PCBA_B91_SEL == PCBA_C1T216A20_V1_2) // without SWS for this PCBA.
+	bootloader_unlock_flash(); // use DP instead of SWS to burn firmware.
+	#endif
     #if (BATT_CHECK_ENABLE)
     app_battery_power_check_and_sleep_handle(0); //battery check must do before OTA relative operation
     #endif
@@ -812,6 +814,9 @@ _attribute_no_inline_ void user_init() // must add no inline, or it will be inli
 	//blc_register_hci_handler(rx_from_uart_cb,tx_to_uart_cb);				//customized uart handler
 	#endif
 #endif
+
+
+
 	#if ADC_ENABLE
 	adc_drv_init();	// still init even though BATT_CHECK_ENABLE is enable, beause battery check may not be called in user init.
 	#endif
@@ -928,12 +933,19 @@ _attribute_no_inline_ void user_init() // must add no inline, or it will be inli
 	user_init_risv_sdk();	// at last should be better.
 #endif
 
+#if MESH_FLASH_PROTECTION_EN
+	mesh_flash_lock(); // must after bls_ota_clearNewFwDataArea();
+#endif
+
     CB_USER_INIT();
 }
 
 #if (PM_DEEPSLEEP_RETENTION_ENABLE)
 _attribute_ram_code_ void user_init_deepRetn(void)
 {
+	#if (PCBA_B91_SEL == PCBA_C1T216A20_V1_2) // without SWS for this PCBA.
+	bootloader_unlock_flash(); // use DP instead of SWS to burn firmware.
+	#endif
 	#if (0 == __TLSR_RISCV_EN__) // B91 called in main_()
     blc_app_loadCustomizedParameters();
     #endif

@@ -57,7 +57,7 @@
 #include "../common/remote_prov.h"
 
 #if (HCI_ACCESS==HCI_USE_UART)
-#include "proj/drivers/uart.h"
+#include "drivers.h"
 #endif
 
 #if 1
@@ -377,7 +377,6 @@ u8 gateway_upload_node_info(u16 unicast)
 	return -1;
 }
 
-#if FAST_PROVISION_ENABLE
 int fast_provision_upload_node_info(u16 unicast, u16 pid)
 {
 	fast_prov_node_info_t node_info;
@@ -392,7 +391,6 @@ int fast_provision_upload_node_info(u16 unicast, u16 pid)
     LOG_MSG_ERR(TL_LOG_COMMON,0, 0,"upload node info failed", 0);
 	return -1;
 }
-#endif
 
 u8 gateway_upload_provision_self_sts(u8 sts)
 {
@@ -403,15 +401,37 @@ u8 gateway_upload_provision_self_sts(u8 sts)
 	}
 	provison_net_info_str* p_net = (provison_net_info_str*)(buf+1);
 	p_net->unicast_address = provision_mag.unicast_adr_last;
+	memcpy(p_net->iv_index, iv_idx_st.cur, 4);
 	return gateway_common_cmd_rsp(HCI_GATEWAY_CMD_PRO_STS_RSP,buf,sizeof(buf));
 }
 
-u8 gateway_upload_ivi(u8 *p_ivi)
+int gateway_upload_primary_info_get()
 {
-	return gateway_common_cmd_rsp(HCI_GATEWAY_CMD_SECURE_IVI,p_ivi,4);
+	provision_primary_mesh_info_t mesh_info;
+	memset(&mesh_info, 0x00, sizeof(mesh_info));
+	mesh_net_key_t *p_netkey = get_nk_first_valid();
+	if(p_netkey){
+		memcpy(mesh_info.provision_data.net_work_key, p_netkey->key, 16);
+		mesh_info.provision_data.key_index = p_netkey->index;
+		memcpy(mesh_info.provision_data.iv_index, iv_idx_st.cur, 4);
+		mesh_info.provision_data.unicast_address = ele_adr_primary;
+		mesh_info.appkey.apk_idx = p_netkey->app_key[0].index;
+		memcpy(mesh_info.appkey.app_key, p_netkey->app_key[0].key, 16);
+		mesh_info.alloc_adr = provision_mag.unicast_adr_last;
+	}
+	return gateway_common_cmd_rsp(HCI_GATEWAY_CMD_PRIMARY_INFO_STATUS, (u8 *)&mesh_info,sizeof(mesh_info));
 }
 
+int gateway_upload_primary_info_set(provision_primary_mesh_info_t *p)
+{
+	mesh_provision_and_bind_self((u8 *)&p->provision_data, p->appkey.app_key, p->appkey.apk_idx, p->appkey.app_key);
+	
+	provision_mag.unicast_adr_last = p->alloc_adr;
+	provision_mag_cfg_s_store();
 
+	mesh_tx_sec_private_beacon_proc(0);	
+	return gateway_upload_primary_info_get();
+}
 
 u8 gateway_upload_mesh_ota_sts(u8 *p_dat,int len)
 {
@@ -435,6 +455,10 @@ u8 gateway_upload_dev_uuid(u8 *p_uuid,u8 *p_mac)
 
 u8 gateway_upload_ividx(u8 *p_ivi)
 {
+	if(is_iv_index_invalid() || !is_provision_success()){
+    	return -1;
+	}
+	
     return gateway_common_cmd_rsp(HCI_GATEWAY_CMD_SEND_IVI,
                         p_ivi,4);
 }
@@ -580,6 +604,13 @@ u8 gateway_cmd_from_host_ctl(u8 *p, u16 len )
 		return 0;
 	}
 	u8 op_code = p[0];
+
+	if(is_iv_index_invalid()){
+		if((op_code == HCI_GATEWAY_CMD_FAST_PROV_START) || (op_code == HCI_GATEWAY_CMD_RP_START) || (op_code == HCI_GATEWAY_CMD_SET_NODE_PARA)){
+			return -1;
+		}
+	}
+	
 	if(op_code == HCI_GATEWAY_CMD_START){
 		set_provision_stop_flag_act(0);
 	}else if (op_code == HCI_GATEWAY_CMD_STOP){
@@ -751,6 +782,13 @@ u8 gateway_cmd_from_host_ctl(u8 *p, u16 len )
 		mesh_sec_get_beacon_key (ivi_beacon_key, p_netkey);
 		#endif
 	}
+	else if(op_code == HCI_GATEWAY_CMD_PRIMARY_INFO_GET){
+		gateway_upload_primary_info_get();
+	}
+	else if(op_code == HCI_GATEWAY_CMD_PRIMARY_INFO_SET){
+		gateway_upload_primary_info_set((provision_primary_mesh_info_t *)(p+1));
+	}
+	
 	return 1;
 }
 

@@ -148,4 +148,14 @@
 #define _USER_CAN_REDEFINE_             //__WEAK // user can re-define function in user_app.c
 
 
+#define COMPILE_PRINT_MACRO_HELPER(x)	#x
+#define COMPILE_PRINT_MACRO(x)			#x"="COMPILE_PRINT_MACRO_HELPER(x)
+/* 
+ * func: get value of MACRO when compile.
+ * COMPILE_PRINT_MACRO sample:
+#pragma message(COMPILE_PRINT_MACRO(BLC_PM_DEEP_RETENTION_MODE_EN));
+*/
+
+#define COMPILE_PRINT_SIZEOF(x) 		char __size_of_x_is[sizeof(x) + 1] = {[sizeof(x)] = ""}
+
 #endif

@@ -7,12 +7,16 @@
 
 
 void PWM_Confing(void){
-	pwm_set_pin(PWM_PWM2_N_PD2);
-	pwm_set_clk((unsigned char) (sys_clk.pclk*1000*1000/24000000-1));//24M
-	pwm_set_pwm0_mode(PWM_NORMAL_MODE);
-	pwm_set_tcmp(PWM0_ID,1);
-	pwm_set_tmax(PWM0_ID,2);
-	pwm_start(PWM0_ID);
+//	pwm_set_pin(PWM_PWM5_PE5);
+//	pwm_set_clk((unsigned char) (sys_clk.pclk*1000*1000/24000000-1));//24M
+//	pwm_set_pwm0_mode(PWM_NORMAL_MODE);
+//	pwm_set_tcmp(PWM0_ID,0);
+//	pwm_set_tmax(PWM0_ID,1000*CLOCK_PWM_CLOCK_1US);
+//	pwm_start(PWM0_ID);
+
+	gpio_set_func(GPIO_PE5,AS_GPIO);
+	gpio_output_en(GPIO_PE5);
+	gpio_write(GPIO_PE5,1);
 }
 
 
@@ -70,7 +74,6 @@ void LCD_RST(void){
 
 	gpio_write(RST_Pin,1);
 	sleep_ms(120);
-
 }
 
 void LCD_SendCmd(u8 cmd){

@@ -44,6 +44,9 @@
 #include "user_ali_time.h"
 #endif
 
+void pair_provision_proc();
+
+
 #ifndef __PROJECT_MESH_SWITCH__
 #define __PROJECT_MESH_SWITCH__     0
 #endif
@@ -59,7 +62,7 @@ u32 system_time_s = 0;
 u32 system_time_tick;
 
 #ifndef RTC_USE_32K_RC_ENABLE
-#define RTC_USE_32K_RC_ENABLE		0 // T_NOTE
+#define RTC_USE_32K_RC_ENABLE		0 // enable should be better when pm enable
 #endif
 
 #if __PROJECT_MESH_SWITCH__
@@ -158,7 +161,7 @@ void system_time_run(){
 	#else
     u32 clock_tmp = clock_time();
 	#endif
-    u32 t_delta = clock_tmp - system_time_tick;
+    u32 t_delta = clock_tmp - system_time_tick;	
 	#if RTC_USE_32K_RC_ENABLE
 	if(t_delta < BIT(31))
 	#else
@@ -258,6 +261,9 @@ void system_time_run(){
 	
 	#if FAST_PROVISION_ENABLE
 		mesh_fast_prov_proc();
+	#endif
+	#if PAIR_PROVISION_ENABLE
+		pair_provision_proc();
 	#endif
 	#if ONLINE_STATUS_EN
         online_st_proc();

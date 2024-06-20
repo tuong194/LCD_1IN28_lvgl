@@ -150,6 +150,7 @@ vendor/common/mi_api/telink_sdk_mesh_api.d vendor/common/mi_api/telink_sdk_mesh_
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/drivers/B91/ext_driver/mcu_boot.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/stack/ble/service/ota/ota_stack.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/stack/ble/service/ota/ota.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/stack/ble/service/ota/ota_server.h \
  ../vendor/common/mi_api/./mijia_ble_api/../../app_health.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/light.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mesh_node.h \
@@ -186,12 +187,14 @@ vendor/common/mi_api/telink_sdk_mesh_api.d vendor/common/mi_api/telink_sdk_mesh_
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/scheduler.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mesh_property.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/app_provison.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/gw_node_info.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/app_proxy.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/app_provison.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mesh_test_cmd.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mesh_common.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/battery_check.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/chip_adapt_layer/app_audio.h \
+ /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/chip_adapt_layer/my_resample.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/mesh/app.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/mesh/app_buffer.h \
  /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/user_app/user_app.h \
@@ -533,6 +536,8 @@ vendor/common/mi_api/telink_sdk_mesh_api.d vendor/common/mi_api/telink_sdk_mesh_
 
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/stack/ble/service/ota/ota.h:
 
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/stack/ble/service/ota/ota_server.h:
+
 ../vendor/common/mi_api/./mijia_ble_api/../../app_health.h:
 
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/light.h:
@@ -605,6 +610,8 @@ vendor/common/mi_api/telink_sdk_mesh_api.d vendor/common/mi_api/telink_sdk_mesh_
 
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/app_provison.h:
 
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/gw_node_info.h:
+
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/app_proxy.h:
 
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/app_provison.h:
@@ -616,6 +623,8 @@ vendor/common/mi_api/telink_sdk_mesh_api.d vendor/common/mi_api/telink_sdk_mesh_
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/battery_check.h:
 
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/chip_adapt_layer/app_audio.h:
+
+/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/chip_adapt_layer/my_resample.h:
 
 /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/mesh/app.h:
 

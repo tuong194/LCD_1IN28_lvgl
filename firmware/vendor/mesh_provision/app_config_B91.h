@@ -40,7 +40,7 @@ extern "C" {
 //////////////// SMP SETTING  //////////////////////////////
 #define BLE_SECURITY_ENABLE 			   	0
 //////////////////board sel/////////////////////////////////////
-#define PCBA_ADK80D_C1T213A20_V13          	1
+#define PCBA_ADK80D_C1T213A20_V13          	1	// development board
 
 #ifndef PCBA_B91_SEL // user can define in user_app_config.h
 #define PCBA_B91_SEL			PCBA_ADK80D_C1T213A20_V13
@@ -74,8 +74,9 @@ extern "C" {
 #define HCI_ACCESS		HCI_USE_USB
 
 #if (HCI_ACCESS==HCI_USE_UART)
-#define UART_TX_PIN		UART1_TX_PE0
-#define UART_RX_PIN		UART1_RX_PE2
+#define UART_TX_PIN				UART0_TX_PB2
+#define UART_RX_PIN				UART0_RX_PB3
+#define UART_DMA_BAUDRATE		115200
 #elif (HCI_ACCESS==HCI_USE_USB)
 #define MODULE_USB_ENABLE		0 // 1 // TODO: use manual usb descriptor
 	#if MODULE_USB_ENABLE

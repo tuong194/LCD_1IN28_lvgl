@@ -175,7 +175,11 @@ static inline unsigned int stimer_get_tick(void)
  */
 static inline _Bool clock_time_exceed(unsigned int ref, unsigned int us)
 {
-	return ((unsigned int)(stimer_get_tick() - ref) > us * SYSTEM_TIMER_TICK_1US);
+	unsigned int tick_now = stimer_get_tick();
+	#if 1 // (CLOCK_SYS_CLOCK_HZ > 48000000) // did not define CLOCK_SYS_CLOCK_HZ here. only effected when > 48000000Hz.
+	tick_now |= 1;	// fix that it may error trigger exceed when setting "ref |= 1" and immediately calling clock_time_exceed_.
+	#endif
+	return ((unsigned int)(tick_now - ref) > us * SYSTEM_TIMER_TICK_1US);
 }
 /**
  * @brief     This function performs to set delay time by us.

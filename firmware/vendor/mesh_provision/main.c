@@ -33,9 +33,15 @@ extern void user_init();
 extern void main_loop ();
 
 #if (HCI_ACCESS==HCI_USE_UART)
-#include "proj/drivers/uart.h"
+#include "drivers.h"
 extern my_fifo_t hci_rx_fifo;
 
+#if __TLSR_RISCV_EN__
+_attribute_ram_code_ void irq_uart_handle()
+{
+    irq_uart_handle_fifo();
+}
+#else // b85m
 u16 uart_tx_irq=0, uart_rx_irq=0;
 
 _attribute_ram_code_ void irq_uart_handle()
@@ -60,6 +66,7 @@ _attribute_ram_code_ void irq_uart_handle()
 		reg_dma_rx_rdy0 = FLD_DMA_CHN_UART_TX;
 	}
 }
+#endif
 #endif
 
 _attribute_ram_code_ void irq_handler(void)
@@ -98,7 +105,19 @@ _attribute_ram_code_
 void uart0_irq_handler(void)
 {
 #if (HCI_ACCESS==HCI_USE_UART)
-	irq_uart_handle();
+	if(IRQ19_UART0 == UART_IRQ_NUM){
+		irq_uart_handle();
+	}
+#endif
+}
+
+_attribute_ram_code_
+void uart1_irq_handler(void)
+{
+#if (HCI_ACCESS==HCI_USE_UART)
+	if(IRQ18_UART1 == UART_IRQ_NUM){
+		irq_uart_handle();
+	}
 #endif
 }
 

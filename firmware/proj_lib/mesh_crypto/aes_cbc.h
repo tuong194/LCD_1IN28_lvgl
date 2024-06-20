@@ -66,8 +66,6 @@ typedef struct
 #endif
 }AES_ctx;
 
-extern AES_ctx ctx;
-
 void AES_init_ctx(AES_ctx* ctx, const uint8_t* key);
 
 //note:padding_buf must AES_BLOCKLEN(16) larger than src_buf.

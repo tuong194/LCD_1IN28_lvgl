@@ -128,15 +128,6 @@
 #endif
 /************* end ************/
 
-#if (GATEWAY_ENABLE)
-#if(DEBUG_CFG_CMD_GROUP_AK_EN)
-#define VC_NODE_INFO_MULTI_SECTOR_EN	1		
-#else
-//enable to use 2 or more sector to save VC_node_info(default use one sector, max support 200 nodes)
-#define VC_NODE_INFO_MULTI_SECTOR_EN	0   // if enable, it will use coustom flash area(such as 0x78000 and 0x79000, please check)
-#endif
-#endif
-
 // ---- message cache setting
 #define SIZE_SNO        3
 
@@ -471,7 +462,11 @@ extern const u8	const_tbl_scanRsp [9] ;
 #define TRANSMIT_CNT_DEF		(7)
 #define TRANSMIT_INVL_STEPS_DEF	(0)
 #elif AUDIO_MESH_EN
+	#if(SBC_BIT_POOL > 20)
+#define TRANSMIT_CNT_DEF		(2)
+	#else
 #define TRANSMIT_CNT_DEF		(3)
+	#endif
 #define TRANSMIT_INVL_STEPS_DEF	(0)
 #else
 #define TRANSMIT_CNT_DEF		(5)
@@ -913,6 +908,7 @@ typedef enum{
 	BEAR_TX_PAR_TYPE_PUB_FLAG	= 1,
 	BEAR_TX_PAR_TYPE_DELAY		= 2,
 	BEAR_TX_PAR_TYPE_REMAINING_TIMES = 3,
+	BEAR_TX_PAR_TYPE_SRC_SNO 	= 4,	// for audio packet
 	// user type from 0x80 to 0xff
 	BEAR_TX_PAR_TYPE_USER_1		= 0x80,
 }bear_tx_par_type_t;
@@ -1894,6 +1890,7 @@ void set_material_tx_cmd(material_tx_cmd_t *p_mat, u16 op, u8 *par, u32 par_len,
 int mesh_tx_cmd2normal(u16 op, u8 *par, u32 par_len, u16 adr_src, u16 adr_dst, int rsp_max);
 int mesh_tx_cmd2normal_specified_key(u16 op, u8 *par, u32 par_len, u16 adr_src, u16 adr_dst, int rsp_max, u16 netkey_index, u16 appkey_index);
 int mesh_tx_cmd2normal_primary(u16 op, u8 *par, u32 par_len, u16 adr_dst, int rsp_max);
+int mesh_tx_cmd2normal_with_tx_head(u16 op, u8 *par, u32 par_len, u16 adr_src, u16 adr_dst, int rsp_max, bear_head_t *p_tx_head);
 int mesh_tx_cmd2normal_primary_specified_key(u16 op, u8 *par, u32 par_len, u16 adr_dst, int rsp_max, u16 netkey_index, u16 appkey_index);
 int mesh_tx_cmd2uuid(u16 op, u8 *par, u32 par_len, u16 adr_src, u16 adr_dst, int rsp_max, u8 *uuid);
 int mesh_tx_cmd_layer_bear(u8 *p_bear, u8 trans_par_val);
@@ -2008,7 +2005,7 @@ void tl_log_file(u32 level_module,u8 *pbuf,int len,char  *format,...);
 #define LOG_SRC_PROV            (1 <<  3) /**< Receive logs from the provisioning module. */
 #define LOG_SRC_PACMAN          (1 <<  4) /**< Receive logs from the packet manager. */
 #define LOG_SRC_INTERNAL        (1 <<  5) /**< Receive logs from the internal event module. */
-#define LOG_SRC_API             (1 <<  6) /**< Receive logs from the Mesh API. */
+#define LOG_SRC_API             (1 <<  6) /**< Receive logs from the  Mesh API. */
 #define LOG_SRC_DFU             (1 <<  7) /**< Receive logs from the DFU module. */
 #define LOG_SRC_BEACON          (1 <<  8) /**< Receive logs from the beacon module. */
 #define LOG_SRC_TEST            (1 <<  9) /**< Receive logs from unit tests. */
@@ -2380,6 +2377,7 @@ u32 mesh_max_payload_get (u32 ctl, bool4 extend_adv_short_unseg);
 int  is_not_use_extend_adv(u16 op);
 int is_not_use_extend_adv_ctl(u16 ctl_op);
 void tx_busy_seg_ack(mesh_cmd_bear_t *p_bear, mesh_match_type_t *p_match_type);
+void relay_check_and_add_extend_adv_src_sno(mesh_cmd_bear_t *p_bear_enc, mesh_cmd_nw_t *p_nw_dec, u8 *p_payload, int src_type);
 
 extern u8 mesh_node_report_enable;
 extern u32 online_status_timeout;

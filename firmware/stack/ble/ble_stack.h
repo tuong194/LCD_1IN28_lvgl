@@ -80,7 +80,10 @@
 
 /////////////////////////////////////////////////////////////////////////////
 
-#define         VENDOR_ID                       0x0211
+#ifndef			VENDOR_ID
+#define         VENDOR_ID                       0x0211 // always 0x0211 when compile library. if always define here, it will cause redefine error when compile spirit mode.
+#endif
+
 #define         VENDOR_ID_HI_B                  U16_HI(VENDOR_ID)
 #define         VENDOR_ID_LO_B                  U16_LO(VENDOR_ID)
 

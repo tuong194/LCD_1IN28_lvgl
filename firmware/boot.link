@@ -116,12 +116,16 @@ SECTIONS
 	PROVIDE (_DLM_DATA_VMA_START = ADDR(.dlm_data));
 	PROVIDE (_DLM_DATA_LMA_START = LOADADDR(.dlm_data));
 	PROVIDE (_DLM_DATA_VMA_END = .); 
-	PROVIDE (BIN_SIZE = LOADADDR(.dlm_data) + SIZEOF(.dlm_data) - BIN_BEGIN);
 	
 	. = ALIGN(8);
 	PROVIDE (_DLM_BSS_VMA_START = .);
 	.dlm_bss 	(NOLOAD)	: { KEEP(*(.dlm_bss )) }
 	PROVIDE (_DLM_BSS_VMA_END = .); 
+	
+	.sdk_version  	: AT(LOADADDR (.dlm_data) + SIZEOF (.dlm_data)) /* no need alignof, because no load */
+		{ KEEP(*(.sdk_version )) }
+		
+	PROVIDE (BIN_SIZE = LOADADDR(.sdk_version) + SIZEOF(.sdk_version) - BIN_BEGIN);
 	
 	. = ALIGN(8);
 	/* end is the starting address of the heap, the heap grows upward */
@@ -131,7 +135,7 @@ SECTIONS
 	PROVIDE (FLASH_SIZE = 0x0100000);
 }
 
-ASSERT((_NO_RETENTION_DATA_VMA_START * __PM_DEEPSLEEP_RETENTION_ENABLE) <= (64*1024), "RETENTION RAM OVERFLOW");
-ASSERT((_NO_RETENTION_BSS_VMA_END) <= (0x0020000 - 3*1024), "IRAM OVERFLOW. Please move some _attribute_no_retention_bss_ to _attribute_bss_dlm_");
-ASSERT((_DLM_BSS_VMA_END) <= (0x000a0000), "DRAM OVERFLOW");
-ASSERT((BIN_SIZE)<= FLASH_SIZE, "BIN FILE OVERFLOW");
+ASSERT((_NO_RETENTION_DATA_VMA_START * __PM_DEEPSLEEP_RETENTION_ENABLE) <= (64*1024), "Error: RETENTION RAM OVERFLOW");
+ASSERT((_NO_RETENTION_BSS_VMA_END) <= (0x0020000 - __STACK_INIT_SIZE__), "Error: IRAM OVERFLOW. Please move some _attribute_no_retention_bss_ to _attribute_bss_dlm_");
+ASSERT((_DLM_BSS_VMA_END) <= (0x000a0000), "Error: DRAM OVERFLOW");
+ASSERT((BIN_SIZE)<= FLASH_SIZE, "Error: BIN FILE OVERFLOW");

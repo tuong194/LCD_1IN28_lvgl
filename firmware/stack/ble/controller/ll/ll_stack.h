@@ -991,7 +991,7 @@ typedef struct{
 	u8  offset_unit	:1;
 	u16 aux_offset  :13;
 	u16	aux_phy		:3;
-
+	u8 data[30];		// BLE_SRC_TELINK_MESH_EN
 }rf_pkt_adv_ext_ind_2;
 
 
@@ -1505,7 +1505,7 @@ RF RX packet format:
 *---------------*---------*-----------*------------*------------*---------------*-------------------*----------*--------------------------------------------------*
 |  DMA_len(4B)  | type(1B)| Rf_len(1B)| payload(wB)|   CRC(3B)  | time_stamp(4B)|  Fre_offset(2B)   | Rssi(1B) |           pkt status indicator(1B)               |
 | (b0,b1 valid) |        Header       |   Payload  |            |               |                   | rssi-110 |[0]:crc err;[1]:sfd err;[2]:ll err;[4]:pwr err;   |
-|               |<--           PDU              -->|            |               |                   |          |[4]:long range 125k;[6:5]:N/A;[7]:NACK ind |
+|               |<--           PDU              -->|            |               |                   |          |[4]:long range 125k;[6:5]:N/A;[7]: NACK ind |
 *---------------*----------------------------------*------------*---------------*-------------------*----------*--------------------------------------------------*
 |<--- 4byte --->|<------ 2 byte ----->|<- Rf_len ->|<- 3 byte ->|<----------------------------------- 8 byte ---------------------------------------------------->|
 note:       b4       ->  type(1B): llid(2bit) nesn(1bit) sn(1bit) md(1bit).

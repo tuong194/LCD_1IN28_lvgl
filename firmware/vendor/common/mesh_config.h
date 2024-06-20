@@ -142,6 +142,66 @@ extern "C" {
 #define SWITCH_PB_ADV_EN			0   // switch support pb adv
 #endif
 
+
+//------------ mesh audio config -------------
+#if __TLSR_RISCV_EN__
+	#if __PROJECT_MESH__ || __PROJECT_MESH_PRO__ 	// only for B91 mesh and gateway project
+#define AUDIO_MESH_EN					0
+		#if AUDIO_MESH_EN
+#define CODEC_ALGORITHM_SBC             0
+#define CODEC_ALGORITHM_LC3	            1
+
+#define AUDIO_MESH_MULTY_NODES_TX_EN	0	// only support audio LC3 + 8k sample rate now for multy nodes mode.
+		#if AUDIO_MESH_MULTY_NODES_TX_EN
+#define AUDIO_DATA_NO_TX_WHEN_SILENCE_EN		1
+			#if AUDIO_DATA_NO_TX_WHEN_SILENCE_EN
+#define AUDIO_RX_NODES_MAX				5	// define a node that can receive audio from how many nodes.
+			#else
+#define AUDIO_RX_NODES_MAX				3	// define a node that can receive audio from how many nodes.
+			#endif
+#define CODEC_ALGORITHM_SEL 			CODEC_ALGORITHM_LC3
+		#else
+#define AUDIO_DATA_NO_TX_WHEN_SILENCE_EN		0
+#define CODEC_ALGORITHM_SEL 			CODEC_ALGORITHM_SBC
+#define AUDIO_RX_NODES_MAX				1	// must 1
+		#endif
+
+#define PAIR_PROVISION_ENABLE		 	0 	// provision without app and gateway. // usually for audio mesh
+#define AUDIO_I2S_EN					0   // 0 means analog sampling, 1 means using I2S sampling
+
+/**
+ * @brief 		enum value: sample rate in RF packet
+ */
+#define RF_SEND_AUDIO_SAMPLE_RATE_8K	1
+#define RF_SEND_AUDIO_SAMPLE_RATE_16K	2
+
+		#if(CODEC_ALGORITHM_SEL == CODEC_ALGORITHM_SBC)
+#define RF_SEND_AUDIO_SAMPLE_RATE_SEL	RF_SEND_AUDIO_SAMPLE_RATE_8K	// must 8k for SBC
+#define MIC_SAMPLES_PER_PACKET      	240		
+#define SBC_FRAME_SAMPLES          		(MIC_SAMPLES_PER_PACKET/2)
+#define SBC_BIT_POOL                    20 // 26:compression ratio is 4.53. 20:compression ratio is 5.71. 17:compression ratio is 6.67.  12:compression ratio is 8.89.
+
+#define SBC_BLOCK_NUM                   (SBC_FRAME_SAMPLES / 8)
+#define SBC_FRAME_SIZE                  ((SBC_BIT_POOL * SBC_BLOCK_NUM + 7) / 8 + 4) // for 8k16bit the Compression ratio is SBC_FRAME_SAMPLES*2/SBC_FRAME_SIZE = 8.89
+#define MIC_ENC_SIZE					SBC_FRAME_SIZE
+		#elif(CODEC_ALGORITHM_SEL == CODEC_ALGORITHM_LC3)
+#define RF_SEND_AUDIO_SAMPLE_RATE_SEL	RF_SEND_AUDIO_SAMPLE_RATE_8K 	// Supports 16k and 8k
+#define MIC_SAMPLES_PER_PACKET      	480 // can't change
+#define LC3_BIT_RATE					58400 // base on 480 mic sample which is 10ms frame of 48k16bit // for 8k16bit is (58400/(48/8)) = 9733, then Compression ratio is 13.1.
+#define LC3_ENC_SIZE					((LC3_BIT_RATE*(MIC_SAMPLES_PER_PACKET/120)+3199)/3200) // default is 73
+#define MIC_ENC_SIZE					LC3_ENC_SIZE
+		#endif
+		
+#define AUDIO_RX_TIMEOUT				1000	//unit:ms
+
+#define MESH_AUDIO_RESAMPLE_EN			(RF_SEND_AUDIO_SAMPLE_RATE_SEL != RF_SEND_AUDIO_SAMPLE_RATE_16K)	// because SPEEX_SAMPLERATE of ENC is fixed 16k.
+#define MIC_NUM_MESH_TX					((ACCESS_NO_MIC_LEN_MAX_UNSEG + CONST_DELTA_EXTEND_AND_NORMAL - 3 - 3)/MIC_ENC_SIZE) // MIC_NUM_MESH_TX is 3 for LC3 // param details: 3:vendor opcode size, 3:OFFSETOF(vd_audio_t, data) 
+		#endif
+	#endif
+#endif
+//------------ mesh audio config end -------------
+
+
 //------------ mesh config-------------
 #define MD_CFG_CLIENT_EN            (__PROJECT_MESH_PRO__ || __PROJECT_MESH_GW_NODE__ || TESTCASE_FLAG_ENABLE)   // don't modify
 #define RELIABLE_CMD_EN             (__PROJECT_MESH_PRO__ || __PROJECT_MESH_GW_NODE__)   // don't modify
@@ -455,6 +515,8 @@ extern "C" {
 #define LIGHT_TYPE_SEL				LIGHT_TYPE_PANEL
 #elif GATT_LPN_EN
 #define LIGHT_TYPE_SEL 				LIGHT_TYPE_LPN_ONOFF_LEVEL
+#elif AUDIO_MESH_EN
+#define LIGHT_TYPE_SEL 				LIGHT_TYPE_DIM
 #else
 	#if MI_API_ENABLE
 		#if MI_PRODUCT_TYPE == MI_PRODUCT_TYPE_CT_LIGHT
@@ -471,7 +533,7 @@ extern "C" {
 #define LIGHT_TYPE_SEL				LIGHT_TYPE_PANEL
 		#endif
 	#else
-#define LIGHT_TYPE_SEL				LIGHT_TYPE_CT	// 
+#define LIGHT_TYPE_SEL				LIGHT_TYPE_PANEL	//
 	#endif
 #endif
 #endif
@@ -776,8 +838,14 @@ extern "C" {
 #define ACTIVE_SCAN_ENABLE  		0
 	#if TESTCASE_FLAG_ENABLE
 #define REMOTE_SET_RETRY_EN			0	
+#define DEVICE_KEY_REFRESH_ENABLE	1 	// must 1
 	#else
 #define REMOTE_SET_RETRY_EN			1
+		#if WIN32
+#define DEVICE_KEY_REFRESH_ENABLE	1	
+		#else
+#define DEVICE_KEY_REFRESH_ENABLE	0	// default 0 to compatible with previous version's VC_node_info[]
+		#endif
 	#endif
 #else
 #define REMOTE_PROV_SCAN_GATT_EN	0
@@ -801,7 +869,7 @@ extern "C" {
 //------------ mesh config(user can config) end -------------
 
 /*ELE_CNT_EVERY_LIGHT means element count of one instance*/
-#if (__PROJECT_MESH_PRO__ || (0 == MD_SERVER_EN)) // && (!DEBUG_SHOW_VC_SELF_EN))
+#if (__PROJECT_MESH_PRO__ || (0 == MD_SERVER_EN) || PAIR_PROVISION_ENABLE) // && (!DEBUG_SHOW_VC_SELF_EN))
 #define ELE_CNT_EVERY_LIGHT         1   // APP and gateway use 1 element always,
 #else
     #if (LIGHT_TYPE_SEL == LIGHT_TYPE_CT)
@@ -976,27 +1044,8 @@ extern "C" {
 
 #define			IRQ_TIMER1_ENABLE  			    1
 #define			IRQ_TIME1_INTERVAL			    (1000) // unit: us
-#define			IRQ_GPIO_ENABLE  			    0
+#define			IRQ_GPIO_ENABLE  			    1
 
-#if __TLSR_RISCV_EN__
-	#if __PROJECT_MESH__ || __PROJECT_MESH_PRO__ 	// only for B91 mesh and gateway project
-#define AUDIO_MESH_EN					0
-		#if AUDIO_MESH_EN
-#define AUDIO_SAMPLE_RATE				AUDIO_8K
-#define MIC_SAMPLES_PER_PACKET      	480 // can't change
-#define MIC_SAMPLES_TIME_US				(MIC_SAMPLES_PER_PACKET*1000 / ((AUDIO_SAMPLE_RATE==AUDIO_8K)?8:16))
-#define MIC_TOLLERANCE_THRES 			240
-#define PLAY_TOLLERANCE_THRES 			(2*MIC_SAMPLES_PER_PACKET)
-#define LC3_BIT_RATE					58400 // base on 480 mic sample which is 10ms frame of 48k16bit // for 8k16bit is (58400/(48/8)) = 9733, then Compression ratio is 13.1.
-#define LC3_ENC_SIZE					((LC3_BIT_RATE*(MIC_SAMPLES_PER_PACKET/120)+3199)/3200)
-#define MIC_NUM_MESH_TX					((ACCESS_NO_MIC_LEN_MAX_UNSEG + CONST_DELTA_EXTEND_AND_NORMAL - 3)/LC3_ENC_SIZE)
-#define AUDIO_RX_TIMEOUT				1000	//unit:ms
-		#endif
-	#endif
-#endif
-#ifndef AUDIO_MESH_EN
-#define AUDIO_MESH_EN					0
-#endif
 
 #if (WIN32)
 // support extend adv, but disable as default. to change by selecting "Extend Adv" item list.

@@ -208,7 +208,8 @@ _attribute_ram_code_ int main(void)
 	LOG_USER_MSG_INFO(0, 0,"[boot] Start from Bootloader", 0);
 #endif
 
-	u32 mesh_type = *(u32 *) FLASH_ADR_MESH_TYPE_FLAG;
+
+	u32 mesh_type = *(u32 *) FLASH_ADR_MESH_TYPE_FLAG; // offset register are always 0 for bootloader.
 	// don't check firmware valid here, because we should check ota valid before. 
 	if((TYPE_TLK_ZIGBEE == mesh_type) || (TYPE_DUAL_MODE_ZIGBEE_RESET == mesh_type)){
 	    g_addr_load = DUAL_MODE_FW_ADDR_ZIGBEE;

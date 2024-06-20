@@ -35,50 +35,38 @@
 #include "../tuong/LCD_lvgl.h"
 #include "../lvgl/demos/benchmark/lv_demo_benchmark.h"
 #include "../lvgl/examples/lv_examples.h"
-
 #include "../UI/ui.h"
+
+#include "../tuong/my_Function.h"
+#include "../tuong/switch.h"
+#include "../tuong/LED_LC8823.h"
+
+
+#define ENCODER1 GPIO_PE7
+#define ENCODER2 GPIO_PE6
+
+int encoder_value1;
+int encoder_value2;
+int sub_encoder = 0;
+u8 check_encoder_r_l = 0;
+
+u8 buff_test[8];
 
 extern void user_init();
 extern void main_loop ();
 void blc_pm_select_none();
 
-u8 gio, phut, giay;
-u8 dim;
-u32 nowtime=0;
-u8 check;
-
-#define LED_ADDR 0xFFFF
-
-unsigned int get_sys_elapse(void)
-{
-	static unsigned int my_sys_pre_tick;
-	unsigned int now = stimer_get_tick();
-	unsigned int ms;
-	static unsigned int elapseFullCnt = 0;
-
-	if( now <  my_sys_pre_tick) //overflow
-	{
-        elapseFullCnt++;
-	}
-
-	ms = now / 24000;
-
-	my_sys_pre_tick = now;
-
-	return (ms + elapseFullCnt * (0xFFFFFFFF/24000));
-}
-
-void setRotation(u8 gio, u8 phut, u8 giay){
-	lv_img_set_angle(ui_gio, gio*60);
-	lv_img_set_angle(ui_phut, phut*60);
-	lv_img_set_angle(ui_giay, giay*60);
-}
-
 
 #if (HCI_ACCESS==HCI_USE_UART)
-#include "proj/drivers/uart.h"
+#include "drivers.h"
 extern my_fifo_t hci_rx_fifo;
 
+#if __TLSR_RISCV_EN__
+_attribute_ram_code_ void irq_uart_handle()
+{
+    irq_uart_handle_fifo();
+}
+#else // b85m
 u16 uart_tx_irq=0, uart_rx_irq=0;
 
 _attribute_ram_code_ void irq_uart_handle()
@@ -103,6 +91,7 @@ _attribute_ram_code_ void irq_uart_handle()
 		reg_dma_rx_rdy0 = FLD_DMA_CHN_UART_TX;
 	}
 }
+#endif
 #endif
 
 #if IRQ_TIMER1_ENABLE
@@ -143,6 +132,16 @@ _attribute_ram_code_sec_noinline_ void gpio_irq_handler(void)
 
 _attribute_ram_code_sec_noinline_ void gpio_risc0_irq_handler(void)
 {
+	if(!gpio_read(ENCODER2)){
+		//encoder_value1 --;
+		check_encoder_r_l = 1;
+
+	}else{
+		//encoder_value1 ++;
+		check_encoder_r_l = 2;
+
+	}
+
 	gpio_irq_risc0_cnt++;
 	gpio_clr_irq_status(FLD_GPIO_IRQ_GPIO2RISC0_CLR);
 }
@@ -232,7 +231,19 @@ _attribute_ram_code_
 void uart0_irq_handler(void)
 {
 #if (HCI_ACCESS==HCI_USE_UART)
-	irq_uart_handle();
+	if(IRQ19_UART0 == UART_IRQ_NUM){
+		irq_uart_handle();
+	}
+#endif
+}
+
+_attribute_ram_code_
+void uart1_irq_handler(void)
+{
+#if (HCI_ACCESS==HCI_USE_UART)
+	if(IRQ18_UART1 == UART_IRQ_NUM){
+		irq_uart_handle();
+	}
 #endif
 }
 
@@ -322,27 +333,44 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 #endif
 	{
 		user_init();
+
 		SPI_Config();
+		PWM_Confing();
+
+		uart_init(UART0,12,15,UART_PARITY_NONE,UART_STOP_BIT_ONE); // sysclock = 24M
+		uart_set_pin(UART0_TX_PD2,UART0_RX_PD3);
+
+
+		gpio_set_func(ENCODER1,AS_GPIO);
+		gpio_input_en(ENCODER1);
+		gpio_set_interrupt_init(ENCODER1,GPIO_PIN_PULLDOWN_100K, INTR_RISING_EDGE, IRQ26_GPIO2RISC0 );
+
+
+		gpio_set_func(ENCODER2,AS_GPIO);
+		gpio_input_en(ENCODER2);
+		gpio_set_up_down_res(ENCODER2,GPIO_PIN_PULLDOWN_100K);
+
+
 		lv_init();
 		lv_port_disp_init();
-
-		//lv_demo_benchmark();
-		//LCD_showImg2();
-
-		//lv_example_anim_2();
-
 		ui_init();
-		gio=12;phut=33;giay=0;
-		setRotation(gio,phut,giay);
 
-		nowtime=0;
-		check=1;
-		//blc_pm_select_internal_32k_crystal();
+		blc_pm_select_external_32k_crystal();
+
+		Config_Pin_Led_Lc8823();
+		Pin_SW_Conf();
+		setValue();
+		getValue();
+//		Setting_stt_led();
+
+		Blink_20_Led_Green();
+		Blink_20_Led_Blue();
+		Blink_20_Led_Red();
+
+		encoder_value1=encoder_value2=1000;
 
 
 	}
-
-
 
     irq_enable();
 	#if (DEBUG_LOG_SETTING_DEVELOP_MODE_EN || (MESH_USER_DEFINE_MODE == MESH_IRONMAN_MENLO_ENABLE))
@@ -354,49 +382,21 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		wd_clear(); //clear watch dog
 #endif
 		main_loop ();
+
 		lv_timer_handler();
 
-		LCD_Clear(BLUE);
-		sleep_ms(5000);
-		lv_disp_load_scr(ui_Screen2);
-		sleep_ms(5000);
+		if(check_encoder_r_l != 0){
+			uart_send_byte(UART0, check_encoder_r_l);
+			check_encoder_r_l= 0;
+		}
+		//		check_OTA();
+		//		check_provision();
+		displayClock();
+		check_Scene();
+		read_sw();
+		//Encoder_Control();
 
 
-/*			if(get_32k_tick() - nowtime>=320000){
-				check ++;
-				check %=2;
-			}
-			if(check == 0){
-					if(get_32k_tick() - nowtime >=32000){
-						giay+=(get_32k_tick()-nowtime)/32000;
-						if(giay == 60){
-							phut++;
-							giay=0;
-							if(phut == 60){
-								phut=0;
-							}
-							if(phut%12 == 0){
-								gio++;
-							}
-							if(gio==60){
-								gio=0;
-							}
-							dim++;
-							if(dim == 100){
-								dim = 0;
-							}
-							//access_cmd_set_light_ctl_100(LED_ADDR, 2 , dim,0, 0);
-						}
-						nowtime = get_32k_tick();
-					}
-					lv_disp_load_scr(ui_Screen2);
-					setRotation(gio,phut,giay);
-			}
-			else if(check == 1){
-				LCD_Clear(GREEN);
-			}*/
-
-		//pm_tim_recover_32k_xtal(pm_get_32k_tick());
 	}
 	return 0;
 }

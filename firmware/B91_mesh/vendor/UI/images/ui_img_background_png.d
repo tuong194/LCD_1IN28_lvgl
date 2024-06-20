@@ -3,7 +3,7 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
  ../vendor/UI/images/../../lvgl/lvgl.h \
  ../vendor/UI/images/../../lvgl/src/misc/lv_log.h \
  ../vendor/UI/images/../../lvgl/src/misc/../lv_conf_internal.h \
- /cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
+ /cygdrive/C/TelinkV323/B91_bigsize/telink_b91_sig_mesh_sdk-B91_V3.1.0.5/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h \
  ../vendor/UI/images/../../lvgl/src/misc/../lv_conf_kconfig.h \
  ../vendor/UI/images/../../lvgl/src/misc/../../lv_conf.h \
  ../vendor/UI/images/../../lvgl/src/misc/lv_types.h \
@@ -23,10 +23,10 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
  ../vendor/UI/images/../../lvgl/src/hal/../draw/../lv_conf_internal.h \
  ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/lv_style.h \
  ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/../font/lv_font.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/../font/../lv_conf_internal.h \
  ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/../font/lv_symbol_def.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/../font/../misc/lv_area.h \
+ ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/../font/../misc/../lv_conf_internal.h \
  ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/lv_color.h \
  ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/../lv_conf_internal.h \
  ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/lv_assert.h \
@@ -54,7 +54,7 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
  ../vendor/UI/images/../../lvgl/src/hal/../draw/sw/../../misc/lv_style.h \
  ../vendor/UI/images/../../lvgl/src/hal/../draw/sw/lv_draw_sw_dither.h \
  ../vendor/UI/images/../../lvgl/src/hal/../draw/sw/../../core/lv_obj_pos.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h \
+ ../vendor/UI/images/../../lvgl/src/hal/../draw/sw/../../core/../misc/lv_area.h \
  ../vendor/UI/images/../../lvgl/src/hal/../draw/lv_draw_label.h \
  ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/lv_bidi.h \
  ../vendor/UI/images/../../lvgl/src/hal/../draw/lv_draw_img.h \
@@ -153,78 +153,78 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
  ../vendor/UI/images/../../lvgl/src/extra/libs/png/../../../lv_conf_internal.h \
  ../vendor/UI/images/../../lvgl/src/extra/libs/gif/lv_gif.h \
  ../vendor/UI/images/../../lvgl/src/extra/libs/gif/../../../lvgl.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/libs/gif/../../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/libs/qrcode/lv_qrcode.h \
  ../vendor/UI/images/../../lvgl/src/extra/libs/qrcode/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/libs/sjpg/lv_sjpg.h \
  ../vendor/UI/images/../../lvgl/src/extra/libs/freetype/lv_freetype.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/libs/freetype/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/libs/rlottie/lv_rlottie.h \
  ../vendor/UI/images/../../lvgl/src/extra/libs/rlottie/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/libs/ffmpeg/lv_ffmpeg.h \
  ../vendor/UI/images/../../lvgl/src/extra/libs/ffmpeg/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/libs/tiny_ttf/lv_tiny_ttf.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/libs/tiny_ttf/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/others/lv_others.h \
  ../vendor/UI/images/../../lvgl/src/extra/others/snapshot/lv_snapshot.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/UI/images/../../lvgl/src/extra/others/snapshot/../../../lv_conf_internal.h \
+ ../vendor/UI/images/../../lvgl/src/extra/others/snapshot/../../../core/lv_obj.h \
  ../vendor/UI/images/../../lvgl/src/extra/others/monkey/lv_monkey.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/others/monkey/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/others/gridnav/lv_gridnav.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/UI/images/../../lvgl/src/extra/others/gridnav/../../../core/lv_obj.h \
  ../vendor/UI/images/../../lvgl/src/extra/others/fragment/lv_fragment.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h \
+ ../vendor/UI/images/../../lvgl/src/extra/others/fragment/../../../lv_conf_internal.h \
  ../vendor/UI/images/../../lvgl/src/extra/others/imgfont/lv_imgfont.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/others/imgfont/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/others/msg/lv_msg.h \
  ../vendor/UI/images/../../lvgl/src/extra/others/msg/../../../core/lv_obj.h \
  ../vendor/UI/images/../../lvgl/src/extra/others/ime/lv_ime_pinyin.h \
  ../vendor/UI/images/../../lvgl/src/extra/others/ime/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/themes/lv_themes.h \
  ../vendor/UI/images/../../lvgl/src/extra/themes/default/lv_theme_default.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/UI/images/../../lvgl/src/extra/themes/default/../../../core/lv_obj.h \
  ../vendor/UI/images/../../lvgl/src/extra/themes/mono/lv_theme_mono.h \
  ../vendor/UI/images/../../lvgl/src/extra/themes/mono/../../../core/lv_obj.h \
  ../vendor/UI/images/../../lvgl/src/extra/themes/basic/lv_theme_basic.h \
  ../vendor/UI/images/../../lvgl/src/extra/themes/basic/../../../core/lv_obj.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/lv_widgets.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/animimg/lv_animimg.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/animimg/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/calendar/lv_calendar.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_btnmatrix.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/calendar/../../../widgets/lv_btnmatrix.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/calendar/lv_calendar_header_arrow.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/calendar/../../../core/lv_obj.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/calendar/lv_calendar_header_dropdown.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/chart/lv_chart.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/chart/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/keyboard/lv_keyboard.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_btnmatrix.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/keyboard/../../../widgets/lv_btnmatrix.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/list/lv_list.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/list/../../../core/lv_obj.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/list/../../layouts/flex/lv_flex.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/menu/lv_menu.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/menu/../../../core/lv_obj.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/msgbox/lv_msgbox.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/msgbox/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/meter/lv_meter.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/meter/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/spinbox/lv_spinbox.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/spinbox/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/spinner/lv_spinner.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/spinner/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/tabview/lv_tabview.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/tabview/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/tileview/lv_tileview.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/tileview/../../../core/lv_obj.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/win/lv_win.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/win/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/colorwheel/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/led/lv_led.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/led/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h \
- /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
+ ../vendor/UI/images/../../lvgl/src/extra/widgets/imgbtn/../../../lvgl.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/span/lv_span.h \
  ../vendor/UI/images/../../lvgl/src/extra/widgets/span/../../../lvgl.h \
  ../vendor/UI/images/../ui_helpers.h ../vendor/UI/images/../ui.h \
@@ -238,7 +238,7 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
 
 ../vendor/UI/images/../../lvgl/src/misc/../lv_conf_internal.h:
 
-/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
+/cygdrive/C/TelinkV323/B91_bigsize/telink_b91_sig_mesh_sdk-B91_V3.1.0.5/firmware/vendor/common/mi_api/mijia_ble_api/stdint.h:
 
 ../vendor/UI/images/../../lvgl/src/misc/../lv_conf_kconfig.h:
 
@@ -278,13 +278,13 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
 
 ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/../font/lv_font.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/../font/../lv_conf_internal.h:
 
 ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/../font/lv_symbol_def.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h:
+../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/../font/../misc/lv_area.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/../font/../misc/../lv_conf_internal.h:
 
 ../vendor/UI/images/../../lvgl/src/hal/../draw/../misc/lv_color.h:
 
@@ -340,7 +340,7 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
 
 ../vendor/UI/images/../../lvgl/src/hal/../draw/sw/../../core/lv_obj_pos.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/misc/lv_area.h:
+../vendor/UI/images/../../lvgl/src/hal/../draw/sw/../../core/../misc/lv_area.h:
 
 ../vendor/UI/images/../../lvgl/src/hal/../draw/lv_draw_label.h:
 
@@ -538,7 +538,7 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
 
 ../vendor/UI/images/../../lvgl/src/extra/libs/gif/../../../lvgl.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/libs/gif/../../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/libs/qrcode/lv_qrcode.h:
 
@@ -548,7 +548,7 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
 
 ../vendor/UI/images/../../lvgl/src/extra/libs/freetype/lv_freetype.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/libs/freetype/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/libs/rlottie/lv_rlottie.h:
 
@@ -560,31 +560,31 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
 
 ../vendor/UI/images/../../lvgl/src/extra/libs/tiny_ttf/lv_tiny_ttf.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/libs/tiny_ttf/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/others/lv_others.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/others/snapshot/lv_snapshot.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/UI/images/../../lvgl/src/extra/others/snapshot/../../../lv_conf_internal.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/UI/images/../../lvgl/src/extra/others/snapshot/../../../core/lv_obj.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/others/monkey/lv_monkey.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/others/monkey/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/others/gridnav/lv_gridnav.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/UI/images/../../lvgl/src/extra/others/gridnav/../../../core/lv_obj.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/others/fragment/lv_fragment.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lv_conf_internal.h:
+../vendor/UI/images/../../lvgl/src/extra/others/fragment/../../../lv_conf_internal.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/others/imgfont/lv_imgfont.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/others/imgfont/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/others/msg/lv_msg.h:
 
@@ -598,7 +598,7 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
 
 ../vendor/UI/images/../../lvgl/src/extra/themes/default/lv_theme_default.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/UI/images/../../lvgl/src/extra/themes/default/../../../core/lv_obj.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/themes/mono/lv_theme_mono.h:
 
@@ -612,25 +612,25 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/animimg/lv_animimg.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/animimg/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/calendar/lv_calendar.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_btnmatrix.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/calendar/../../../widgets/lv_btnmatrix.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/calendar/lv_calendar_header_arrow.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/calendar/../../../core/lv_obj.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/calendar/lv_calendar_header_dropdown.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/chart/lv_chart.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/chart/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/keyboard/lv_keyboard.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/widgets/lv_btnmatrix.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/keyboard/../../../widgets/lv_btnmatrix.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/list/lv_list.h:
 
@@ -644,27 +644,27 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/msgbox/lv_msgbox.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/msgbox/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/meter/lv_meter.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/meter/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/spinbox/lv_spinbox.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/spinbox/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/spinner/lv_spinner.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/spinner/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/tabview/lv_tabview.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/tabview/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/tileview/lv_tileview.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/core/lv_obj.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/tileview/../../../core/lv_obj.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/win/lv_win.h:
 
@@ -672,7 +672,7 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/colorwheel/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/led/lv_led.h:
 
@@ -680,7 +680,7 @@ vendor/UI/images/ui_img_background_png.d vendor/UI/images/ui_img_background_png.
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h:
 
-/cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h:
+../vendor/UI/images/../../lvgl/src/extra/widgets/imgbtn/../../../lvgl.h:
 
 ../vendor/UI/images/../../lvgl/src/extra/widgets/span/lv_span.h:
 

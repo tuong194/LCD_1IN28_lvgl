@@ -27,11 +27,13 @@ C_SRCS += \
 ../vendor/common/fast_provision_model.c \
 ../vendor/common/flash_fw_check.c \
 ../vendor/common/generic_model.c \
+../vendor/common/gw_node_info.c \
 ../vendor/common/light.c \
 ../vendor/common/lighting_model.c \
 ../vendor/common/lighting_model_HSL.c \
 ../vendor/common/lighting_model_LC.c \
 ../vendor/common/lighting_model_xyl.c \
+../vendor/common/mesh_access_layer.c \
 ../vendor/common/mesh_common.c \
 ../vendor/common/mesh_fn.c \
 ../vendor/common/mesh_log.c \
@@ -41,8 +43,10 @@ C_SRCS += \
 ../vendor/common/mesh_test_cmd.c \
 ../vendor/common/myprintf.c \
 ../vendor/common/ota_fw_ow.c \
+../vendor/common/pair_provision.c \
 ../vendor/common/scene.c \
 ../vendor/common/scheduler.c \
+../vendor/common/security_network_beacon.c \
 ../vendor/common/sensors_model.c \
 ../vendor/common/system_time.c \
 ../vendor/common/tc32.c \
@@ -79,11 +83,13 @@ OBJS += \
 ./vendor/common/fast_provision_model.o \
 ./vendor/common/flash_fw_check.o \
 ./vendor/common/generic_model.o \
+./vendor/common/gw_node_info.o \
 ./vendor/common/light.o \
 ./vendor/common/lighting_model.o \
 ./vendor/common/lighting_model_HSL.o \
 ./vendor/common/lighting_model_LC.o \
 ./vendor/common/lighting_model_xyl.o \
+./vendor/common/mesh_access_layer.o \
 ./vendor/common/mesh_common.o \
 ./vendor/common/mesh_fn.o \
 ./vendor/common/mesh_log.o \
@@ -93,8 +99,10 @@ OBJS += \
 ./vendor/common/mesh_test_cmd.o \
 ./vendor/common/myprintf.o \
 ./vendor/common/ota_fw_ow.o \
+./vendor/common/pair_provision.o \
 ./vendor/common/scene.o \
 ./vendor/common/scheduler.o \
+./vendor/common/security_network_beacon.o \
 ./vendor/common/sensors_model.o \
 ./vendor/common/system_time.o \
 ./vendor/common/tc32.o \
@@ -131,11 +139,13 @@ C_DEPS += \
 ./vendor/common/fast_provision_model.d \
 ./vendor/common/flash_fw_check.d \
 ./vendor/common/generic_model.d \
+./vendor/common/gw_node_info.d \
 ./vendor/common/light.d \
 ./vendor/common/lighting_model.d \
 ./vendor/common/lighting_model_HSL.d \
 ./vendor/common/lighting_model_LC.d \
 ./vendor/common/lighting_model_xyl.d \
+./vendor/common/mesh_access_layer.d \
 ./vendor/common/mesh_common.d \
 ./vendor/common/mesh_fn.d \
 ./vendor/common/mesh_log.d \
@@ -145,8 +155,10 @@ C_DEPS += \
 ./vendor/common/mesh_test_cmd.d \
 ./vendor/common/myprintf.d \
 ./vendor/common/ota_fw_ow.d \
+./vendor/common/pair_provision.d \
 ./vendor/common/scene.d \
 ./vendor/common/scheduler.d \
+./vendor/common/security_network_beacon.d \
 ./vendor/common/sensors_model.d \
 ./vendor/common/system_time.d \
 ./vendor/common/tc32.d \
@@ -164,7 +176,7 @@ C_DEPS += \
 vendor/common/%.o: ../vendor/common/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Andes C Compiler'
-	$(CROSS_COMPILE)gcc -D__TLSR_RISCV_EN__=1 -DCHIP_TYPE=CHIP_TYPE_9518 -D__PROJECT_MESH__=1 -I"/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware" -I../drivers/B91 -I../vendor/Common -I../common -I"/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/libs" -I"/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api" -O2 -flto -g3 -Wall -mcpu=d25f -ffunction-sections -fdata-sections -c -fmessage-length=0 -fno-builtin -fomit-frame-pointer -fno-strict-aliasing -fshort-wchar -fuse-ld=bfd -fpack-struct -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d) $(@:%.o=%.o)" -o "$@" "$<"
+	$(CROSS_COMPILE)gcc -D__TLSR_RISCV_EN__=1 -DCHIP_TYPE=CHIP_TYPE_9518 -D__PROJECT_MESH__=1 -I"/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware" -I../drivers/B91 -I../vendor/Common -I../common -I"/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/libs" -I"/cygdrive/C/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/common/mi_api/mijia_ble_api" -O2 -flto -g3 -Wall -mcpu=d25f -ffunction-sections -fdata-sections -mext-dsp -c -fmessage-length=0 -fno-builtin -fomit-frame-pointer -fno-strict-aliasing -fshort-wchar -fuse-ld=bfd -fpack-struct -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d) $(@:%.o=%.o)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

@@ -192,7 +192,7 @@ u8 att_perm_auth_rdwd  = ATT_PERMISSIONS_RDWD_AUTHOR;
 const u8 my_OtaServiceUUID[16]		= TELINK_OTA_UUID_SERVICE;
 const u8 my_OtaUUID[16]		= TELINK_SPP_DATA_OTA;
 
-static u8 my_OtaProp		= CHAR_PROP_READ | CHAR_PROP_WRITE_WITHOUT_RSP;
+static u8 my_OtaProp		= CHAR_PROP_READ | CHAR_PROP_WRITE_WITHOUT_RSP | CHAR_PROP_NOTIFY;
 const u8  my_OtaName[] = {'O', 'T', 'A'};
 u8	 	my_OtaData 		= 0x00;
 // pb-gatt 

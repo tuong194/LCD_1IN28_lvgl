@@ -22,5 +22,9 @@ echo  ":1: Error: exec failed, exit code=%errorlevel%"
 rm -rf output/%1.bin
 )
 
+echo  "---------------------------  SDK version info ---------------------------"
+grep -E "[\$]{3}[a-zA-Z0-9 _.]+[\$]{3}" --text -o output/%1.bin | sed 's/\$//g'
+echo  "---------------------------  SDK version end  ---------------------------"
+
 echo "**************** end of post build ******************"
 exit 0

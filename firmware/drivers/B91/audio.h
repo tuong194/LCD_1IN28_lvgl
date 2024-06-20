@@ -220,6 +220,7 @@ typedef enum{
 typedef enum{
 	AUDIO_8K,
 	AUDIO_16K=3,
+	AUDIO_24K=5,
 	AUDIO_32K=6,
 	AUDIO_44EP1K,
 	AUDIO_48K,

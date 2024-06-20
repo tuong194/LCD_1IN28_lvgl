@@ -230,7 +230,9 @@ vendor/lvgl/demos/keypad_encoder/lv_demo_keypad_encoder.d vendor/lvgl/demos/keyp
  ../vendor/lvgl/demos/keypad_encoder/../../src/extra/widgets/span/lv_span.h \
  /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
  ../vendor/lvgl/demos/keypad_encoder/../benchmark/lv_demo_benchmark.h \
- ../vendor/lvgl/demos/keypad_encoder/../benchmark/../lv_demos.h
+ ../vendor/lvgl/demos/keypad_encoder/../benchmark/../lv_demos.h \
+ ../vendor/lvgl/demos/keypad_encoder/../music/lv_demo_music.h \
+ ../vendor/lvgl/demos/keypad_encoder/../music/../lv_demos.h
 
 ../vendor/lvgl/demos/keypad_encoder/lv_demo_keypad_encoder.h:
 
@@ -693,3 +695,7 @@ vendor/lvgl/demos/keypad_encoder/lv_demo_keypad_encoder.d vendor/lvgl/demos/keyp
 ../vendor/lvgl/demos/keypad_encoder/../benchmark/lv_demo_benchmark.h:
 
 ../vendor/lvgl/demos/keypad_encoder/../benchmark/../lv_demos.h:
+
+../vendor/lvgl/demos/keypad_encoder/../music/lv_demo_music.h:
+
+../vendor/lvgl/demos/keypad_encoder/../music/../lv_demos.h:

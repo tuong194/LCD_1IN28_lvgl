@@ -45,7 +45,7 @@ extern "C" {
 //////////////// SMP SETTING  //////////////////////////////
 #define BLE_SECURITY_ENABLE 			   	0
 //////////////////board sel/////////////////////////////////////
-#define PCBA_ADK80D_C1T213A20_V13          	1
+#define PCBA_ADK80D_C1T213A20_V13          	1	// development board
 
 #ifndef PCBA_B91_SEL // user can define in user_app_config.h
 #define PCBA_B91_SEL			PCBA_ADK80D_C1T213A20_V13

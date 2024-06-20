@@ -32,7 +32,7 @@
 #include "proj_lib/mesh_crypto/aes_att.h"
 #include "proj_lib/mesh_crypto/mesh_md5.h"
 #include "vendor/common/certify_base/certify_base_crypto.h"
-
+#include "pair_provision.h"
 
 #if(AIS_ENABLE)
 extern const u16 du_pri_service_uuid_16 ;
@@ -290,7 +290,10 @@ void uuid_create_by_mac(u8 *mac,u8 *uuid)
 	uuid_create_md5_from_name((uuid_mesh_t *)uuid, NameSpace_DNS, name_string, 15);
 
     //special proc to set the mac address into the uuid part 
-    #if MD_REMOTE_PROV
+    #if PAIR_PROVISION_ENABLE
+    char head_flag[] = PAIR_PROV_UUID_FLAG;
+    memcpy(uuid,head_flag, sizeof(head_flag));
+    #elif MD_REMOTE_PROV
 	uuid_mesh_t * p_uuid = (uuid_mesh_t * )uuid;
     memcpy(p_uuid->node,mac,6);
     #endif

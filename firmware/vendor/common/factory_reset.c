@@ -389,6 +389,15 @@ int factory_reset() // flash plus
 	if((FLASH_ADR_MESH_TYPE_FLAG < FLASH_ADR_AREA_1_START) || (FLASH_ADR_MESH_TYPE_FLAG >= FLASH_ADR_AREA_1_END)){
         flash_erase_sector(FLASH_ADR_MESH_TYPE_FLAG);
     }
+
+#if GATEWAY_ENABLE
+	#if (FLASH_ADR_VC_NODE_INFO >= FLASH_ADR_AREA_1_END) // user may move FLASH_ADR_VC_NODE_INFO to custom flash area.
+	for (int i = 0; i < (FLASH_ADR_VC_NODE_INFO_END - FLASH_ADR_VC_NODE_INFO) / 4096; ++i){
+		flash_erase_sector(FLASH_ADR_VC_NODE_INFO + i*0x1000); // user may change FLASH_ADR_VC_NODE_INFO, erase should be better
+	}
+	#endif
+#endif
+
 	// no area2
 
 	#if HOMEKIT_EN
@@ -440,7 +449,15 @@ int factory_reset(){
 		    flash_erase_sector(adr);
 		}
 	}
-	
+
+#if GATEWAY_ENABLE
+	#if (FLASH_ADR_VC_NODE_INFO >= FLASH_ADR_AREA_2_END) // user may move FLASH_ADR_VC_NODE_INFO to custom flash area.
+	for (int i = 0; i < (FLASH_ADR_VC_NODE_INFO_END - FLASH_ADR_VC_NODE_INFO) / 4096; ++i){
+		flash_erase_sector(FLASH_ADR_VC_NODE_INFO + i*0x1000); // user may change FLASH_ADR_VC_NODE_INFO, erase should be better
+	}
+	#endif
+#endif
+
 	for(int i = 1; i < (FLASH_ADR_PAR_USER_MAX - (CFG_SECTOR_ADR_CALIBRATION_CODE)) / 4096; ++i){
 		#if XIAOMI_MODULE_ENABLE
 		if(i < (((FLASH_ADR_PAR_USER_MAX - (CFG_SECTOR_ADR_CALIBRATION_CODE)) / 4096) - 1)){ // the last sector is FLASH_ADR_MI_AUTH
@@ -477,6 +494,9 @@ int factory_reset(){
 #endif
 
 void kick_out(int led_en){
+#if AUDIO_MESH_EN
+	vd_cmd_mic_tx_req(ele_adr_primary); // just to clear play buffer of itself(no sending RF packet), so that no noise during 6 seconds of led flash.
+#endif
 	#if !WIN32
 	// add terminate cmd 
 	if(bls_ll_isConnectState()){

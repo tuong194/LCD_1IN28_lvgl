@@ -197,7 +197,7 @@ unsigned long crc32_cal(unsigned long crc, unsigned char* input, unsigned long* 
  * @param[in]  len: data length.
  * @return     crc result.
  */
-unsigned short crc16 (unsigned char *pD, int len);
+unsigned short crc16 (const unsigned char *pD, int len);
 
 
 #endif /* OTA_H_ */

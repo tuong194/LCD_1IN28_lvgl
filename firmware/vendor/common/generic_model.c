@@ -50,6 +50,10 @@
 #include "subnet_bridge.h"
 #include "op_agg_model.h"
 #include "solicitation_rpl_cfg_model.h"
+
+#include"../tuong/switch.h" //T_NOTE: include led
+#include"../tuong/my_Function.h"
+
 /** @addtogroup Mesh_Common
   * @{
   */
@@ -210,7 +214,26 @@ int g_onoff_set(mesh_cmd_g_onoff_set_t *p_set, int par_len, int force_last, int 
 		int len_tmp = GET_LEVEL_PAR_LEN(par_len >= sizeof(mesh_cmd_g_onoff_set_t));
 		err = g_level_set((u8 *)&level_set_tmp, len_tmp, G_LEVEL_SET_NOACK, idx, retransaction, st_trans_type, 0, pub_list);
         if(!err){
-		    set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);
+			// T_NOTE
+			transition_par_t trs_par = {0};
+			trs_par.transit_t = 10;
+			if(idx == 0){
+				//gpio_write(LED1,p_set->onoff);
+				set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);
+				stateLed1 = p_set->onoff;
+
+
+			}else if(idx == 1){
+				//gpio_write(LED2, p_set->onoff);
+				set_on_power_up_onoff(idx, st_trans_type, p_set->onoff);
+				stateLed2 = p_set->onoff;
+				if(stateLed2){
+					access_cmd_set_lightness(LED_ADDR,2,lum2_lightness(dim_set),0, &trs_par);
+				}else{
+					access_cmd_set_lightness(LED_ADDR,2,0,0, &trs_par);
+				}
+			}
+			flag_flash = 1;
 		}
 	}
 	
@@ -1162,9 +1185,9 @@ const mesh_cmd_sig_func_t mesh_cmd_sig_func[] = {
 #if MD_SCHEDULE_EN
 	CMD_NO_STR(SCHD_GET, 0, SIG_MD_SCHED_C, SIG_MD_SCHED_S, mesh_cmd_sig_scheduler_get, SCHD_STATUS),
 	CMD_NO_STR(SCHD_STATUS, 1, SIG_MD_SCHED_S, SIG_MD_SCHED_C, mesh_cmd_sig_scheduler_status, STATUS_NONE),
-	CMD_NO_STR(SCHD_ACTION_GET, 0, SIG_MD_SCHED_C, SIG_MD_SCHED_SETUP_S, mesh_cmd_sig_schd_action_get, SCHD_ACTION_STATUS),
+	CMD_NO_STR(SCHD_ACTION_GET, 0, SIG_MD_SCHED_C, SIG_MD_SCHED_S, mesh_cmd_sig_schd_action_get, SCHD_ACTION_STATUS),
 	CMD_NO_STR(SCHD_ACTION_SET, 0, SIG_MD_SCHED_C, SIG_MD_SCHED_SETUP_S, mesh_cmd_sig_schd_action_set, SCHD_ACTION_STATUS),
-	CMD_NO_STR(SCHD_ACTION_SET_NOACK, 0, SIG_MD_SCHED_C, SIG_MD_SCHED_S, mesh_cmd_sig_schd_action_set, STATUS_NONE),
+	CMD_NO_STR(SCHD_ACTION_SET_NOACK, 0, SIG_MD_SCHED_C, SIG_MD_SCHED_SETUP_S, mesh_cmd_sig_schd_action_set, STATUS_NONE),
 	CMD_NO_STR(SCHD_ACTION_STATUS, 1, SIG_MD_SCHED_S, SIG_MD_SCHED_C, mesh_cmd_sig_schd_action_status, STATUS_NONE),
 #endif
 #if MD_SENSOR_EN
@@ -1176,16 +1199,16 @@ const mesh_cmd_sig_func_t mesh_cmd_sig_func[] = {
 	CMD_NO_STR(SENSOR_COLUMN_STATUS, 1, SIG_MD_SENSOR_S, SIG_MD_SENSOR_C, mesh_cmd_sig_sensor_column_status, STATUS_NONE),
 	CMD_NO_STR(SENSOR_SERIES_GET, 0, SIG_MD_SENSOR_C, SIG_MD_SENSOR_S, mesh_cmd_sig_sensor_series_get, SENSOR_SERIES_STATUS),
 	CMD_NO_STR(SENSOR_SERIES_STATUS, 1, SIG_MD_SENSOR_S, SIG_MD_SENSOR_C, mesh_cmd_sig_sensor_series_status, STATUS_NONE),
-	CMD_NO_STR(SENSOR_CANDECE_GET, 0, SIG_MD_SENSOR_C, SIG_MD_SENSOR_S, mesh_cmd_sig_sensor_cadence_get, SENSOR_CANDECE_STATUS),
+	CMD_NO_STR(SENSOR_CANDECE_GET, 0, SIG_MD_SENSOR_C, SIG_MD_SENSOR_SETUP_S, mesh_cmd_sig_sensor_cadence_get, SENSOR_CANDECE_STATUS),
 	CMD_NO_STR(SENSOR_CANDECE_SET, 0, SIG_MD_SENSOR_C, SIG_MD_SENSOR_SETUP_S, mesh_cmd_sig_sensor_cadence_set, SENSOR_CANDECE_STATUS),
 	CMD_NO_STR(SENSOR_CANDECE_SET_NOACK, 0, SIG_MD_SENSOR_C, SIG_MD_SENSOR_SETUP_S, mesh_cmd_sig_sensor_cadence_set, STATUS_NONE),
-	CMD_NO_STR(SENSOR_CANDECE_STATUS, 1, SIG_MD_SENSOR_S, SIG_MD_SENSOR_C, mesh_cmd_sig_sensor_cadence_status, STATUS_NONE),
-	CMD_NO_STR(SENSOR_SETTINGS_GET, 0, SIG_MD_SENSOR_C, SIG_MD_SENSOR_S, mesh_cmd_sig_sensor_settings_get, SENSOR_SETTINGS_STATUS),
-	CMD_NO_STR(SENSOR_SETTINGS_STATUS, 1, SIG_MD_SENSOR_S, SIG_MD_SENSOR_C, mesh_cmd_sig_sensor_settings_status, STATUS_NONE),
-	CMD_NO_STR(SENSOR_SETTING_GET, 0, SIG_MD_SENSOR_C, SIG_MD_SENSOR_S, mesh_cmd_sig_sensor_setting_get, SENSOR_SETTING_STATUS),
+	CMD_NO_STR(SENSOR_CANDECE_STATUS, 1, SIG_MD_SENSOR_SETUP_S, SIG_MD_SENSOR_C, mesh_cmd_sig_sensor_cadence_status, STATUS_NONE),
+	CMD_NO_STR(SENSOR_SETTINGS_GET, 0, SIG_MD_SENSOR_C, SIG_MD_SENSOR_SETUP_S, mesh_cmd_sig_sensor_settings_get, SENSOR_SETTINGS_STATUS),
+	CMD_NO_STR(SENSOR_SETTINGS_STATUS, 1, SIG_MD_SENSOR_SETUP_S, SIG_MD_SENSOR_C, mesh_cmd_sig_sensor_settings_status, STATUS_NONE),
+	CMD_NO_STR(SENSOR_SETTING_GET, 0, SIG_MD_SENSOR_C, SIG_MD_SENSOR_SETUP_S, mesh_cmd_sig_sensor_setting_get, SENSOR_SETTING_STATUS),
 	CMD_NO_STR(SENSOR_SETTING_SET, 0, SIG_MD_SENSOR_C, SIG_MD_SENSOR_SETUP_S, mesh_cmd_sig_sensor_setting_set, SENSOR_SETTING_STATUS),
 	CMD_NO_STR(SENSOR_SETTING_SET_NOACK, 0, SIG_MD_SENSOR_C, SIG_MD_SENSOR_SETUP_S, mesh_cmd_sig_sensor_setting_set, STATUS_NONE),
-	CMD_NO_STR(SENSOR_SETTING_STATUS, 1, SIG_MD_SENSOR_S, SIG_MD_SENSOR_C, mesh_cmd_sig_sensor_setting_status, STATUS_NONE),
+	CMD_NO_STR(SENSOR_SETTING_STATUS, 1, SIG_MD_SENSOR_SETUP_S, SIG_MD_SENSOR_C, mesh_cmd_sig_sensor_setting_status, STATUS_NONE),
 #endif
     // ----- mesh ota
 #if MD_MESH_OTA_EN

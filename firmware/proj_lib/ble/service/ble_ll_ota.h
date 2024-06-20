@@ -49,6 +49,15 @@ enum{
 #if __TLSR_RISCV_EN__
 #include "stack/ble/service/ota/ota_stack.h"
 #include "stack/ble/service/ota/ota.h"
+#include "stack/ble/service/ota/ota_server.h"
+
+typedef struct{
+	u8  ota_start_flag;
+}ota_service_t;
+
+ota_service_t blcOta;
+
+
 #else
 
 #ifndef	BLE_OTA_ENABLE
@@ -78,6 +87,8 @@ extern int 	ota_program_bootAddr ;
 
 
 typedef void (*ota_startCb_t)(void);
+_attribute_data_retention_	ota_startCb_t		otaStartCb = NULL;
+
 typedef void (*ota_versionCb_t)(void);
 
 typedef void (*ota_resIndicateCb_t)(int result);
@@ -107,7 +118,7 @@ enum{
 
 #endif /* BLE_LL_OTA_H_ */
 
-#if 0
+#if 1
 typedef struct{
 	u8 device_type;
 	u32 fw_version;
@@ -205,7 +216,7 @@ void bls_ota_setBootFlagAddr(u32 bootFlag_addr);
 
 int bls_ota_clearNewFwDataArea(int check_only);
 
-unsigned short crc16(unsigned char *pD, int len);
+unsigned short crc16(const unsigned char *pD, int len);
 u8 ota_condition_enable();
 void set_ota_reboot_flag(u8 flag);
 u8 get_fw_ota_value();

@@ -772,10 +772,10 @@ typedef struct{
 #define LIGHT_CNT						(4) 	// means instance count
 		#endif
 	#else
-#define LIGHT_CNT                       (3)     // means instance count
+#define LIGHT_CNT                       (2)     // means instance count
 	#endif
 #else
-#define LIGHT_CNT                       (1)     // means instance count
+#define LIGHT_CNT                       (3)     // means instance count
 #endif
 #endif
 #define ELE_CNT                         (LIGHT_CNT * ELE_CNT_EVERY_LIGHT)
@@ -1566,6 +1566,12 @@ typedef struct{
 // common save
 #define FLASH_CHECK_SIZE_MAX	(64)
 #define SIZE_SAVE_FLAG		(4)
+
+typedef struct{
+	u8 flag;
+	u8 crc_en:1;
+	u16 crc;
+}mesh_save_head_t;
 
 typedef struct{
     u32 adr_base;

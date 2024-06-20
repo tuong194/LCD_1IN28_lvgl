@@ -217,35 +217,36 @@ typedef struct {
 
 
 #if(MCU_CORE_TYPE == MCU_CORE_9518)
-#define 		FLASH_ADR_AREA_FIRMWARE_END	0x6E000 // 6E000 = 440K
+#define 		FLASH_ADR_AREA_FIRMWARE_END	0x60000 // 60000 = 384K  need to be 0x60000 for flash protection.
 /* Flash adr 0x00000 ~ 0x6dfff  is firmware area*/
-#define			FLASH_ADR_AREA_1_START		FLASH_ADR_AREA_FIRMWARE_END
-#define			FLASH_ADR_MESH_KEY			0x70000
-#define			FLASH_ADR_MD_CFG_S			0x71000
-#define			FLASH_ADR_MD_HEALTH			0x72000
-#define			FLASH_ADR_MD_G_ONOFF_LEVEL	0x73000
-#define			FLASH_ADR_MD_TIME_SCHEDULE	0x74000
-#define			FLASH_ADR_MD_LIGHTNESS		0x75000	// share with power level
-#define			FLASH_ADR_MD_LIGHT_CTL		0x76000
-#define			FLASH_ADR_MD_LIGHT_LC		0x77000
-#define			FLASH_ADR_MD_SCENE			0x78000
-#define 		FLASH_ADR_MD_SENSOR		    0x79000
-#define 		FLASH_ADR_PROVISION_CFG_S	0x7a000
-#define			FLASH_ADR_MD_LIGHT_HSL		0x7b000 // cps before V23
-#define			FLASH_ADR_MD_VD_LIGHT		0x7c000
-#define			FLASH_ADR_MD_G_POWER_ONOFF	0x7d000
-#define			FLASH_ADR_FRIEND_SHIP		0x7e000
-#define			FLASH_ADR_MD_PROPERTY		0x7f000 // just test
-#define			FLASH_ADR_MD_DF_SBR			0x7f000 // just test
-#define			FLASH_ADR_MD_SOLI_PDU_RPL	0x7f000 // just test
+#define			FLASH_ADR_AREA_1_START		0xe0000
+#define			FLASH_ADR_MESH_KEY			0xe0000
+#define			FLASH_ADR_MD_CFG_S			0xe1000
+#define			FLASH_ADR_MD_HEALTH			0xe2000
+#define			FLASH_ADR_MD_G_ONOFF_LEVEL	0xe3000
+#define			FLASH_ADR_MD_TIME_SCHEDULE	0xe4000
+#define			FLASH_ADR_MD_LIGHTNESS		0xe5000	// share with power level
+#define			FLASH_ADR_MD_LIGHT_CTL		0xe6000
+#define			FLASH_ADR_MD_LIGHT_LC		0xe7000
+#define			FLASH_ADR_MD_SCENE			0xe8000
+#define 		FLASH_ADR_MD_SENSOR		    0xe9000
+#define 		FLASH_ADR_PROVISION_CFG_S	0xea000
+#define			FLASH_ADR_MD_LIGHT_HSL		0xeb000 // cps before V23
+#define			FLASH_ADR_MD_VD_LIGHT		0xec000
+#define			FLASH_ADR_MD_G_POWER_ONOFF	0xed000
+#define			FLASH_ADR_FRIEND_SHIP		0xee000
+#define			FLASH_ADR_MD_PROPERTY		0xef000 // just test
+#define			FLASH_ADR_MD_DF_SBR			0xef000 // just test
+#define			FLASH_ADR_MD_SOLI_PDU_RPL	0xef000 // just test
 
 #if (__PROJECT_MESH_PRO__ || __PROJECT_MESH_GW_NODE__)
-#define 		FLASH_ADR_VC_NODE_INFO		0x7f000		//
+#define 		FLASH_ADR_VC_NODE_INFO		0xef000		//
+#define 		FLASH_ADR_VC_NODE_INFO_END	0xf0000
 #endif
-#define			FLASH_ADR_AREA_1_END		0x80000
+#define			FLASH_ADR_AREA_1_END		0xf0000
 
 /* Flash adr 0x80000 ~ 0xedfff  is firmware(OTA) area*/
-#define			FLASH_ADR_AREA_2_START		0xee000
+#define			FLASH_ADR_AREA_2_START		0xf0000
 #define			FLASH_ADR_MISC				0xf0000 // should be located at the last 64K for future flash protect function.
 #define			FLASH_ADR_RESET_CNT			0xf1000 // should be located at the last 64K for future flash protect function.
 #define			FLASH_ADR_SW_LEVEL			0xf2000 // should be located at the last 64K for future flash protect function.
@@ -328,10 +329,12 @@ vendor use from 0xf6000 to 0xfcfff should be better, because telink may use 0xFB
 	#if WIN32
 #define 		FLASH_ADR_VC_NODE_INFO		0x80000		//  from 0x00000 to 0x40000 (256K)
 	#else
-		#if VC_NODE_INFO_MULTI_SECTOR_EN
+		#if DEBUG_CFG_CMD_GROUP_AK_EN
 #define         FLASH_ADR_VC_NODE_INFO      0x78000 // vcnode info, occupy sector num dependent on  MESH_NODE_MAX_NUM
+#define 		FLASH_ADR_VC_NODE_INFO_END	0x79000
 		#else
 #define 		FLASH_ADR_VC_NODE_INFO		0x3f000		//
+#define 		FLASH_ADR_VC_NODE_INFO_END	0x40000
 		#endif
 	#endif
 #endif
@@ -423,6 +426,7 @@ vendor use from 0x7ffff to 0x78000 should be better, because telink may use 0x78
 #define			FLASH_ADR_MD_MESH_OTA		0x38000
 #define         FLASH_ADR_MD_REMOTE_PROV    0x39000 // remote provision part 
 #define 		FLASH_ADR_VC_NODE_INFO		0x3A000		//
+#define 		FLASH_ADR_VC_NODE_INFO_END	0x3B000
 #define			FLASH_ADR_AREA_1_END		0x3B000
 // FLASH_ADR_AREA_1_END to start of user is reserve for telink
 /*******SIG mesh vendor define here, from FLASH_ADR_USER_MESH_END ~ FLASH_ADR_USER_MESH_START, vendor define from behined to head should be better, .*/
@@ -465,6 +469,7 @@ vendor use from 0x7ffff to 0x78000 should be better, because telink may use 0x78
 #define			FLASH_ADR_MD_MESH_OTA		0xC9000
 #define         FLASH_ADR_MD_REMOTE_PROV    0xCA000 // remote provision part 
 #define 		FLASH_ADR_VC_NODE_INFO		0xCB000		//
+#define 		FLASH_ADR_VC_NODE_INFO_END	0xCC000
 #define			FLASH_ADR_AREA_1_END		0xCC000
 // FLASH_ADR_AREA_1_END to start of user is reserve for telink
 /*******SIG mesh vendor define here, from FLASH_ADR_USER_MESH_END ~ FLASH_ADR_USER_MESH_START, vendor define from behined to head should be better, .*/
@@ -570,6 +575,7 @@ vendor use from 0x7ffff to 0x78000 should be better, because telink may use 0x78
 #define			FLASH_ADR_MD_MESH_OTA		0x54000
 #define         FLASH_ADR_MD_REMOTE_PROV    0x55000 // remote provision part 
 #define 		FLASH_ADR_VC_NODE_INFO		0x56000		//
+#define 		FLASH_ADR_VC_NODE_INFO_END	0x57000
 #define			FLASH_ADR_AREA_1_END		0x57000
 // FLASH_ADR_AREA_1_END to start of user is reserve for telink
 /*******SIG mesh vendor define here, from FLASH_ADR_USER_MESH_END ~ FLASH_ADR_USER_MESH_START, vendor define from behined to head should be better, .*/
@@ -626,71 +632,76 @@ vendor use from 0x7ffff to 0x78000 should be better, because telink may use 0x78
 #endif
 
 enum{
-	// send cmd part 
-	HCI_GATEWAY_CMD_START		= 0x00,
-	HCI_GATEWAY_CMD_STOP		= 0x01,
-	HCI_GATEWAY_CMD_RESET       = 0x02,
-	HCI_GATEWAY_CMD_CLEAR_NODE_INFO	=0x06,
-	HCI_GATEWAY_CMD_SET_ADV_FILTER 	=0x08,
-	HCI_GATEWAY_CMD_SET_PRO_PARA 	=0x09,
-	HCI_GATEWAY_CMD_SET_NODE_PARA	=0x0a,
-	HCI_GATEWAY_CMD_START_KEYBIND 	=0x0b,
-	HCI_GATEWAY_CMD_GET_PRO_SELF_STS = 0x0c,
-    HCI_GATEWAY_CMD_SET_DEV_KEY     = 0x0d,
-    HCI_GATEWAY_CMD_GET_SNO         = 0x0e,
-    HCI_GATEWAY_CMD_SET_SNO         = 0x0f,
-    HCI_GATEWAY_CMD_GET_UUID_MAC        = 0x10,
-    HCI_GATEWAY_CMD_DEL_VC_NODE_INFO    = 0x11,
-    HCI_GATEWAY_CMD_SEND_VC_NODE_INFO	= 0x12,
-    HCI_GATEWAY_CMD_MESH_OTA_ADR_SEND = 0x13,// HCI send back the static oob information 
-    HCI_GATEWAY_CMD_MESH_COMMUNICATE_TEST = 0x14,// HCI send back the static oob information
-    HCI_GATEWAY_CMD_MESH_RX_TEST        = 0x15,
-    HCI_GATEWAY_CMD_SET_EXTEND_ADV_OPTION = 0x16,
-    HCI_GATEWAY_CMD_FAST_PROV_START		=0x17,
+	// send cmd part ----------------------------------
+	HCI_GATEWAY_CMD_START					= 0x00,
+	HCI_GATEWAY_CMD_STOP					= 0x01,
+	HCI_GATEWAY_CMD_RESET       			= 0x02,
+	HCI_GATEWAY_CMD_CLEAR_NODE_INFO			= 0x06,
+	HCI_GATEWAY_CMD_SET_ADV_FILTER 			= 0x08,
+	HCI_GATEWAY_CMD_SET_PRO_PARA 			= 0x09,
+	HCI_GATEWAY_CMD_SET_NODE_PARA			= 0x0a,
+	HCI_GATEWAY_CMD_START_KEYBIND 			= 0x0b,
+	HCI_GATEWAY_CMD_GET_PRO_SELF_STS 		= 0x0c,
+    HCI_GATEWAY_CMD_SET_DEV_KEY     		= 0x0d,
+    HCI_GATEWAY_CMD_GET_SNO         		= 0x0e,
+    HCI_GATEWAY_CMD_SET_SNO         		= 0x0f,
+    HCI_GATEWAY_CMD_GET_UUID_MAC        	= 0x10,
+    HCI_GATEWAY_CMD_DEL_VC_NODE_INFO    	= 0x11,
+    HCI_GATEWAY_CMD_SEND_VC_NODE_INFO		= 0x12,
+    HCI_GATEWAY_CMD_MESH_OTA_ADR_SEND 		= 0x13, // HCI send back the static oob information 
+    HCI_GATEWAY_CMD_MESH_COMMUNICATE_TEST 	= 0x14, // HCI send back the static oob information
+    HCI_GATEWAY_CMD_MESH_RX_TEST        	= 0x15,
+    HCI_GATEWAY_CMD_SET_EXTEND_ADV_OPTION 	= 0x16,
+    HCI_GATEWAY_CMD_FAST_PROV_START			= 0x17,
 
-	HCI_GATEWAY_CMD_RP_MODE_SET			  = 0x18,
-	HCI_GATEWAY_CMD_RP_SCAN_START_SET     = 0x19,
-	HCI_GATEWAY_CMD_RP_LINK_OPEN		  = 0x1a,
-	HCI_GATEWAY_CMD_RP_START			  = 0x1b,
-	HCI_GATEWAY_CMD_GET_USB_ID			  = 0x1c, // for B91
-	HCI_GATEWAY_CMD_SEND_NET_KEY    = 0x20,
-	// rsp cmd part 
-	HCI_GATEWAY_RSP_UNICAST	=0x80,
-	HCI_GATEWAY_RSP_OP_CODE	=0X81,
-	HCI_GATEWAY_KEY_BIND_RSP = 0x82,
-	HCI_GATEWAY_CMD_STATIC_OOB_RSP = 0x87,// HCI send back the static oob information 
-	HCI_GATEWAY_CMD_UPDATE_MAC	 = 0x88,
-	HCI_GATEWAY_CMD_PROVISION_EVT = 0x89,
-	HCI_GATEWAY_CMD_KEY_BIND_EVT = 0x8a,
-	HCI_GATEWAY_CMD_PRO_STS_RSP = 0x8b,
-	HCI_GATEWAY_CMD_SEND_ELE_CNT = 0x8c,
-	HCI_GATEWAY_CMD_SEND_NODE_INFO = 0x8d,
-	//HCI_GATEWAY_CMD_SEND_CPS_INFO	= 0x8e,
-	HCI_GATEWAY_CMD_HEARTBEAT	= 0x8f,
+	HCI_GATEWAY_CMD_RP_MODE_SET		  		= 0x18,	// used in B91 mesh.
+	HCI_GATEWAY_CMD_RP_SCAN_START_SET   	= 0x19,	// used in B91 mesh.
+	HCI_GATEWAY_CMD_RP_LINK_OPEN		  	= 0x1a,
+	HCI_GATEWAY_CMD_RP_START			  	= 0x1b,
+	HCI_GATEWAY_CMD_GET_USB_ID			  	= 0x1c, // for B91
 
-	HCI_GATEWAY_CMD_SECURE_IVI = 0x90,
-	HCI_GATEWAY_CMD_PRIVATE_BEACON = 0x91,
+	HCI_GATEWAY_CMD_PRIMARY_INFO_GET	  	= 0x1d,
+	HCI_GATEWAY_CMD_PRIMARY_INFO_SET	  	= 0x1e,
+	HCI_GATEWAY_CMD_PRIMARY_INFO_STATUS	  	= 0x1f,
 	
-	HCI_GATEWAY_CMD_SEND_MESH_OTA_STS	= 0x98,
-	HCI_GATEWAY_CMD_SEND_UUID   = 0x99,
-	HCI_GATEWAY_CMD_SEND_IVI    = 0x9a,
-	HCI_GATEWAY_CMD_SEND_EXTEND_ADV_OPTION = 0x9b,
-	HCI_GATEWAY_CMD_SEND_SRC_CMD = 0x9c,
-	HCI_GATEWAY_CMD_ONLINE_ST	= 0x9d,
-	HCI_GATEWAY_CMD_RSP_USB_ID	= 0x9e,
+	HCI_GATEWAY_CMD_SEND_NET_KEY    		= 0x20,
+	HCI_GATEWAY_CMD_OTS_TX					= 0x21,
 	
-	HCI_GATEWAY_CMD_SEND_SNO_RSP    = 0xa0,
-	HCI_GATEWAY_CMD_SEND       = 0xb1,
-	HCI_GATEWAY_DEV_RSP         = 0xb2,
-	HCI_GATEWAY_CMD_LINK_OPEN   = 0xb3,
-	HCI_GATEWAY_CMD_LINK_CLS    =0xb4,
-	HCI_GATEWAY_CMD_SEND_BACK_VC = 0xb5,
-	HCI_GATEWAY_CMD_LOG_STRING	= 0xb6,
-	HCI_GATEWAY_CMD_LOG_BUF		= 0xb7,
+	// rsp cmd part ----------------------------------
+	HCI_GATEWAY_RSP_UNICAST					= 0x80,
+	HCI_GATEWAY_RSP_OP_CODE					= 0x81,
+	HCI_GATEWAY_KEY_BIND_RSP 				= 0x82,
+	HCI_GATEWAY_CMD_STATIC_OOB_RSP 			= 0x87, // HCI send back the static oob information 
+	HCI_GATEWAY_CMD_UPDATE_MAC	 			= 0x88,
+	HCI_GATEWAY_CMD_PROVISION_EVT 			= 0x89,
+	HCI_GATEWAY_CMD_KEY_BIND_EVT 			= 0x8a,
+	HCI_GATEWAY_CMD_PRO_STS_RSP 			= 0x8b,
+	HCI_GATEWAY_CMD_SEND_ELE_CNT 			= 0x8c,
+	HCI_GATEWAY_CMD_SEND_NODE_INFO 			= 0x8d,
+	//HCI_GATEWAY_CMD_SEND_CPS_INFO			= 0x8e,
+	HCI_GATEWAY_CMD_HEARTBEAT				= 0x8f,
+
+	HCI_GATEWAY_CMD_SECURE_IVI 				= 0x90,
+	HCI_GATEWAY_CMD_PRIVATE_BEACON 			= 0x91,
 	
-	HCI_GATEWAY_CMD_RP_SCAN_RSP = 0xC0,
-	HCI_GATEWAY_CMD_RP_SCAN_REPORT_RSP = 0xc1,
+	HCI_GATEWAY_CMD_SEND_GATT_OTA_STS		= 0x97, // firmware down to gateway ota area
+	HCI_GATEWAY_CMD_SEND_MESH_OTA_STS		= 0x98,
+	HCI_GATEWAY_CMD_SEND_UUID   			= 0x99,
+	HCI_GATEWAY_CMD_SEND_IVI    			= 0x9a,
+	HCI_GATEWAY_CMD_SEND_EXTEND_ADV_OPTION 	= 0x9b,
+	HCI_GATEWAY_CMD_SEND_SRC_CMD 			= 0x9c,
+	HCI_GATEWAY_CMD_ONLINE_ST				= 0x9d,
+	HCI_GATEWAY_CMD_RSP_USB_ID				= 0x9e,
 	
+	HCI_GATEWAY_CMD_SEND_SNO_RSP    		= 0xa0,
+	HCI_GATEWAY_CMD_SEND       				= 0xb1,
+	HCI_GATEWAY_DEV_RSP         			= 0xb2,
+	HCI_GATEWAY_CMD_LINK_OPEN   			= 0xb3,
+	HCI_GATEWAY_CMD_LINK_CLS    			= 0xb4,
+	HCI_GATEWAY_CMD_SEND_BACK_VC 			= 0xb5,
+	HCI_GATEWAY_CMD_LOG_STRING				= 0xb6,
+	HCI_GATEWAY_CMD_LOG_BUF					= 0xb7,
+	HCI_GATEWAY_CMD_OTS_RX					= 0xb8,
 };
 //---------hci_cmd_from_usb
 enum{

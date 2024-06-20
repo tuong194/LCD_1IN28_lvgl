@@ -328,8 +328,13 @@ u8 edch_is_exist()
 {
 #if PROV_AUTH_LEAK_RECREATE_KEY_EN
 #else
-	u32 *p_edch = (u32 *) FLASH_ADR_EDCH_PARA;
-	if(*p_edch == 0xffffffff){
+	u32 edch_4bypte;
+	#if __TLSR_RISCV_EN__
+	flash_read_page (FLASH_ADR_EDCH_PARA, sizeof(edch_4bypte), (u8 *)&edch_4bypte);
+	#else
+	edch_4bypte = *(u32 *) FLASH_ADR_EDCH_PARA;
+	#endif
+	if(edch_4bypte == 0xffffffff){
 		return 0;
 	}	
 #endif
@@ -483,7 +488,6 @@ void light_dim_set_hw(int idx, int idx2, u16 val)
         #endif
     }
 }
-
 #if (LIGHT_TYPE_HSL_EN)
 typedef struct{
     float h;
@@ -1560,6 +1564,10 @@ _USER_CAN_REDEFINE_ void rf_link_light_event_callback (u8 status)
 #if (DUAL_MODE_ADAPT_EN || DUAL_MODE_WITH_TLK_MESH_EN)
 	}else if(status == LGT_CMD_DUAL_MODE_MESH){
 		cfg_led_event(DUAL_MODE_WITH_TLK_MESH_EN ? LED_EVENT_FLASH_2HZ_2T : LED_EVENT_FLASH_2HZ_1T);
+#endif
+#if PAIR_PROVISION_ENABLE
+	}else if(status == PROV_START_LED_CMD){
+		cfg_led_event(LED_EVENT_FLASH_4HZ_3T);
 #endif
 	}
 }

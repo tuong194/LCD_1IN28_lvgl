@@ -168,31 +168,15 @@ u32 irq_rx_aux_adv_tick;
 
 #if EXTENDED_ADV_ENABLE
 #define reg_rf_chn_current	REG_ADDR8(0x14080d)	// refer to rf_set_ble_channel()
+#define RAW_PKT_INDEX_AUX_AD_TYPE			(3)	// 
+
+aux_payload_t g_aux_payload = {0};
 
 /*extern */u8				blm_scan_type;
 extern ll_ext_adv_t		*blt_pextadv;  	//global adv_set data pointer
 extern ll_ext_adv_t		*p_ext_adv;     //for immediate use
 
-typedef struct {
-	u32 dma_len;            //won't be a fixed number as previous, should adjust with the mouse package number
-
-	rf_adv_head2_t  header;
-	u8  rf_len;				//LEN(6)_RFU(2)
-	
-	u8  adv_mode  :2;
-	u8  header_len:6;
-
-	u8 flags;
-
-	u16 data_id: 12;
-	u16 set_id :  4;
-
-	u8 chn_idx         :6;
-	u8 clock_accuracy  :1;
-	u8 offset_units    :1;
-	u16 aux_offset     :13;
-	u16 aux_phy        :3;
-}rf_packet_adv_ext_ind_t;
+STATIC_ASSERT(sizeof(rf_pkt_adv_ext_ind_2) <= sizeof(rf_pkt_pri_adv_t));
 
 static inline int  blt_packet_crc24 (unsigned char *p, int n, int crc)
 {
@@ -242,15 +226,42 @@ _attribute_ram_code_ u8 mesh_blc_rx_aux_adv(u8 * raw_pkt, u8 * new_pkt)
 		return 1;
 	}
 	
-	if((pAdv->rf_len != 7) || !is_crc_ok(raw_pkt)){  // add by weixiong, receive abnormal adv, confirm later
+	if(((pAdv->rf_len != 7) && (pAdv->rf_len != 7 + sizeof(aux_payload_t))) || !is_crc_ok(raw_pkt)){  // add by weixiong, receive abnormal adv, confirm later
 		return 0;
 	}
 
+    rf_pkt_adv_ext_ind_2 *adv_ext_ind = (rf_pkt_adv_ext_ind_2 *)raw_pkt;
+	int flag_aux_payload_with_src_sno = 0;
+	if(adv_ext_ind->rf_len == adv_ext_ind->ext_hdr_len + 1 + sizeof(aux_payload_t)){
+		aux_payload_t *p_aux = (aux_payload_t *)adv_ext_ind->data;
+		bear_head_src_sno_t *p_head = &p_aux->head_src_sno;
+		if((DATA_TYPE_MANUFACTURER_SPECIFIC_DATA == p_aux->ad_type) && 
+			(BEAR_TX_PAR_TYPE_SRC_SNO == p_head->bear_par_type) && 
+			(g_vendor_id == p_aux->vnd_id)){
+			extend_adv_aux_src_sno_xor(p_aux); // get original source address.
+			foreach(i, g_cache_buf_max){
+				if(is_own_ele(p_head->src_addr)){
+					return 0;
+				}
+				
+				if(cache_buf[i].src == p_head->src_addr){
+					u8 sno_cache = (cache_buf[i].sno & 0xff);
+					u8 delta = p_head->sno_low - sno_cache;
+				   	if((0 == delta) || delta > 0x80){
+				   		/* when >3 nodes send MIC messages, relay messages will be too much, and will be later than a new message. 
+				   		so if only check by "=", filter will be fail.*/
+		    			return  0; // filter old  payload
+		    		}
+		  		}
+			}
+			flag_aux_payload_with_src_sno = 1;
+		}
+	}
+	
 	u32 timeStamp = reg_rf_timestamp;
     u8	next_buffer = 0;
-    rf_packet_adv_ext_ind_t *adv_ext_ind = (rf_packet_adv_ext_ind_t *)raw_pkt;
-    u8 channel = adv_ext_ind->chn_idx;
-    u32 time_offset = (adv_ext_ind->offset_units?(sys_tick_per_us*300):(sys_tick_per_us*30))
+    u8 channel = adv_ext_ind->chn_index;
+    u32 time_offset = (adv_ext_ind->offset_unit?(sys_tick_per_us*300):(sys_tick_per_us*30))
         * adv_ext_ind->aux_offset;
 
     u8 channel_backup = reg_rf_chn_current;
@@ -294,6 +305,7 @@ _attribute_ram_code_ u8 mesh_blc_rx_aux_adv(u8 * raw_pkt, u8 * new_pkt)
             // AUX
             next_buffer = 1;
             raw_pkt[2] = 0xAA;
+            raw_pkt[RAW_PKT_INDEX_AUX_AD_TYPE] = flag_aux_payload_with_src_sno ? BEAR_TX_PAR_TYPE_SRC_SNO : 0; // 0 means no payload for primary adv of aux.
             //pAdv = (rf_packet_adv_t *) (raw_pkt + DMA_RFRX_LEN_HW_INFO);
             // my_printf_uart("received=%2d backup=%2d\r\n", pAdv->rf_len, channel_backup);
         }else{
@@ -325,7 +337,7 @@ int mesh_blc_rx_aux_handler(u8 *raw_pkt, s8 rssi_pkt)
 			
 			memcpy(&timeStamp, raw_pkt+DMA_RFRX_OFFSET_TIME_STAMP(raw_pkt),sizeof(timeStamp)); // back up
 			pa->subcode = HCI_SUB_EVT_LE_ADVERTISING_REPORT;
-			pa->nreport = 1;
+			pa->nreport = (raw_pkt[RAW_PKT_INDEX_AUX_AD_TYPE] >= BEAR_TX_PAR_TYPE_SRC_SNO) ? raw_pkt[3] : 1; // have checked (raw_pkt[2] == 0xAA) before.
 			pa->event_type = LL_TYPE_ADV_NONCONN_IND;
 			pa->adr_type = raw_pkt[DMA_RFRX_OFFSET_HEADER] & BIT(6) ? 1 : 0;
 
@@ -383,6 +395,34 @@ static mesh_adv_extend_module_t adv_extend_module = {
 	.rx_adv_handler = mesh_blc_rx_aux_handler,
 };
 #endif
+
+void extend_adv_aux_src_sno_xor(aux_payload_t *p_aux)
+{
+	u8 *p_src_u8 = (u8 *)&p_aux->head_src_sno.src_addr;
+	u8 *p_ad_type_u8 = &p_aux->ad_type;
+	int len = sizeof(bear_head_src_sno_t) - OFFSETOF(bear_head_src_sno_t, src_addr);
+	foreach(i, len){
+		p_src_u8[i] ^= p_ad_type_u8[i];
+	}
+}
+
+void relay_check_and_add_extend_adv_src_sno(mesh_cmd_bear_t *p_bear_enc, mesh_cmd_nw_t *p_nw_dec, u8 *p_payload, int src_type)
+{
+#if EXTENDED_ADV_ENABLE
+	if(MESH_BEAR_ADV == src_type){
+		if(p_bear_enc->len > (ADV_MAX_DATA_LEN - 1)){
+			event_adv_report_t *pa = CONTAINER_OF(p_payload,event_adv_report_t,data[0]); // packet is from adv channel, so there is event_adv_report_t here.
+			//LOG_MSG_LIB(TL_LOG_NODE_SDK, (u8 *)&p_bear_enc->len, 16,"test relay audio, nreport:0x%0x, src_type:0x%0x: ", pa->nreport, src_type);
+			if(BEAR_TX_PAR_TYPE_SRC_SNO == pa->nreport){
+				bear_head_src_sno_t *p = (bear_head_src_sno_t *)&p_bear_enc->tx_head;
+				p->bear_par_type = BEAR_TX_PAR_TYPE_SRC_SNO;
+				p->src_addr = p_nw_dec->src;
+				p->sno_low = p_nw_dec->sno[0];
+			}
+		}
+	}
+#endif
+}
 
 ble_sts_t blc_ll_setScanEnable (scan_en_t scan_enable, dupFilter_en_t filter_duplicate)
 {
@@ -661,6 +701,102 @@ void adc_drv_init(){
 }
 #endif
 
+#if (HCI_ACCESS==HCI_USE_UART)
+const uart_num_e UART_RX_NUM = UART_NUM_GET(UART_RX_PIN);
+const uart_num_e UART_TX_NUM = UART_NUM_GET(UART_TX_PIN);
+const irq_source_e UART_IRQ_NUM = UART_IRQ_GET(UART_RX_PIN);
+static volatile u32 uart_dma_sending_tick = 0;
+
+STATIC_ASSERT(UART_NUM_GET(UART_RX_PIN) == UART_NUM_GET(UART_TX_PIN)); // must to be same now.
+
+void uart_tx_busy_timeout_poll()
+{
+	 if(uart_dma_sending_tick){
+		 if(clock_time_exceed(uart_dma_sending_tick, 500*1000)){
+			 uart_dma_sending_tick = 0;
+		 }
+	 }
+}
+
+unsigned char uart_tx_is_busy_dma_tick()
+{
+	return (uart_dma_sending_tick != 0);
+}
+
+unsigned char uart_Send_dma_with_busy_hadle(unsigned char* data, unsigned int len)
+{
+	int success = uart_send_dma(UART_TX_NUM, data, len);
+	if(success){
+		uart_dma_sending_tick = clock_time() | 1;
+	}else{
+		uart_dma_sending_tick = 0;
+	}
+
+	return success;
+}
+
+unsigned char uart_ErrorCLR(void){
+	if((uart_get_irq_status(UART_RX_NUM, UART_RX_ERR)))
+    {
+    	uart_clr_irq_status(UART_RX_NUM, UART_CLR_RX);
+		return 1;
+    }
+	return 0;
+}
+
+static u16 uart_tx_irq=0, uart_rx_irq=0;
+
+_attribute_ram_code_ void irq_uart_handle_fifo()
+{
+    if(uart_get_irq_status(UART_RX_NUM, UART_RXDONE)) //A0-SOC can't use RX-DONE status,so this interrupt can noly used in A1-SOC.
+    {
+    	uart_rx_irq++;
+		/************************get the length of receive data****************************/
+        u32 rev_data_len = uart_get_dma_rev_data_len(UART_RX_NUM, UART_DMA_CHANNEL_RX);
+    	/************************cll rx_irq****************************/
+    	uart_clr_irq_status(UART_RX_NUM, UART_CLR_RX);
+    	u8* w = hci_rx_fifo.p + (hci_rx_fifo.wptr & (hci_rx_fifo.num-1)) * hci_rx_fifo.size;
+		memcpy(w, &rev_data_len, sizeof(rev_data_len));
+		my_fifo_next(&hci_rx_fifo);
+		u8* p = hci_rx_fifo.p + (hci_rx_fifo.wptr & (hci_rx_fifo.num-1)) * hci_rx_fifo.size;
+		uart_receive_dma(UART_RX_NUM, (unsigned char *)(p+OFFSETOF(uart_data_t, data)), (unsigned int)hci_rx_fifo.size);
+    }
+
+	if(uart_get_irq_status(UART_TX_NUM, UART_TXDONE))
+	{
+		uart_tx_irq++;
+    	uart_dma_sending_tick=0;
+	    uart_clr_tx_done(UART_TX_NUM);
+	}
+}
+
+void uart_drv_init_B91m()
+{
+	unsigned short div;
+	unsigned char bwpc;
+	uart_reset(UART_RX_NUM);
+	uart_set_pin(UART_TX_PIN ,UART_RX_PIN );// uart tx/rx pin set
+	uart_cal_div_and_bwpc(UART_DMA_BAUDRATE, sys_clk.pclk*1000*1000, &div, &bwpc);
+	uart_set_rx_timeout(UART_RX_NUM, bwpc, 12, UART_BW_MUL1);
+	uart_init(UART_RX_NUM, div, bwpc, UART_PARITY_NONE, UART_STOP_BIT_ONE);
+
+	uart_clr_irq_mask(UART_RX_NUM, UART_RX_IRQ_MASK | UART_TX_IRQ_MASK | UART_TXDONE_MASK|UART_RXDONE_MASK);
+	core_interrupt_enable();
+
+	uart_set_tx_dma_config(UART_TX_NUM, UART_DMA_CHANNEL_TX);
+	uart_set_rx_dma_config(UART_RX_NUM, UART_DMA_CHANNEL_RX);
+
+	uart_clr_tx_done(UART_TX_NUM);
+	uart_set_irq_mask(UART_RX_NUM, UART_RXDONE_MASK);
+
+	uart_set_irq_mask(UART_TX_NUM, UART_TXDONE_MASK);
+	plic_interrupt_enable(UART_IRQ_NUM);
+
+	u8 *uart_rx_addr = hci_rx_fifo.p + (hci_rx_fifo.wptr & (hci_rx_fifo.num-1)) * hci_rx_fifo.size;
+	uart_receive_dma(UART_RX_NUM, (unsigned char *)(uart_rx_addr+OFFSETOF(uart_data_t, data)), (unsigned int)hci_rx_fifo.size);
+}
+#endif
+
 #if 0 // debug
 void debug_set_irq_interval_pin(u8 level)
 {
@@ -694,4 +830,131 @@ void debug_set_scan_rx_ok_pin(u8 level)
     gpio_write(pin, level);
 }
 #endif
+
+#if (__TLSR_RISCV_EN__)
+#define reg_swire_ctrl1			REG_ADDR8(0x100c01)
+#define AS_USB      			(AS_USB_DP)
+#define FLD_USB_BDT_EN      	(BIT(3)|BIT(4))
+#endif
+
+/*_attribute_ahead_ram_code_ */void bootloader_unlock_flash()
+{
+    #if 1 // ((MCU_CORE_TYPE == MCU_CORE_8258)||(MCU_CORE_TYPE == MCU_CORE_8278)) // no need for eagle
+    gpio_set_func(GPIO_DP, AS_USB);   	// input enable inside for B85m, but no input enable inside for B91m. // for B85 GPIO as default, for B87 USB as default.
+    usb_dp_pullup_en(1);
+   
+    	#if (__TLSR_RISCV_EN__)
+    gpio_input_en(GPIO_DP);				// must // input enable as default for chip, but may be disable by gpio_init_() in product image.
+    gpio_input_en(GPIO_DM);				// must // input enable as default for chip, but may be disable by gpio_init_() in product image.
+    	#else
+    gpio_set_func(GPIO_DM, AS_USB);   	// input enable inside.
+    // analog_write(0x34, 0x80);   		// USB clock // disable as default. enable in cpu wakeup init(),
+    	#endif
+    gpio_setup_up_down_resistor(GPIO_DM, PM_PIN_PULLUP_1M);
+    #endif
+   
+    reg_swire_ctrl1 |= FLD_SWIRE_USB_EN;
+    reg_usb_mdev |= FLD_USB_BDT_EN;   	// also enable
+}
+
+
+#if MESH_FLASH_PROTECTION_EN
+/**
+ * @brief     flash mid definition
+ */
+typedef enum{
+	MID146085   =   0x146085,//P25Q80U // 1M byte
+	MID156085   =   0x156085,//P25Q16SU
+	MID1560c8   =   0x1560c8,//GD25LQ16E
+	MID166085   =   0x166085,//P25Q32SU
+	MID186085   =   0x186085,//P25Q128L
+}flash_mid_e;
+
+#define FLASH_LOCK_SECTION		FLASH_LOCK_LOW_896K_MID146085
+#define FLASH_UNLOCK_VAL		FLASH_LOCK_NONE_MID146085
+
+static u32 g_flash_mid = 0;
+
+STATIC_ASSERT(FLASH_ADR_AREA_1_START >= 0xE0000);		// because lock 896k
+STATIC_ASSERT(FLASH_PLUS_ENABLE == 0);					// only support 1M now. 2M need to change flash map and FLASH_LOCK_SECTION.
+
+/**
+ * @brief      this function is used to lock flash.
+ * @param[in]  flash_lock_block - flash lock block, different value for different flash type
+ * @return     none
+ */
+void mesh_flash_lock() // only for MID146085 now. TODO: others.
+{
+	if(0 == g_flash_mid){
+		g_flash_mid = flash_read_mid();
+	}
+
+	if(MID146085 != g_flash_mid){
+		return ;
+	}
+
+	u16 cur_lock_status = flash_read_status_mid146085();
+	u16 target_lock_status = FLASH_LOCK_SECTION;
+
+	if(cur_lock_status == target_lock_status){ //lock status is want we want, no need lock again
+
+	}else{ //unlocked or locked block size is not what we want
+		#if 0 // no need unlock first
+		if(cur_lock_status != flash_unlock_status){ //locked block size is not what we want, need unlock first
+			for(int i = 0; i < 3; i++){ //Unlock flash up to 3 times to prevent failure.
+				flash_unlock_mid();
+				cur_lock_status = flash_get_lock_status_mid();
+
+				if(cur_lock_status == flash_unlock_status){ //unlock success
+					break;
+				}
+			}
+		}
+		#endif
+
+
+		for(int i = 0; i < 3; i++) //Lock flash up to 3 times to prevent failure.
+		{
+			flash_lock_mid146085(target_lock_status);
+			cur_lock_status = flash_read_status_mid146085();
+			if(cur_lock_status == target_lock_status){  //lock OK
+				break;
+			}
+		}
+	}
+}
+
+/**
+ * @brief      this function is used to unlock flash.
+ * @param[in]  none
+ * @return     none
+ */
+void mesh_flash_unlock(void)
+{
+	if(0 == g_flash_mid){
+		g_flash_mid = flash_read_mid();
+	}
+	
+	if(MID146085 != g_flash_mid){
+		return ;
+	}
+	
+	u16 cur_lock_status = flash_read_status_mid146085();
+	u16 target_lock_status = FLASH_UNLOCK_VAL;
+
+	if(cur_lock_status != target_lock_status){ //not in lock status
+		for(int i = 0; i < 3; i++){ //Unlock flash up to 3 times to prevent failure.
+			flash_unlock_mid146085();
+			cur_lock_status = flash_read_status_mid146085();
+
+			if(cur_lock_status == target_lock_status){ //unlock success
+				break;
+			}
+		}
+	}
+}
+#else
+void mesh_flash_unlock(void){ }
+#endif
+
 

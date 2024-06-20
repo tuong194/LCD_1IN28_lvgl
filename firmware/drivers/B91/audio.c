@@ -868,6 +868,8 @@ void audio_i2s_config(i2s_mode_select_e i2s_format,i2s_data_select_e wl,  i2s_co
 		   FLD_AUDIO_I2S_ADC_DCI_MS, m_s, \
 		   FLD_AUDIO_I2S_DAC_DCI_MS, m_s);
 }
+
+#if 0 // The original parameters can not be used, the 16K waveform appears distorted, and the sound cannot be heard through the I2S analog board
 audio_i2s_clk_config_t   audio_i2s_8k_config=
 {
 	.i2s_clk_step=1,        //set i2s clk step
@@ -884,6 +886,15 @@ audio_i2s_clk_config_t   audio_i2s_16k_config=
 	.i2s_bclk_div=6,        //24M/(2*6) = 2M bclk
 	.i2s_lrclk_adc_div=125, //adc sample rate =2M/125 = 16k
 	.i2s_lrclk_dac_div=125, //dac sample rate =2M/125 = 16k
+};
+
+audio_i2s_clk_config_t   audio_i2s_24k_config=
+{
+	.i2s_clk_step=1,        //set i2s clk step
+	.i2s_clk_mode=8,        //set i2s clk mode,set i2s clk=192M*(1/8)= 24M
+	.i2s_bclk_div=1,        //24M/(2*1) = 12M bclk
+	.i2s_lrclk_adc_div=500, //adc sample rate =12M/500 = 24k
+	.i2s_lrclk_dac_div=500, //dac sample rate =12M/500 = 24k
 };
 
 audio_i2s_clk_config_t   audio_i2s_32k_config=
@@ -903,6 +914,53 @@ audio_i2s_clk_config_t   audio_i2s_192k_config=
 	.i2s_lrclk_adc_div=32, //adc sample rate =6.144M/32 =192k
 	.i2s_lrclk_dac_div=32, //dac sample rate =6.144M/32 =192k
 };
+
+#else
+audio_i2s_clk_config_t   audio_i2s_8k_config=
+{
+	.i2s_clk_step=4,        //set i2s clk step
+	.i2s_clk_mode=125,		//set i2s clk mode,set i2s clk=192M*(1/8)= 24M
+	.i2s_bclk_div=6,		//24M/(2*12) = 1M bclk
+	.i2s_lrclk_adc_div=64, //adc sample rate =1M/125 = 8k.for the PCM5102 chip of "I2S to analog board", only 32/48/64 is supported
+	.i2s_lrclk_dac_div=64, //dac sample rate =1M/125 = 8k.for the PCM5102 chip of "I2S to analog board", only 32/48/64 is supported
+};
+
+audio_i2s_clk_config_t   audio_i2s_16k_config=
+{
+	.i2s_clk_step=8,        //set i2s clk step
+	.i2s_clk_mode=125,        //set i2s clk mode,set i2s clk=192M*(1/8)= 24M
+	.i2s_bclk_div=6,        //24M/(2*6) = 2M bclk
+	.i2s_lrclk_adc_div=64, //adc sample rate =2M/125 = 16k.for the PCM5102 chip of "I2S to analog board", only 32/48/64 is supported
+	.i2s_lrclk_dac_div=64, //dac sample rate =2M/125 = 16k.for the PCM5102 chip of "I2S to analog board", only 32/48/64 is supported
+};
+
+audio_i2s_clk_config_t   audio_i2s_24k_config=
+{
+	.i2s_clk_step=4,        //set i2s clk step
+	.i2s_clk_mode=125,        //set i2s clk mode,set i2s clk=192M*(1/8)= 24M
+	.i2s_bclk_div=2,        //24M/(2*1) = 12M bclk
+	.i2s_lrclk_adc_div=64, //adc sample rate =12M/500 = 24k
+	.i2s_lrclk_dac_div=64, //dac sample rate =12M/500 = 24k
+};
+
+audio_i2s_clk_config_t   audio_i2s_32k_config=
+{
+	.i2s_clk_step=8,        //set i2s clk step
+	.i2s_clk_mode=125,        //set i2s clk mode,set i2s clk=192M*(1/8)= 24M
+	.i2s_bclk_div=3,        //24M/(2*3) = 4M bclk
+	.i2s_lrclk_adc_div=64, //adc sample rate =4M/125 = 32k
+	.i2s_lrclk_dac_div=64, //dac sample rate =4M/125 = 32k
+};
+
+audio_i2s_clk_config_t   audio_i2s_192k_config=
+{
+	.i2s_clk_step=32,        //set i2s clk step
+	.i2s_clk_mode=125,      //set i2s clk mode,i2s clk=192M*(8/125)= 12.288M
+	.i2s_bclk_div=2,        //12.288M/(1*2) = 6.144M bclk
+	.i2s_lrclk_adc_div=64, //adc sample rate =6.144M/32 =192k
+	.i2s_lrclk_dac_div=64, //dac sample rate =6.144M/32 =192k
+};
+#endif
 audio_i2s_clk_config_t   audio_i2s_adc_16k_dac_48k_config=
 {
 	.i2s_clk_step=2,        //set i2s clk step
@@ -1020,6 +1078,10 @@ _attribute_ram_code_sec_noinline_ void  audio_set_i2s_clock (audio_sample_rate_e
 			clk_config_ptr=&audio_i2s_16k_config;
 		break;
 
+		case AUDIO_24K:
+			clk_config_ptr=&audio_i2s_24k_config;
+		break;
+		
 		case AUDIO_32K:
 			clk_config_ptr=&audio_i2s_32k_config;
 		break;

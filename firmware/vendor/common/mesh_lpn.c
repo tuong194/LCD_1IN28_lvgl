@@ -41,7 +41,7 @@
 #include "blt_soft_timer.h"
 #include "vendor/common/mesh_ota.h"
 #if(HCI_ACCESS == HCI_USE_UART)
-#include "proj/drivers/uart.h"
+#include "drivers.h"
 #endif
 
 #if (FEATURE_LOWPOWER_EN || SPIRIT_PRIVATE_LPN_EN)

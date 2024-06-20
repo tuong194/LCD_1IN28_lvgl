@@ -23,6 +23,13 @@
 
 #if	1	/*default is open*/
 #include "../../vendor/common/version.h"
+#if (AUDIO_MESH_EN)
+	.equ __STACK_INIT_SIZE__,	(9*1024)
+#else
+	.equ __STACK_INIT_SIZE__,	(5*1024)
+#endif
+	.global	 __STACK_INIT_SIZE__			// include normal stack and irq stack
+
 
     .section .vectors, "ax"
 
@@ -277,7 +284,7 @@ _FILL_STK:
 #if 1
     lui    t0, 0x55555
     addi   t0, t0, 0x555
-    la     t2, (_STACK_TOP - (4*1024)) // _NO_RETENTION_BSS_VMA_END // include IRQ stack
+    la     t2, (_STACK_TOP - (__STACK_INIT_SIZE__)) // _NO_RETENTION_BSS_VMA_END // include IRQ stack
     la     t3, _STACK_TOP
 _FILL_STK_BEGIN:
     bleu   t3, t2, _MAIN_FUNC

@@ -15,8 +15,26 @@ lv_obj_t * ui_Screen2;
 lv_obj_t * ui_giay;
 lv_obj_t * ui_gio;
 lv_obj_t * ui_phut;
-lv_obj_t * ui_Image1;
+lv_obj_t * ui_Colorwheel1;
+
+
+// SCREEN: ui_Screen1
+void ui_Screen1_screen_init(void);
+lv_obj_t * ui_Screen1;
+lv_obj_t * ui_Arc1;
+lv_obj_t * ui_Panel1;
+lv_obj_t * ui_Label1;
+
+
+// SCREEN: ui_Screen3
+void ui_Screen3_screen_init(void);
+lv_obj_t * ui_Screen3;
+lv_obj_t * ui_Colorwheel2;
+lv_obj_t * ui_Image3;
+lv_obj_t * ui_Panel2;
 lv_obj_t * ui____initial_actions0;
+const lv_img_dsc_t * ui_imgset_rect[1] = {&ui_img_rect7541_png};
+const lv_img_dsc_t * ui_imgset_1980390468[1] = {&ui_img_31572172};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
@@ -39,6 +57,8 @@ void ui_init(void)
                                                true, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
     ui_Screen2_screen_init();
+    ui_Screen1_screen_init();
+    ui_Screen3_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_Screen2);
 }

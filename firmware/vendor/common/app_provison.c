@@ -2706,29 +2706,34 @@ u8 is_provision_working()
 	return(get_provision_state() == STATE_DEV_PROVING);
 	#endif
 }
+
 static u8 gateway_connect_filter[6];
 void set_gateway_adv_filter(u8 *p_mac)
 {
 	memcpy(gateway_connect_filter,p_mac,sizeof(gateway_connect_filter));
 }
+
 void gateway_adv_filter_init()
 {
 	memset(gateway_connect_filter,0,sizeof(gateway_connect_filter));
 }
-void mesh_pro_rc_beacon_dispatch(pro_PB_ADV *p_adv,u8 *p_mac){
+
+void mesh_pro_rc_beacon_dispatch(pro_PB_ADV *p_adv,u8 *p_mac)
+{
+	#if PAIR_PROVISION_ENABLE
+	void pair_prov_rx_unprov_beacon_handle(beacon_data_pk *p_beacon, u8 *mac);
+	pair_prov_rx_unprov_beacon_handle((beacon_data_pk *)p_adv, p_mac);
+	#endif
+
 	//provision_mag.provison_send_state = LINK_ESTABLISHED;
-#if BLE_SIG_MESH_CERTIFY_ENABLE
-	if(	prov_para.provison_send_state != STATE_PRO_SUC &&
-		prov_para.provison_send_state != LINK_UNPROVISION_STATE){
+	if(	(prov_para.provison_send_state != STATE_PRO_SUC && prov_para.provison_send_state != LINK_UNPROVISION_STATE)
+		#if (0 == BLE_SIG_MESH_CERTIFY_ENABLE)
+		|| prov_para.key_bind_lock
+		#endif
+		){
 		return ;
 	}
-#else
-	if(	(prov_para.provison_send_state != STATE_PRO_SUC &&
-		prov_para.provison_send_state != LINK_UNPROVISION_STATE)||
-		prov_para.key_bind_lock){
-		return ;
-	}
-#endif 
+
 	beacon_data_pk *p_beacon = (beacon_data_pk *)p_adv;
 	if(p_beacon->beacon_type == SECURE_BEACON){
 		return ;
@@ -3635,349 +3640,6 @@ void mesh_prov_proc_loop()
 }
  
 #if (IS_VC_PROJECT_MASTER || DONGLE_PROVISION_EN)
- /*************hci_tx_fifo_poll ***********************
- device key list save and read
- ******************************************************/ 
-
- #if DONGLE_PROVISION_EN
- VC_node_info_t VC_node_info[MESH_NODE_MAX_NUM];
- VC_node_cps_t VC_node_cps;
- #else
- VC_node_info_t VC_node_info[MESH_NODE_MAX_NUM];        // 1000*(20+384) = 404000
- #endif
- 
-#if WIN32 
-STATIC_ASSERT(sizeof(VC_node_info) <= 4096*128);
-#else
-	#if VC_NODE_INFO_MULTI_SECTOR_EN
-STATIC_ASSERT(sizeof(VC_node_info) <= 4096*2);	// because only one sector for it now
-	#else
-/* because only one sector to save vc node info now, please enable VC_NODE_INFO_MULTI_SECTOR_EN, and then 
- * coustom flash area(such as 0x78000 and 0x79000) will be used, please check.*/
-STATIC_ASSERT(sizeof(VC_node_info) <= 4096);
-	#endif
-#endif
-
-void save_vc_node_info_all()
-{
-#if WIN32
-    // erase all the store vc node info part 
-    // erase_vc_node_info(); // no need erase, write directly later
-#else
-	#if VC_NODE_INFO_MULTI_SECTOR_EN
-	u8 cnt = (sizeof(VC_node_info)+4095)/4096;
-	for(u8 i=0;i<cnt;i++){
-		flash_erase_sector(FLASH_ADR_VC_NODE_INFO+0x1000*i);
-	}
-	#else
-	flash_erase_sector(FLASH_ADR_VC_NODE_INFO);
-	#endif
-#endif
-    flash_write_page(FLASH_ADR_VC_NODE_INFO, sizeof(VC_node_info), (u8 *)VC_node_info);
-}
-
-#if WIN32
-void save_vc_node_info_single(VC_node_info_t *p_info)
-{
-    // erase all the store vc node info part 
-    // erase_vc_node_info(); // no need erase, write directly later
-    u32 adr_save = FLASH_ADR_VC_NODE_INFO + (u8 *)p_info - (u8 *)&VC_node_info;
-    flash_write_page(adr_save, sizeof(VC_node_info_t), (u8 *)p_info);
-}
-#endif
-
-void VC_cmd_clear_all_node_info(u16 adr)
-{
-	if(adr == 0xffff){
-		provision_mag.unicast_adr_last =1;// reset the adr part 
-		provision_mag_cfg_s_store();// avoid restore part 
-		memset((u8 *)(VC_node_info),0xff,sizeof(VC_node_info));
-	}else if (is_unicast_adr(adr)){
-		VC_node_info_t *p_info = get_VC_node_info(adr, 1);
-		if(p_info){
-            memset(p_info,0xff,sizeof(VC_node_info_t));
-		}
-	}else{
-		return;
-	}
-	
-    save_vc_node_info_all();
-}
-
-VC_node_info_t * get_VC_node_info(u16 obj_adr, int is_must_primary)
-{
-	if(obj_adr && is_unicast_adr(obj_adr)){
-        foreach(i,MESH_NODE_MAX_NUM){
-            VC_node_info_t *p_info = &VC_node_info[i];
-            if(p_info->node_adr){
-                if(is_must_primary){
-                    if(p_info->node_adr == obj_adr){    
-                        return p_info;
-                    }
-                }else if(is_ele_in_node(obj_adr, p_info->node_adr, p_info->element_cnt)){
-                    return p_info;
-                }
-            }
-        }
-	}
-	
-#if WIN32
-    LOG_MSG_ERR(TL_LOG_COMMON,0, 0,"obj_adr 0x%04x, not found VC node info", obj_adr);
-#endif
-
-    return 0;
-}
-
-void del_vc_node_info_by_unicast(u16 unicast)
-{
-    VC_node_info_t * p_node_info = get_VC_node_info(unicast,1);        
-    if(p_node_info!=0){
-        // clear the vc node info part 
-        #if WIN32
-        memset(p_node_info,0,sizeof(VC_node_info_t));
-        #else
-        memset(p_node_info,0xff,sizeof(VC_node_info_t));
-        #endif
-    }
-    save_vc_node_info_all();//save the vc node info part 
-}
-
-#if IS_VC_PROJECT_MASTER
-void erase_vc_node_info()
-{
-    flash_erase_sector_VC(0, sizeof(VC_node_info));
-}
-
-/**
-* function: get offset between object addr and element addr which include the model.
-*/
-u8 get_ele_offset_by_model_VC_node_info(u16 obj_adr, u32 model_id, bool4 sig_model)
-{
-    VC_node_info_t *p_info = get_VC_node_info(obj_adr, 0);
-    if(p_info){
-        return get_ele_offset_by_model((mesh_page0_t *)(&p_info->cps.page0_head), p_info->cps.len_cps, p_info->node_adr, obj_adr, model_id, sig_model);
-    }
-    LOG_MSG_ERR (TL_LOG_COMMON, 0, 0, "VC node info NOT_FOUND!........................",0);
-    return MODEL_NOT_FOUND;
-}
-#endif
-#if WIN32
-static u32 mesh_vc_node_addr = FLASH_ADR_VC_NODE_INFO;
-#endif
-
-void VC_node_info_retrieve()
-{
-#if WIN32
-    int err = mesh_par_retrieve((u8 *)VC_node_info, &mesh_vc_node_addr, FLASH_ADR_VC_NODE_INFO, sizeof(VC_node_info));
-#else    
-	flash_read_page(FLASH_ADR_VC_NODE_INFO, sizeof(VC_node_info), (u8 *)VC_node_info);
-#endif
-}
- 
-int VC_node_dev_key_save(u16 adr, u8 *dev_key,u8 ele_cnt)
-{
-    if(!is_unicast_adr(adr) && (!adr)){
-        return -1;
-    }
-
-    VC_node_info_t *p_info = 0;    // save
-    VC_node_info_t *p_info_1st_empty = 0;
-    foreach(i,MESH_NODE_MAX_NUM){
-        VC_node_info_t *p_info_tmp = &VC_node_info[i];
-        if(p_info_tmp->node_adr == adr){    
-            p_info = p_info_tmp;  // existed
-            break;
-        }else if((!p_info_1st_empty) && ((0 == p_info_tmp->node_adr)||(p_info_tmp->node_adr >= 0x8000))){
-            p_info_1st_empty = p_info_tmp;
-        }
-    }
-
-    if(0 == p_info){
-        p_info = p_info_1st_empty;
-    }
-    if(p_info){
-        if(!((adr == p_info->node_adr)&&(!memcmp(p_info->dev_key, dev_key, 16)))){
-            p_info->node_adr = adr;
-			p_info->element_cnt = ele_cnt;
-            memcpy(p_info->dev_key, dev_key, 16);
-
-            #if DONGLE_PROVISION_EN
-            save_vc_node_info_all();
-            #else
-            save_vc_node_info_single(p_info);
-            #endif
-        }
-        return 0;
-    }
-
-    return -1; 	 // full
-}
- 
-u8* VC_master_get_other_node_dev_key(u16 adr)
-{
-     if(is_actived_factory_test_mode()){
-         return mesh_key.dev_key;
-     }
-     
-	 VC_node_info_t *p_info = get_VC_node_info(adr, 1);
-	 if(p_info){
-	    return p_info->dev_key;
-	 }
- 
-	 return 0;
-}
-
-#if MD_REMOTE_PROV
-int VC_node_dev_key_candi_enable(u16 adr)
-{
-	 if(!is_unicast_adr(adr) && (!adr)){
-        return -1;
-    }
-
-    VC_node_info_t *p_info = 0;    // save
-    VC_node_info_t *p_info_1st_empty = 0;
-    foreach(i,MESH_NODE_MAX_NUM){
-        VC_node_info_t *p_info_tmp = &VC_node_info[i];
-        if(p_info_tmp->node_adr == adr){    
-            p_info = p_info_tmp;  // existed
-            break;
-        }else if((!p_info_1st_empty) && ((0 == p_info_tmp->node_adr)||(p_info_tmp->node_adr >= 0x8000))){
-            p_info_1st_empty = p_info_tmp;
-        }
-    }
-    if(p_info){
-        p_info->node_adr = adr;
-        memcpy(p_info->dev_key, p_info->dev_key_candi, 16);
-		memset(p_info->dev_key_candi,0,16);
-        #if DONGLE_PROVISION_EN
-        save_vc_node_info_all();
-        #else
-        save_vc_node_info_single(p_info);
-        #endif
-        return 0;
-    }
-
-    return -1; 	 // full
-}
-
-
-int VC_node_replace_devkey_candi_adr(u16 adr, u16 new_adr,u8 *dev_key_cadi)
-{
-    if(!is_unicast_adr(adr) && (!adr)){
-        return -1;
-    }
-
-    VC_node_info_t *p_info = 0;    // save
-    VC_node_info_t *p_info_1st_empty = 0;
-    foreach(i,MESH_NODE_MAX_NUM){
-        VC_node_info_t *p_info_tmp = &VC_node_info[i];
-        if(p_info_tmp->node_adr == adr){    
-            p_info = p_info_tmp;  // existed
-            break;
-        }else if((!p_info_1st_empty) && ((0 == p_info_tmp->node_adr)||(p_info_tmp->node_adr >= 0x8000))){
-            p_info_1st_empty = p_info_tmp;
-        }
-    }
-    if(p_info){
-		p_info->node_adr = new_adr;
-		memcpy(p_info->dev_key, dev_key_cadi, 16);
-		memset(p_info->dev_key_candi,0,16);
-		#if DONGLE_PROVISION_EN
-		save_vc_node_info_all();
-		#else
-		save_vc_node_info_single(p_info);
-		#endif
-        return 0;
-    }
-
-    return -1; 	 // full
-}
- 
- int VC_node_dev_key_save_candi(u16 adr, u8 *dev_key_cadi)
- {
-	 if(!is_unicast_adr(adr) && (!adr)){
-		 return -1;
-	 }
- 
-	 VC_node_info_t *p_info = 0;	// save
-	 VC_node_info_t *p_info_1st_empty = 0;
-	 foreach(i,MESH_NODE_MAX_NUM){
-		 VC_node_info_t *p_info_tmp = &VC_node_info[i];
-		 if(p_info_tmp->node_adr == adr){	 
-			 p_info = p_info_tmp;  // existed
-			 break;
-		 }else if((!p_info_1st_empty) && ((0 == p_info_tmp->node_adr)||(p_info_tmp->node_adr >= 0x8000))){
-			 p_info_1st_empty = p_info_tmp;
-		 }
-	 }
-	 if(p_info){
-		 if(!((adr == p_info->node_adr)&&(!memcmp(p_info->dev_key_candi, dev_key_cadi, 16)))){
-			 p_info->node_adr = adr;
-			 memcpy(p_info->dev_key_candi, dev_key_cadi, 16);
- 
-            #if DONGLE_PROVISION_EN
-            save_vc_node_info_all();
-            #else
-            save_vc_node_info_single(p_info);
-            #endif
-        }
-        return 0;
-    }
-
-    return -1; 	 // full
-}
- 
-
-
-u8* VC_master_get_other_node_dev_key_candi(u16 adr)
-{
-     if(is_actived_factory_test_mode()){
-         return mesh_key.dev_key;
-     }
-     
-	 VC_node_info_t *p_info = get_VC_node_info(adr, 1);
-	 if(p_info){
-	    return p_info->dev_key_candi;
-	 }
- 
-	 return 0;
-}
-#endif
-
-
-u8 VC_node_cps_save(mesh_page0_t * p_page0,u16 unicast, u32 len_cps)
-{
-    VC_node_info_t *p_info = get_VC_node_info(unicast, 1); // have been sure no same node address in node info
-    if(p_info){
-        #if DONGLE_PROVISION_EN
-        VC_node_cps_t *p_cps = &VC_node_cps;
-        #else
-		VC_node_cps_t *p_cps = &p_info->cps;
-		if(unicast == ele_adr_primary){
-            p_info->element_cnt = g_ele_cnt;
-        }else{
-        	u8 cps_ele_cnt =0;
-            cps_ele_cnt = get_ele_cnt_by_traversal_cps(p_page0, len_cps);
-			if(p_info->element_cnt == 0){
-				p_info->element_cnt = cps_ele_cnt;
-			}else if (cps_ele_cnt != p_info->element_cnt){
-    			p_info->element_cnt =0;
-                LOG_MSG_ERR(TL_LOG_PROVISION,0, 0 ,"element count error!",0);
-    		}
-		}
-        #endif
-        p_cps->len_cps = len_cps;
-        memcpy(&p_cps->page0_head, p_page0, len_cps);
-        
-        #if WIN32
-        save_vc_node_info_single(p_info);
-        #endif
-        
-        return 0;
-    }
-    // to save later
-    return -1;
-}
 void mesh_cfg_keybind_start_trigger_event(u8* p_idx,u8 *p_key,u16 unicast,u16 nk_idx,u8 fastbind)
 {
 	prov_para.key_bind_lock = 1;
@@ -4137,32 +3799,8 @@ u8 VC_search_and_bind_model()
 #endif
 #endif
 
-#if WIN32 
-int upload_sig_mesh_para(u8 *buf,int *len)
-{
-	sdk_info_t *p_info = (sdk_info_t *)(buf);
-	memcpy(p_info->node_info,VC_node_info,sizeof(VC_node_info));
-	memcpy(&p_info->mesh_key,&mesh_key,sizeof(mesh_key));
-	*len = sizeof(sdk_info_t);
-	return 1;
-}
 
-int download_sig_mesh_para(u8 *buf,int len )
-{
-	if(len<sizeof(sdk_info_t)){
-		return -1;
-	}
-	sdk_info_t *p_info = (sdk_info_t *)buf;
-	memcpy(&mesh_key,&p_info->mesh_key,sizeof(mesh_key));
-	flash_erase_sector(FLASH_ADR_MESH_KEY);
-	flash_write_page(FLASH_ADR_MESH_KEY,sizeof(mesh_key),(u8 *)&mesh_key);
-	
-	// erase all the store vc node info part 
-	memcpy(VC_node_info,p_info->node_info,sizeof(VC_node_info));
-	save_vc_node_info_all();
-	return 0;
-}
-#endif
+
 
 
 

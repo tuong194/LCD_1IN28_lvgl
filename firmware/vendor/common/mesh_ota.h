@@ -188,6 +188,11 @@
 #define MESH_OTA_PULL_MODE_EN           0		// must 0
 #endif
 
+#define MESH_OTA_DEFAULT_SUB_EN			0      // if enable, must confirm device had sub the group addr which use in distribut start
+#if MESH_OTA_DEFAULT_SUB_EN
+#define MESH_OTA_DEFAULT_GROUP_ADDR		0xC000
+#endif
+
 //---- transfer mode setting
 #define MESH_OTA_TRANSFER_MODE_PUSH     BIT(0)
 #define MESH_OTA_TRANSFER_MODE_PULL     BIT(1)      // for LPN
@@ -801,7 +806,8 @@ typedef struct{
     u8 additional_info  :5;
     u8 skip_flag        :1;
     u8 apply_flag       :1;
-    u8 rsv              :6;
+	u8 no_missing_flag  :1;
+    u8 rsv              :5;
 }fw_receiver_list_t;
 
 typedef struct{
@@ -1085,7 +1091,7 @@ void APP_set_mesh_ota_pause_flag(u8 val);
 int mesh_ota_and_only_one_node_check();
 u32 soft_crc32_ota_flash(u32 addr, u32 len, u32 crc_init,u32 *out_crc_type1_blk);
 int mesh_ota_slave_need_ota(fw_metadata_t *p_metadata, int len);
-unsigned short crc16(unsigned char *pD, int len);
+unsigned short crc16(const unsigned char *pD, int len);
 void mesh_ota_read_data(u32 adr, u32 len, u8 * buf);
 void mesh_ota_proc();
 int is_blob_chunk_transfer_ready();

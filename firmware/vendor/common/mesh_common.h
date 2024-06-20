@@ -290,7 +290,11 @@ extern u8 GATT_PROXY_HANDLE;    // may use in library
 extern const u8 SERVICE_CHANGE_ATT_HANDLE_SLAVE;
 extern const u8 ONLINE_ST_ATT_HANDLE_SLAVE;
 extern u8 proc_homekit_pair;
+#if __TLSR_RISCV_EN__
+extern volatile const u8 key_encode_bin[];
+#else
 extern const u8 key_encode_bin[];
+#endif
 
 enum{
 	BLE_4_0 =0,

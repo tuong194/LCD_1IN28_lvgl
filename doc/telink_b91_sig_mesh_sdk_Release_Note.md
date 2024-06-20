@@ -1,3 +1,205 @@
+## V3.1.0.5
+
+### Dependency Updates
+
+* telink_b91m_ble_single_connection_sdk_v3.3.0.0
+
+### Bug Fixes
+
+* N/A
+
+### Features
+
+* Add flash write protection, please refer to MESH_FLASH_PROTECTION_EN. disable as default. Note: 1M Flash Map has been changed, please pay attention to compatibility issues.
+
+### Performance Improvements
+
+* N/A
+
+### BREAKING CHANGES
+
+* 1M Flash Map has been changed, please pay attention to compatibility issues.
+
+### Notes
+
+* debugging tools: such as sig_mesh_tool.exe and Android apk, please be sure to use the tools of this release.
+* to avoid compilation errors or loss of functionality, please update all files when upgrading the SDK.
+* for the release note contents of the BLE SDK and Driver SDK mentioned in "Dependency Updates", please refer to the release note files of related SDKs.
+
+* Flash and RAM (default target):
+
+  - B91_mesh:_________Flash 120 KB, I-RAM (38 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_gw:_____Flash 126 KB, I-RAM (45 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_LPN:____Flash 114 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_switch:__Flash 108 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
+
+
+### Dependency Updates
+
+* telink_b91m_ble_single_connection_sdk_v3.3.0.0
+
+### Bug Fixes
+
+* N/A
+
+### Features
+
+* 增加 flash 写保护功能，请参考宏定义 MESH_FLASH_PROTECTION_EN，默认关闭。注意 1M Flash Map 有变更，请留意兼容性问题。
+
+### Performance Improvements
+
+* N/A
+
+### BREAKING CHANGES
+
+* 1M Flash Map 有变更，请留意兼容性问题
+
+### Notes
+
+* 调试工具：比如sig_mesh_tool.exe和APP 安装包文件，请务必使用本次release的版本。
+* 为避免编译错误以及功能丢失，升级SDK时，请确认更新全部SDK文件。
+* “Dependency Updates”里面提到的BLE SDK和Driver SDK的release note内容，请查阅对应SDK的release note文件。
+
+
+
+## V3.1.0.4
+
+### Dependency Updates
+
+* telink_b91m_ble_single_connection_sdk_v3.3.0.0
+
+### Bug Fixes
+
+* N/A
+
+### Features
+
+* fix GPIO IRQ. Please refer to IRQ_GPIO_ENABLE, and this feature is not enabled by default.
+* fix TIMER IRQ. Please refer to IRQ_TIMER1_ENABLE, and this feature is not enabled by default.
+* fix gateway mesh ota b85.
+
+### Performance Improvements
+
+* N/A
+
+### BREAKING CHANGES
+
+* N/A
+
+### Notes
+
+* debugging tools: such as sig_mesh_tool.exe and Android apk, please be sure to use the tools of this release.
+* to avoid compilation errors or loss of functionality, please update all files when upgrading the SDK.
+* for the release note contents of the BLE SDK and Driver SDK mentioned in "Dependency Updates", please refer to the release note files of related SDKs.
+
+* Flash and RAM (default target):
+
+  - B91_mesh:_________Flash 120 KB, I-RAM (38 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_gw:_____Flash 126 KB, I-RAM (45 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_LPN:____Flash 114 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_switch:__Flash 108 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
+
+
+### Dependency Updates
+
+* telink_b91m_ble_single_connection_sdk_v3.3.0.0
+
+### Bug Fixes
+
+* N/A
+
+### Features
+
+* 修复 GPIO IRQ。代码请参考 IRQ_GPIO_ENABLE，默认未启用该功能。
+* 修复 TIMER1 IRQ。代码请参考 IRQ_TIMER1_ENABLE，默认未启用该功能。
+* 修复网关mesh ota b85设备。
+
+### Performance Improvements
+
+* N/A
+
+### BREAKING CHANGES
+
+* N/A
+
+### Notes
+
+* 调试工具：比如sig_mesh_tool.exe和APP 安装包文件，请务必使用本次release的版本。
+* 为避免编译错误以及功能丢失，升级SDK时，请确认更新全部SDK文件。
+* “Dependency Updates”里面提到的BLE SDK和Driver SDK的release note内容，请查阅对应SDK的release note文件。
+
+
+
+## V3.1.0.3
+
+### Dependency Updates
+
+* telink_b91m_ble_single_connection_sdk_v3.3.0.0
+
+### Bug Fixes
+
+* N/A
+
+### Features
+
+* (Firmware) Mesh Audio: add ENC (Environmental Noise Cancellation).
+* (Firmware) Mesh Audio: support multiple nodes speaking simultaneously. enable AUDIO_MESH_MULTY_NODES_TX_EN for this function, disabled as default.
+* (Firmware) Mesh Audio: support provision between nodes without an App and gateway. enable PAIR_PROVISION_ENABLE for this function, disabled as default.
+* (Firmware) Mesh Audio: support I2S. enable AUDIO_I2S_EN for this function, disabled as default. if enable I2S, AUDIO_SAMPLE_RATE only support 8k now. next version will support 16K.
+
+### Performance Improvements
+
+* N/A
+
+### BREAKING CHANGES
+
+* N/A
+
+### Notes
+
+* debugging tools: such as sig_mesh_tool.exe and Android apk, please be sure to use the tools of this release.
+* to avoid compilation errors or loss of functionality, please update all files when upgrading the SDK.
+* for the release note contents of the BLE SDK and Driver SDK mentioned in "Dependency Updates", please refer to the release note files of related SDKs.
+
+* Flash and RAM (default target):
+
+  - B91_mesh:_________Flash 120 KB, I-RAM (38 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_gw:_____Flash 126 KB, I-RAM (45 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_LPN:____Flash 114 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_switch:__Flash 108 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
+
+
+### Dependency Updates
+
+* telink_b91m_ble_single_connection_sdk_v3.3.0.0
+
+### Bug Fixes
+
+* N/A
+
+### Features
+
+* (Firmware) Mesh Audio功能：增加 ENC 环境噪音降噪功能。(Environmental Noise Cancellation,环境降噪技术)。
+* (Firmware) Mesh Audio功能：支持多节点同时讲话，打开 AUDIO_MESH_MULTY_NODES_TX_EN 即可，默认关闭。
+* (Firmware) Mesh Audio功能：支持在没有App和网关情况下, 节点和节点之间进行配对组网的功能。打开 PAIR_PROVISION_ENABLE 即可，默认关闭。
+* (Firmware) Mesh Audio功能：支持I2S。打开 AUDIO_I2S_EN 即可，默认关闭。使能AUDIO_I2S_EN后，AUDIO_SAMPLE_RATE 目前仅支持 8k模式, 下个版本再支持 16k.
+
+### Performance Improvements
+
+* N/A
+
+### BREAKING CHANGES
+
+* N/A
+
+### Notes
+
+* 调试工具：比如sig_mesh_tool.exe和APP 安装包文件，请务必使用本次release的版本。
+* 为避免编译错误以及功能丢失，升级SDK时，请确认更新全部SDK文件。
+* “Dependency Updates”里面提到的BLE SDK和Driver SDK的release note内容，请查阅对应SDK的release note文件。
+
+
+
 ## V3.1.0.2
 
 ### Dependency Updates
@@ -22,16 +224,16 @@
 
 ### Notes
 
-* updated from version 3.1.0.0.
+* updated base on version 3.1.0.0.
 
 ### CodeSize
 
 * Flash and RAM (default target):
 
-  - 8258_mesh:_________Flash 120 KB, I-RAM (38 KB + 4K stack), D-RAM (0 KB).
-  - 8258_mesh_LPN:____Flash 113 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
-  - 8258_mesh_gw:_____Flash 126 KB, I-RAM (45 KB + 4K stack), D-RAM (0 KB).
-  - 8258_mesh_switch:__Flash 108 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh:_________Flash 120 KB, I-RAM (38 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_LPN:____Flash 113 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_gw:_____Flash 126 KB, I-RAM (45 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_switch:__Flash 108 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
 
 
 ### Dependency Updates
@@ -57,6 +259,70 @@
 ### Notes
 
 * 基于 3.1.0.0 版本进行更新。
+
+
+## V3.1.0.1
+
+### Dependency Updates
+
+* N/A
+
+### Bug Fixes
+
+* N/A
+
+### Features
+
+* (Firmware) add software PA function.
+* (Firmware) add SBC algorithm for mesh audio.
+
+### Performance Improvements
+
+* N/A
+
+### BREAKING CHANGES
+
+* N/A
+
+### Notes
+
+* debugging tools: such as sig_mesh_tool.exe and Android apk, please be sure to use the tools of this release.
+* to avoid compilation errors or loss of functionality, please update all files when upgrading the SDK.
+* for the release note contents of the BLE SDK and Driver SDK mentioned in "Dependency Updates", please refer to the release note files of related SDKs.
+
+* Flash and RAM (default target):
+
+  - B91_mesh:_________Flash 120 KB, I-RAM (38 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_LPN:____Flash 113 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_gw:_____Flash 126 KB, I-RAM (45 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_switch:__Flash 108 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
+
+
+### Dependency Updates
+
+* N/A
+
+### Bug Fixes
+
+* N/A
+
+### Features
+
+* (Firmware) 增加 软件PA功能。
+* (Firmware) mesh audio增加SBC算法。
+
+### Performance Improvements
+
+* N/A
+
+### BREAKING CHANGES
+
+* N/A
+
+### Notes
+
+* 调试工具：比如sig_mesh_tool.exe和APP 安装包文件，请务必使用本次release的版本。
+* 为避免编译错误以及功能丢失，升级SDK时，请确认更新全部SDK文件。
 
 
 ## V3.1.0.0
@@ -93,10 +359,10 @@
 
 * Flash and RAM (default target):
 
-  - 8258_mesh:_________Flash 120 KB, I-RAM (38 KB + 4K stack), D-RAM (0 KB).
-  - 8258_mesh_LPN:____Flash 113 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
-  - 8258_mesh_gw:_____Flash 126 KB, I-RAM (45 KB + 4K stack), D-RAM (0 KB).
-  - 8258_mesh_switch:__Flash 108 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh:_________Flash 120 KB, I-RAM (38 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_LPN:____Flash 113 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_gw:_____Flash 126 KB, I-RAM (45 KB + 4K stack), D-RAM (0 KB).
+  - B91_mesh_switch:__Flash 108 KB, I-RAM (33 KB + 4K stack), D-RAM (0 KB).
 
 
 ### Dependency Updates

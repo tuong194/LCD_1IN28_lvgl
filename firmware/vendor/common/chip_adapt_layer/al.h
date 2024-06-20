@@ -52,6 +52,8 @@
 #define	CLOCK_SYS_CLOCK_1MS				SYSTEM_TIMER_TICK_1MS
 #define	CLOCK_SYS_CLOCK_1US				SYSTEM_TIMER_TICK_1US
 
+#define BOOT_MARK_ADDR_B85				0x00008 
+
 typedef enum{
 	SET_RX_WITHOUT_CHN,		// must set to rx mode
 	SET_RX_WITH_CHN,		// must set to rx mode
@@ -102,6 +104,41 @@ static inline void pwm_start(pwm_id_e id)
 	}
 }
 
+// uart
+#define UART_DMA_CHANNEL_RX  	DMA2
+#define UART_DMA_CHANNEL_TX  	DMA3
+#define UART_NUM_GET(pin)		(((((int)pin==UART0_RX_PA4)||((int)pin==UART0_RX_PB3)||((int)pin==UART0_RX_PD3))|| \
+									(((int)pin==UART0_TX_PA3)||((int)pin==UART0_TX_PB2)||((int)pin==UART0_TX_PD2))) ? UART0 : UART1)
+#define UART_IRQ_GET(pin)		((UART_NUM_GET(pin) == UART0) ? IRQ19_UART0 : IRQ18_UART1)
+
+typedef struct{
+	unsigned int len;  // must be 4 byte align 
+	unsigned char data[1];
+}uart_data_t;
+
+extern const uart_num_e UART_RX_NUM;
+extern const uart_num_e UART_TX_NUM;
+extern const irq_source_e UART_IRQ_NUM;
+
+void uart_tx_busy_timeout_poll();
+unsigned char uart_tx_is_busy_dma_tick();
+unsigned char uart_Send_dma_with_busy_hadle(unsigned char* data, unsigned int len);
+unsigned char uart_ErrorCLR(void);
+void irq_uart_handle_fifo();
+void uart_drv_init_B91m();
+
+typedef struct {
+	u8 bear_par_type;	// be equal to bear_head_t->par_type
+	u16 src_addr;
+	u8 sno_low; 		// low byte of message sequence number
+}bear_head_src_sno_t;
+
+typedef struct{
+	u8 len;
+	u8 ad_type;		// always DATA_TYPE_MANUFACTURER_SPECIFIC_DATA
+	u16 vnd_id;		// vendor id
+	bear_head_src_sno_t head_src_sno; // be equal to bear_head_t
+}aux_payload_t;
 
 typedef struct {
 	u8 (*rx_aux_adv)(u8 * raw_pkt, u8 * new_pkt);
@@ -119,6 +156,7 @@ extern u16 g_SCAN_PRICHN_RXFIFO_NUM;
 extern u8 scan_pri_chn_rx_fifo[];
 
 extern unsigned char adc_hw_initialized;
+extern aux_payload_t g_aux_payload;
 
 #define cpu_long_sleep_wakeup		cpu_long_sleep_wakeup_32k_rc
 #define adc_sample_and_get_result 	adc_get_voltage
@@ -140,5 +178,8 @@ void main_loop_risv_sdk();
 void user_init_risv_sdk();
 void ble_loop_send_adv_in_gatt();
 unsigned short adc_get_voltage(void);
-
+void extend_adv_aux_src_sno_xor(aux_payload_t *p_aux);
+void bootloader_unlock_flash();
+void mesh_flash_lock();
+void mesh_flash_unlock(void);
 

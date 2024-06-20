@@ -81,7 +81,7 @@
 #endif
 
 #if (HCI_ACCESS==HCI_USE_UART)
-#include "proj/drivers/uart.h"
+#include "drivers.h"
 #endif
 
 #if HOMEKIT_EN
@@ -245,13 +245,23 @@ __WEAK void function_null_compile(const void *p){}// just for avoid being optimi
 #ifndef ENCODE_BIN_USER_KEY     // please define in "user_app_config.h"
 #define ENCODE_BIN_USER_KEY     {0} //{0x51,0x03,0x1f,0x03,0x57,0x81,0x7b,0x5c,0x48,0x83,0x93,0xae,0xa8,0xc6,0x5d,0x9a,} // 
 #endif
-const u8 key_encode_bin[] = ENCODE_BIN_USER_KEY;    // must const
+#if __TLSR_RISCV_EN__
+volatile _attribute_no_retention_data_ // for not be optimized
+#endif
+const u8 key_encode_bin[] = ENCODE_BIN_USER_KEY;    // const
 STATIC_ASSERT(sizeof(key_encode_bin) == 16);
 
 #ifdef ENCODE_BIN_USER_NAME     // please define in "user_app_config.h" if need.
+#if __TLSR_RISCV_EN__
+volatile _attribute_no_retention_data_ // for not be optimized
+#endif
 const u8 ENCODE_BIN_USER_NAME_CONST[] = ENCODE_BIN_USER_NAME; // {"8258_mesh_AES"}
 STATIC_ASSERT(sizeof(ENCODE_BIN_USER_NAME_CONST) >= 1);
+	#if __TLSR_RISCV_EN__
+#define FUNC_NULL_KEEP_ENCODE_BIN_USER_NAME()   // no need to be called, because kept in boot link.
+	#else
 #define FUNC_NULL_KEEP_ENCODE_BIN_USER_NAME()   do{function_null_compile(ENCODE_BIN_USER_NAME_CONST);}while(0)
+	#endif
 #endif
 #endif
 
@@ -260,9 +270,16 @@ STATIC_ASSERT(sizeof(ENCODE_BIN_USER_NAME_CONST) >= 1);
 #endif
 
 #ifdef NORMAL_BIN_USER_NAME    // please define in "user_app_config.h" if need.
+#if __TLSR_RISCV_EN__
+volatile _attribute_no_retention_data_ // for not be optimized
+#endif
 const u8 NORMAL_BIN_USER_NAME_CONST[] = NORMAL_BIN_USER_NAME; // {"8258_mesh_normal"}
 STATIC_ASSERT(sizeof(NORMAL_BIN_USER_NAME_CONST) >= 1);
+	#if __TLSR_RISCV_EN__
+#define FUNC_NULL_KEEP_NORMAL_BIN_USER_NAME()   // no need to be called, because kept in boot link.
+	#else
 #define FUNC_NULL_KEEP_NORMAL_BIN_USER_NAME()     do{function_null_compile(NORMAL_BIN_USER_NAME_CONST);}while(0)
+	#endif
 #else
 #define FUNC_NULL_KEEP_NORMAL_BIN_USER_NAME()     
 #endif
@@ -1320,6 +1337,10 @@ void entry_ota_mode(void)
 	dual_mode_disable();
 	// bls_ota_clearNewFwDataArea(0); // may disconnect
 	#endif
+
+	#if MESH_FLASH_PROTECTION_EN
+	mesh_flash_unlock();
+	#endif
 }
 
 _USER_CAN_REDEFINE_ u8 ota_condition_enable()
@@ -1563,6 +1584,9 @@ void mesh_ble_connect_cb(u8 e, u8 *p, int n)
 #if HOMEKIT_EN
 	task_connect(e, p, n);
 #endif
+#if PAIR_PROVISION_ENABLE
+	pair_login_ok = 1; // because want to use generic APP to do OTA.
+#endif	
 	
 	LOG_MSG_LIB(TL_LOG_NODE_SDK, 0, 0, "%s", __func__);
     CB_USER_BLE_CONNECT(e, p, n);
@@ -1641,7 +1665,11 @@ void set_random_adv_delay(int en)   // 0-10ms for mesh network PDU random delay
 	// random from 0--10ms
 	u8 cnt = 0;
 	if(en){
-	    if(get_blt_state() == BLS_LINK_STATE_CONN){
+	    if((get_blt_state() == BLS_LINK_STATE_CONN)
+	    #if AUDIO_MESH_MULTY_NODES_TX_EN
+	    || audio_mesh_is_reduce_relay_random()
+	    #endif
+	    ){
 	        #if (!SIG_MESH_LOOP_PROC_10MS_EN) // no need for 8269
 	        cnt = (rand() % 12) + 1;    // because ble window. a little shorter should be better
 	        #endif
@@ -2194,6 +2222,14 @@ void set_random_enable(u8 en)
 #if MD_SERVER_EN
 void publish_when_powerup()
 {
+	#if 0 // PAIR_PROVISION_ENABLE
+	if(0 == is_provision_success()){
+		// should not send message, because cache data will record the node address and sno, which will block message from provioner if they use the same node address.
+		// no need return now, because provisioner and provisionee use different address range. refer to PAIR_PROV_UNPROV_ADDRESS_START.
+		return ;
+	}
+	#endif
+	
     #if SEND_STATUS_WHEN_POWER_ON
     user_power_on_proc();
     #endif
@@ -3237,6 +3273,8 @@ void uart_drv_init()
 
 	irq_set_mask(FLD_IRQ_DMA_EN);
 	dma_chn_irq_enable(FLD_DMA_CHN_UART_RX | FLD_DMA_CHN_UART_TX, 1);   	//uart Rx/Tx dma irq enable
+#elif __TLSR_RISCV_EN__
+	uart_drv_init_B91m();
 #else
 
 	//todo:uart init here
@@ -3281,9 +3319,17 @@ int blc_hci_tx_to_uart ()
 {
 	my_fifo_buf_t *p = (my_fifo_buf_t *)my_fifo_get (&hci_tx_fifo);
 	#if 1
+	#if  __TLSR_RISCV_EN__
+#define uart_Send(p_data,len_data)	uart_Send_dma_with_busy_hadle(p_data, len_data)
+
+	uart_tx_busy_timeout_poll();
+	
+	if (p && !uart_tx_is_busy_dma_tick())
+	#else
 	if (p && !uart_tx_is_busy ())
+	#endif
 	{
-		#if (1 == HCI_LOG_FW_EN)
+		#if 0//(1 == HCI_LOG_FW_EN) // use simulate UART with DEBUG_INFO_TX_PIN to print log.
 	    if(p->data[0] == HCI_LOG){// printf part ,not send the hci log part 
 			u8 uart_tx_buf[UART_TX_LEN_MAX + 8];
 			u8 head_len = p->data[1];
@@ -3332,6 +3378,10 @@ int blc_hci_tx_to_uart ()
 	#endif
 	
 	return 0;
+	
+#if  __TLSR_RISCV_EN__
+#undef uart_Send
+#endif
 }
 #endif
 
@@ -3521,7 +3571,7 @@ int mesh_dev_key_candi_decrypt_cb(u16 src_adr, int dirty_flag , const u8* ac_bac
 {
 	int err =-1;
 	// both the vc and the node will use the remote prov candi decrypt
-#if MD_REMOTE_PROV
+#if (MD_REMOTE_PROV && DEVICE_KEY_REFRESH_ENABLE)
 	//roll back the src data to the ac part 
 	u8 *p_devkey = mesh_cfg_cmd_dev_key_candi_get(src_adr);
 	if(is_buf_zero(p_devkey,16)){

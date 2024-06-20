@@ -230,7 +230,9 @@ vendor/lvgl/demos/stress/lv_demo_stress.d vendor/lvgl/demos/stress/lv_demo_stres
  ../vendor/lvgl/demos/stress/../../src/extra/widgets/span/lv_span.h \
  /cygdrive/c/TelinkV323/LCD_1IN28_lvgl/firmware/vendor/lvgl/src/lvgl.h \
  ../vendor/lvgl/demos/stress/../benchmark/lv_demo_benchmark.h \
- ../vendor/lvgl/demos/stress/../benchmark/../lv_demos.h
+ ../vendor/lvgl/demos/stress/../benchmark/../lv_demos.h \
+ ../vendor/lvgl/demos/stress/../music/lv_demo_music.h \
+ ../vendor/lvgl/demos/stress/../music/../lv_demos.h
 
 ../vendor/lvgl/demos/stress/lv_demo_stress.h:
 
@@ -693,3 +695,7 @@ vendor/lvgl/demos/stress/lv_demo_stress.d vendor/lvgl/demos/stress/lv_demo_stres
 ../vendor/lvgl/demos/stress/../benchmark/lv_demo_benchmark.h:
 
 ../vendor/lvgl/demos/stress/../benchmark/../lv_demos.h:
+
+../vendor/lvgl/demos/stress/../music/lv_demo_music.h:
+
+../vendor/lvgl/demos/stress/../music/../lv_demos.h:

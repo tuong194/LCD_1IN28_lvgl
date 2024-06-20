@@ -31,6 +31,7 @@
 #pragma pack(1)
 #endif
 
+#define MESH_INVALID_IV_INDEX	    0xffffffff
 #define URI_DATA    {0x17,0x2f,0x2f,0x50,0x54,0x53,0x2e,0x43,0x4f,0x4d}
 
 typedef struct {
@@ -111,6 +112,14 @@ typedef enum{
 	OOB_IN_MANUL,
 	OOB_ON_DEVICE,
 }OOB_INFO_FIELD;
+
+/**
+ * @brief       This function service to judge wether the iv index is valid or not. 
+ 				If not valid, need update by receiving the network beacon from the network.
+ * @return      1:iv index invalid. 0:iv index valid.
+ * @note        
+ */
+int is_iv_index_invalid();
 
 u8  beacon_data_init_without_uri(beacon_str *p_str ,u8 *p_uuid,u8 *p_info);
 u8  beacon_data_init_uri(beacon_str *p_str ,u8 *p_uuid,u8 *p_info,u8 *p_hash);

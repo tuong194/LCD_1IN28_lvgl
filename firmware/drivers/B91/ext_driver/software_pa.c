@@ -27,6 +27,11 @@
 
 #define USE_SOFTWARE_PA		0
 
+#if (PA_ENABLE && (0 == USE_SOFTWARE_PA))
+STATIC_ASSERT(((u32)PA_RXEN_PIN==(u32)RF_RFFE_RX_PB1)||((u32)PA_RXEN_PIN==(u32)RF_RFFE_RX_PD6)||((u32)PA_RXEN_PIN==(u32)RF_RFFE_RX_PE4));
+STATIC_ASSERT(((u32)PA_TXEN_PIN==(u32)RF_RFFE_TX_PB0)||((u32)PA_TXEN_PIN==(u32)RF_RFFE_TX_PB6)||((u32)PA_TXEN_PIN==(u32)RF_RFFE_TX_PD7)||((u32)PA_TXEN_PIN==(u32)RF_RFFE_TX_PE5));
+#endif
+
 _attribute_data_retention_	rf_pa_callback_t  blc_rf_pa_cb = 0;
 
 _attribute_ram_code_

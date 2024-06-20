@@ -45,8 +45,10 @@ extern "C" {
 //////////////// SMP SETTING  //////////////////////////////
 #define BLE_SECURITY_ENABLE 			   	0
 //////////////////board sel/////////////////////////////////////
-#define PCBA_ADK80D_C1T213A20_V13          	1
-#define PCBA_ADK80D_C1T213A16_V13          	2
+#define PCBA_ADK80D_C1T213A20_V13          	1	// development board
+#define PCBA_C1T213A16_V13_PA_DONGLE 		2	// PA dongle
+#define PCBA_C1T213A3_V11_DONGLE			3 	// dongle without PA
+#define PCBA_C1T216A20_V1_2                 4	//  without SWS for this PCBA.
 
 #ifndef PCBA_B91_SEL // user can define in user_app_config.h
 #define PCBA_B91_SEL			PCBA_ADK80D_C1T213A20_V13
@@ -80,6 +82,8 @@ extern "C" {
 #endif
 #endif
 
+#define MESH_FLASH_PROTECTION_EN		0
+
 //////////// product  Information  //////////////////////////////
 #define ID_VENDOR				0x248a			// for report
 #define ID_PRODUCT_BASE			0x880C
@@ -112,8 +116,9 @@ extern "C" {
 #endif 
 
 #if (HCI_ACCESS==HCI_USE_UART)
-#define UART_TX_PIN		UART1_TX_PE0
-#define UART_RX_PIN		UART1_RX_PE2
+#define UART_TX_PIN				UART0_TX_PB2
+#define UART_RX_PIN				UART0_RX_PB3
+#define UART_DMA_BAUDRATE		115200
 #endif
 #endif
 
@@ -266,13 +271,13 @@ extern "C" {
 
 //---------------  Button 
 #if (PCBA_B91_SEL == PCBA_ADK80D_C1T213A20_V13)
+// button
 #define PULL_WAKEUP_SRC_PC2     PM_PIN_PULLUP_1M	//btn
 #define PULL_WAKEUP_SRC_PC0     PM_PIN_PULLUP_1M	//btn
 #define PC2_INPUT_ENABLE		1
 #define PC0_INPUT_ENABLE		1
 #define	SW1_GPIO				GPIO_PC0			// PCB mark SW4 // TL_Key2 
 #define	SW2_GPIO				GPIO_PC2			// PCB mark SW2 // TL_Key1
-
 
 #define PULL_WAKEUP_SRC_PC3     PM_PIN_PULLDOWN_100K	//btn	// TL_Key3 // change key matrix to button
 #define PULL_WAKEUP_SRC_PC1     PM_PIN_UP_DOWN_FLOAT	//btn	// TL_Key4 // change key matrix to button
@@ -286,8 +291,24 @@ extern "C" {
 #define PULL_WAKEUP_SRC_PB1     PM_PIN_PULLUP_1M	//btn
 #define PB2_INPUT_ENABLE		1
 #define PB1_INPUT_ENABLE		1
-#define	SW1_GPIO				GPIO_PB1			// PCB mark SW1 // TL_Key2 
-#define	SW2_GPIO				GPIO_PB2			// PCB mark SW2 // TL_Key1
+#define	SW1_GPIO				GPIO_PB1			// PCB mark SW1
+#define	SW2_GPIO				GPIO_PB2			// PCB mark SW2
+#elif (PCBA_B91_SEL == PCBA_C1T213A3_V11_DONGLE)
+#define PULL_WAKEUP_SRC_PB2     PM_PIN_PULLUP_1M	//btn
+#define PULL_WAKEUP_SRC_PB3     PM_PIN_PULLUP_1M	//btn
+#define PB2_INPUT_ENABLE		1
+#define PB3_INPUT_ENABLE		1
+#define	SW1_GPIO				GPIO_PB3			// PCB mark SW7
+#define	SW2_GPIO				GPIO_PB2			// PCB mark SW2
+#elif (PCBA_B91_SEL == PCBA_C1T216A20_V1_2)
+#define PULL_WAKEUP_SRC_PC2     PM_PIN_PULLUP_1M	//btn
+#define PULL_WAKEUP_SRC_PC0     PM_PIN_PULLUP_1M	//btn
+#define PC2_INPUT_ENABLE		1
+#define PC0_INPUT_ENABLE		1
+#define	SW1_GPIO				GPIO_PC0			// PCB mark SW4 // TL_Key2 
+#define	SW2_GPIO				GPIO_PC2			// PCB mark SW2 // TL_Key1
+#define PULL_WAKEUP_SRC_PC3     PM_PIN_PULLDOWN_100K	//btn	// TL_Key3 // change key matrix to button
+#define PULL_WAKEUP_SRC_PC1     PM_PIN_UP_DOWN_FLOAT	//btn	// TL_Key4 // change key matrix to button
 #endif
 
 #define XIAOMI_MODULE_ENABLE	MI_API_ENABLE
@@ -299,11 +320,21 @@ extern "C" {
 #define PWM_G       PWM_PWM1_PB5	//green
 #define PWM_B       PWM_PWM0_PB4	//blue
 #define PWM_W       PWM_PWM5_PB0	//white // GPIO_PB6 is not PWM IO // please connect TL_PB0 to LED_W for J34 from C1T213A20_V1_3.pdf.
-#elif(PCBA_B91_SEL == PCBA_ADK80D_C1T213A16_V13)
+#elif(PCBA_B91_SEL == PCBA_C1T213A16_V13_PA_DONGLE)
 #define PWM_R       PWM_PWM0_PB4	//red
 #define PWM_G       PWM_PWM5_PB0	//green
 #define PWM_B       PWM_PWM2_PB7	//blue
 #define PWM_W       PWM_PWM1_PB5	//white
+#elif(PCBA_B91_SEL == PCBA_C1T213A3_V11_DONGLE)
+#define PWM_R       PWM_PWM0_PB4	//red
+#define PWM_G       PWM_PWM5_PB0	//green
+#define PWM_B       PWM_PWM2_PB7	//blue
+#define PWM_W       PWM_PWM1_PB5	//white
+#elif(PCBA_B91_SEL == PCBA_C1T216A20_V1_2)
+#define PWM_R       PWM_PWM3_PB1	//red
+#define PWM_G       PWM_PWM1_PB5	//green
+#define PWM_B       PWM_PWM5_PB0	//blue
+#define PWM_W       GPIO_PB6		//white // TODO: PB6 is not PWM.
 #endif
 
 #define PWM_FUNC_R  0  // no use, just for compile

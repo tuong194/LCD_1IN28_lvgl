@@ -28,6 +28,8 @@
 #include "vendor/common/mesh_node.h"
 #include "proj_lib/sig_mesh/app_mesh.h"
 #include "proj_lib/sig_mesh/Test_case.h"
+#include "gw_node_info.h"
+
 #define PB_GATT_ENABLE 1
 
 extern u8 blt_state;
@@ -396,46 +398,9 @@ typedef  enum{
 	CANNOT_ASSGIN_ADDR,
 	INVALID_DATA_PROV,
 }TRANS_FAIL_CODE_ENUM;
-#define ELE_LIGHT_MODEL_SIZE  (380-12)	
- typedef struct{
-	u8 nums;
-	u8 numv;
-	u8 id[ELE_LIGHT_MODEL_SIZE];
-}mesh_element_model_id;
-
-typedef struct{
-    u16 len_cps;
-    #if 1   // must same with page0_local_t from start to numv
-    mesh_page0_head_t page0_head;
-    u16 local;
-    mesh_element_model_id model_id;
-    #endif
-}VC_node_cps_t;
 
 #define MODEL_NOT_FOUND         (0xff)
 
-#if DONGLE_PROVISION_EN&&!WIN32
-typedef struct{
-    u16 node_adr;    // primary address
-    u8 element_cnt;
-    u8 rsv;
-    u8 dev_key[16];
-	#if MD_REMOTE_PROV
-	u8 dev_key_candi[16];
-	#endif
-}VC_node_info_t;
-#else
-typedef struct{
-    u16 node_adr;    // primary address
-    u8 element_cnt;
-    u8 rsv;
-    u8 dev_key[16];
-    VC_node_cps_t cps;
-	#if WIN32
-	u8 dev_key_candi[16];
-	#endif
-}VC_node_info_t;    // size is 404(0x194)
-#endif
 typedef struct{
 	VC_node_info_t node_info[MESH_NODE_MAX_NUM];
 	mesh_key_t mesh_key;
@@ -538,13 +503,13 @@ typedef  enum{
 
 typedef struct{
 	u8  net_work_key[16];
-	u16  key_index;
+	u16  key_index;			// little endian
 	union{
 		mesh_ctl_fri_update_flag_t prov_flags;
 		u8  flags;
 	};
-	u8  iv_index[4];
-	u16  unicast_address;
+	u8  iv_index[4]; 		// big endian
+	u16  unicast_address;	// little endian
 }provison_net_info_str;
 
 typedef struct{
@@ -552,6 +517,12 @@ typedef struct{
 	u8 app_key[16];
 }provision_appkey_t;
 
+
+typedef struct{
+	provison_net_info_str provision_data;
+	provision_appkey_t appkey;
+	u16 alloc_adr;
+}provision_primary_mesh_info_t;
 
 typedef struct{
     u32 link_id;
@@ -771,7 +742,6 @@ extern _align_4_ fast_prov_par_t fast_prov;
 #define MESH_PRO_MAX_LENG 31
 
 #define MAX_RETRY_INTERVAL	1000*1000
-extern _align_4_ VC_node_info_t VC_node_info[MESH_NODE_MAX_NUM];
 
 #define PROV_VAR_UION_EN    (FEATURE_LOWPOWER_EN) // can't not change
 
