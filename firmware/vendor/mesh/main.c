@@ -42,13 +42,16 @@
 #include "../tuong/LED_LC8823.h"
 
 
-#define ENCODER1 GPIO_PE7
-#define ENCODER2 GPIO_PE6
 
+
+ _Bool ec1;
+static _Bool ec1_temp = 0, ec2_temp = 0;
+
+int lastEncoded;
 int encoder_value1;
 int encoder_value2;
 int sub_encoder = 0;
-u8 check_encoder_r_l = 0;
+u8 check_encoder_r_l;
 
 u8 buff_test[8];
 
@@ -132,15 +135,18 @@ _attribute_ram_code_sec_noinline_ void gpio_irq_handler(void)
 
 _attribute_ram_code_sec_noinline_ void gpio_risc0_irq_handler(void)
 {
-	if(!gpio_read(ENCODER2)){
-		//encoder_value1 --;
-		check_encoder_r_l = 1;
 
-	}else{
-		//encoder_value1 ++;
-		check_encoder_r_l = 2;
+//	if(ec1 != gpio_read(ENCODER1)){
+//		if(gpio_read(ENCODER2) == 0){
+//			encoder_value1 --;
+//
+//		}else if(gpio_read(ENCODER2) == 1){
+//			encoder_value1 ++;
+//		}
+//		ec1 = gpio_read(ENCODER1);
+//		ec2 = gpio_read(ENCODER2);
+//	}
 
-	}
 
 	gpio_irq_risc0_cnt++;
 	gpio_clr_irq_status(FLD_GPIO_IRQ_GPIO2RISC0_CLR);
@@ -148,6 +154,19 @@ _attribute_ram_code_sec_noinline_ void gpio_risc0_irq_handler(void)
 
 _attribute_ram_code_sec_noinline_ void gpio_risc1_irq_handler(void)
 {
+
+//	if(ec2 != gpio_read(ENCODER2)){
+//		if(gpio_read(ENCODER1) == 0){
+//			encoder_value1 --;
+//
+//		}else if(gpio_read(ENCODER1) == 1){
+//			encoder_value1 ++;
+//		}
+//		ec1 = gpio_read(ENCODER1);
+//		ec2 = gpio_read(ENCODER2);
+//	}
+
+
 	gpio_irq_risc1_cnt++;
 	gpio_clr_irq_status(FLD_GPIO_IRQ_GPIO2RISC1_CLR);
 }
@@ -247,6 +266,7 @@ void uart1_irq_handler(void)
 #endif
 }
 
+
 FLASH_ADDRESS_DEFINE;
 #if(MCU_CORE_TYPE == MCU_CORE_8269)
 int main (void) {
@@ -341,14 +361,17 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		uart_set_pin(UART0_TX_PD2,UART0_RX_PD3);
 
 
+
 		gpio_set_func(ENCODER1,AS_GPIO);
 		gpio_input_en(ENCODER1);
-		gpio_set_interrupt_init(ENCODER1,GPIO_PIN_PULLDOWN_100K, INTR_RISING_EDGE, IRQ26_GPIO2RISC0 );
+		gpio_set_up_down_res(ENCODER1,GPIO_PIN_UP_DOWN_FLOAT);
+//		gpio_set_interrupt_init(ENCODER1,GPIO_PIN_UP_DOWN_FLOAT, INTR_RISING_EDGE, IRQ26_GPIO2RISC0 );
 
 
 		gpio_set_func(ENCODER2,AS_GPIO);
 		gpio_input_en(ENCODER2);
-		gpio_set_up_down_res(ENCODER2,GPIO_PIN_PULLDOWN_100K);
+		gpio_set_up_down_res(ENCODER2,GPIO_PIN_UP_DOWN_FLOAT);
+//		gpio_set_interrupt_init(ENCODER2,GPIO_PIN_UP_DOWN_FLOAT, INTR_FALLING_EDGE, IRQ27_GPIO2RISC1 );
 
 
 		lv_init();
@@ -366,8 +389,11 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		Blink_20_Led_Green();
 		Blink_20_Led_Blue();
 		Blink_20_Led_Red();
+		On_Off_Led_SW(ON_LED_SW1,ON_LED_SW2,ON_LED_SW3,ON_LED_SW4);
 
-		encoder_value1=encoder_value2=1000;
+		ec1 = gpio_read(ENCODER1);
+
+		encoder_value1=encoder_value2=10;
 
 
 	}
@@ -385,17 +411,40 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 
 		lv_timer_handler();
 
-		if(check_encoder_r_l != 0){
-			uart_send_byte(UART0, check_encoder_r_l);
-			check_encoder_r_l= 0;
-		}
-		//		check_OTA();
-		//		check_provision();
-		displayClock();
-		check_Scene();
-		read_sw();
-		//Encoder_Control();
 
+		ec1_temp = gpio_read(ENCODER1);
+		ec2_temp = gpio_read(ENCODER2);
+		if(ec1 != ec1_temp)
+		{
+			if(ec1_temp ^ ec2_temp)
+			{
+				//func_led_l();
+				encoder_value1 -- ;
+				if(encoder_value1 <= 0 || encoder_value1 >= 100){
+					encoder_value1 = 0;
+				}
+				sprintf(buff_test, "%d\n",encoder_value1);
+				uart_send(UART0,buff_test,6);
+				check_encoder_r_l = 1;
+
+			} else {
+				//func_led_r();
+				encoder_value1 ++ ;
+				if(encoder_value1 >= 100) encoder_value1 = 100;
+				sprintf(buff_test, "%d\n",encoder_value1);
+				uart_send(UART0,buff_test,6);
+				check_encoder_r_l = 2;
+			}
+
+//			ec1 = gpio_read(ENCODER1);
+		}
+
+//		check_OTA();
+//		check_provision();
+//		displayClock();
+//		check_Scene();
+		read_sw();
+		Encoder_Control();
 
 	}
 	return 0;

@@ -30,6 +30,8 @@
 #define MODE_CTT_SET 1
 #define MODE_RGB_SET 2
 
+#define ENCODER1 GPIO_PE7
+#define ENCODER2 GPIO_PE6
 
 u8 flag_flash;
 

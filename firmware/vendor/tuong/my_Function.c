@@ -20,6 +20,14 @@ extern int sub_encoder;
 
 extern u8 get_ota_check_type();
 extern int access_cmd_set_light_hsl(u16 adr, u8 rsp_max, u16 lightness, u16 hue, u16 sat, int ack, transition_par_t *trs_par);
+extern  _Bool ec1;
+extern u8 check_encoder_r_l;
+
+u8 stt_sw1;
+u8 stt_sw2;
+u8 stt_sw3;
+u8 stt_sw4;
+
 
 u8 kick_out_flag; u32 time_out_kick_out;
 u8 check_press;
@@ -320,6 +328,8 @@ void read_sw(void){
 			timeKickout = pm_get_32k_tick();
 		}
 	}else if(swx == '4'){
+		stt_sw4 = !stt_sw4;
+		On_Off_Led_SW(stt_sw1, stt_sw2, stt_sw3, stt_sw4);
 		if(checkScene == 1){
 			if(mode == MODE_DIM_SET){
 				dim_set--;
@@ -359,6 +369,8 @@ void read_sw(void){
 		}
 		Write_Data_Flash();
 	}else if(swx == '3'){
+		stt_sw3 = !stt_sw3;
+		On_Off_Led_SW(stt_sw1, stt_sw2, stt_sw3, stt_sw4);
 		if(checkScene == 1){
 			if(mode == MODE_DIM_SET){
 				dim_set++;
@@ -392,7 +404,8 @@ void read_sw(void){
 		Write_Data_Flash();
 	}
 	else if(swx == '2'){
-
+		stt_sw2 = !stt_sw2;
+		On_Off_Led_SW(stt_sw1, stt_sw2, stt_sw3, stt_sw4);
 		checkScene = 0;
 		ui_Screen2_screen_init();
 		lv_disp_load_scr(ui_Screen2);
@@ -400,10 +413,13 @@ void read_sw(void){
 		//Set_RGB();
 	}
 	else if(swx == '1'){
+		stt_sw1 = !stt_sw1;
+		On_Off_Led_SW(stt_sw1, stt_sw2, stt_sw3, stt_sw4);
 		checkScene = 1;
 		mode++;
 		mode %= 3;
 		if(mode == MODE_DIM_SET){
+			encoder_value1 = dim_set;
 			ui_Screen1_screen_init();
 			lv_disp_load_scr(ui_Screen1);
 			lv_label_set_text(ui_Label1, "dim");
@@ -411,6 +427,7 @@ void read_sw(void){
 			access_set_lum(LED_ADDR,2,dim_set,0);
 
 		}if(mode == MODE_CTT_SET){
+			encoder_value1 = ctt_set;
 			ui_Screen1_screen_init();
 			lv_disp_load_scr(ui_Screen1);
 			lv_label_set_text(ui_Label1, "ctt");
@@ -418,6 +435,7 @@ void read_sw(void){
 			access_cmd_set_light_ctl_temp_100(LED_ADDR,2,ctt_set,0);
 
 		}if(mode == MODE_RGB_SET){
+			encoder_value1 = hsvH;
 			ui_Screen3_screen_init();
 			lv_disp_load_scr(ui_Screen3);
 			set_RGB_panel(hsvH);
@@ -463,7 +481,7 @@ void Read_Data_Flash(void){
 	//uart_send_byte(UART0, buf[0]);
 }
 
-void Encoder_Control(void){
+void Encoder_Control1(void){
 	if(checkScene == 1){
 		if(encoder_value1 > encoder_value2){
 				sub_encoder = encoder_value1 - encoder_value2;
@@ -492,8 +510,9 @@ void Encoder_Control(void){
 						Set_RGB();
 					}
 
+					encoder_value2 = encoder_value1;
+					//func_led_r();
 
-				encoder_value2 = encoder_value1;
 				Write_Data_Flash();
 			}
 
@@ -503,7 +522,6 @@ void Encoder_Control(void){
 					if(mode == MODE_DIM_SET){
 						dim_set-=sub_encoder;
 						if(dim_set >100) dim_set = 0;
-
 						lv_arc_set_value(ui_Arc1, dim_set);
 						sprintf(buff,"%d",dim_set);
 						lv_label_set_text(ui_Label1, buff);
@@ -524,15 +542,55 @@ void Encoder_Control(void){
 						set_RGB_panel(hsvH);
 						Set_RGB();
 					}
+					encoder_value2 = encoder_value1;
+					//func_led_l();
 
-				encoder_value2 = encoder_value1;
+
 				Write_Data_Flash();
 			}
+		ec1 = gpio_read(ENCODER1);
 	}
 
 }
 
+void Encoder_Control(void){
+	if(checkScene == 1 ){
+		if(check_encoder_r_l !=0){
+			if(mode == MODE_DIM_SET){
+				dim_set = encoder_value1;
 
+				lv_arc_set_value(ui_Arc1, dim_set);
+				sprintf(buff,"%d",dim_set);
+				lv_label_set_text(ui_Label1, buff);
+				access_set_lum(LED_ADDR,2,dim_set,0);
+
+			}else if(mode == MODE_CTT_SET){
+				ctt_set = encoder_value1;
+
+				lv_arc_set_value(ui_Arc1, ctt_set);
+				sprintf(buff,"%d",ctt_set);
+				lv_label_set_text(ui_Label1, buff);
+				access_cmd_set_light_ctl_temp_100(LED_ADDR,2,ctt_set,0);
+			}else if(mode == MODE_RGB_SET){
+				hsvH = encoder_value1;
+
+				checkHSV();
+				set_RGB_panel(hsvH);
+				Set_RGB();
+			}
+			if(check_encoder_r_l == 1){
+				func_led_l();
+			}else if(check_encoder_r_l == 2){
+				func_led_r();
+			}
+			check_encoder_r_l =0;
+
+			Write_Data_Flash();
+			ec1 = gpio_read(ENCODER1);
+
+		}
+	}
+}
 
 
 

@@ -58,6 +58,8 @@ typedef enum{
 	I2C_GPIO_SDA_C2		= GPIO_PC2,
 	I2C_GPIO_SDA_E2		= GPIO_PE2,
 	I2C_GPIO_SDA_E3		= GPIO_PE3,
+
+	I2C_GPIO_SDA_A5		= GPIO_PA5,  // T_NOTE: edit sda
 }i2c_sda_pin_e;
 
 
@@ -66,6 +68,8 @@ typedef enum{
 	I2C_GPIO_SCL_C1		= GPIO_PC1,
 	I2C_GPIO_SCL_E0		= GPIO_PE0,
 	I2C_GPIO_SCL_E1		= GPIO_PE1,
+
+	I2C_GPIO_SCL_A6     = GPIO_PA6,   //T_NOTE: edit scl
 }i2c_scl_pin_e;
 
 
