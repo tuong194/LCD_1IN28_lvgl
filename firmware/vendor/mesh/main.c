@@ -42,9 +42,10 @@
 #include "../tuong/LED_LC8823.h"
 
 
-
+unsigned short div; unsigned char bwpc;
 
  _Bool ec1;
+ _Bool ec2;
 static _Bool ec1_temp = 0, ec2_temp = 0;
 
 int lastEncoded;
@@ -135,17 +136,20 @@ _attribute_ram_code_sec_noinline_ void gpio_irq_handler(void)
 
 _attribute_ram_code_sec_noinline_ void gpio_risc0_irq_handler(void)
 {
+	if(ec1 != gpio_read(ENCODER1)){
+		if(gpio_read(ENCODER2) == 0){
+			encoder_value1 --;
+			if(encoder_value1 <= 0 || encoder_value1 >= 100){
+				encoder_value1 = 0;
+			}
+			check_encoder_r_l = 1;
 
-//	if(ec1 != gpio_read(ENCODER1)){
-//		if(gpio_read(ENCODER2) == 0){
-//			encoder_value1 --;
-//
-//		}else if(gpio_read(ENCODER2) == 1){
-//			encoder_value1 ++;
-//		}
-//		ec1 = gpio_read(ENCODER1);
-//		ec2 = gpio_read(ENCODER2);
-//	}
+		}else if(gpio_read(ENCODER2) == 1){
+			encoder_value1 ++;
+			if(encoder_value1 >= 100) encoder_value1 = 100;
+			check_encoder_r_l = 2;
+		}
+	}
 
 
 	gpio_irq_risc0_cnt++;
@@ -155,16 +159,20 @@ _attribute_ram_code_sec_noinline_ void gpio_risc0_irq_handler(void)
 _attribute_ram_code_sec_noinline_ void gpio_risc1_irq_handler(void)
 {
 
-//	if(ec2 != gpio_read(ENCODER2)){
-//		if(gpio_read(ENCODER1) == 0){
-//			encoder_value1 --;
-//
-//		}else if(gpio_read(ENCODER1) == 1){
-//			encoder_value1 ++;
-//		}
-//		ec1 = gpio_read(ENCODER1);
-//		ec2 = gpio_read(ENCODER2);
-//	}
+	if(ec2 != gpio_read(ENCODER2)){
+		if(gpio_read(ENCODER1) == 0){
+			encoder_value1 --;
+			if(encoder_value1 <= 0 || encoder_value1 >= 100){
+				encoder_value1 = 0;
+			}
+			check_encoder_r_l = 1;
+
+		}else if(gpio_read(ENCODER1) == 1){
+			encoder_value1 ++;
+			if(encoder_value1 >= 100) encoder_value1 = 100;
+			check_encoder_r_l = 2;
+		}
+	}
 
 
 	gpio_irq_risc1_cnt++;
@@ -309,7 +317,7 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 #elif(MCU_CORE_TYPE == MCU_CORE_8278)
 	cpu_wakeup_init(LDO_MODE,EXTERNAL_XTAL_24M);
 #elif(MCU_CORE_TYPE == MCU_CORE_9518)
-	sys_init(DCDC_1P4_LDO_1P8,VBAT_MAX_VALUE_GREATER_THAN_3V6); // need to confirm if want to use DCDC.
+	sys_init(LDO_1P4_LDO_1P8,VBAT_MAX_VALUE_GREATER_THAN_3V6); // need to confirm if want to use DCDC.
 #endif
 
 	/* detect if MCU is wake_up from deep retention mode */
@@ -357,21 +365,28 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		SPI_Config();
 		PWM_Confing();
 
-		uart_init(UART0,12,15,UART_PARITY_NONE,UART_STOP_BIT_ONE); // sysclock = 24M
+
+		uart_cal_div_and_bwpc(115200,sys_clk.pclk*1000000, &div, &bwpc);
+		uart_init(UART0,div,bwpc,UART_PARITY_NONE,UART_PARITY_NONE);
 		uart_set_pin(UART0_TX_PD2,UART0_RX_PD3);
+
+
+
+//		uart_init(UART0,12,15,UART_PARITY_NONE,UART_STOP_BIT_ONE); // sysclock = 24M
+//		uart_set_pin(UART0_TX_PD2,UART0_RX_PD3);
 
 
 
 		gpio_set_func(ENCODER1,AS_GPIO);
 		gpio_input_en(ENCODER1);
-		gpio_set_up_down_res(ENCODER1,GPIO_PIN_UP_DOWN_FLOAT);
-//		gpio_set_interrupt_init(ENCODER1,GPIO_PIN_UP_DOWN_FLOAT, INTR_RISING_EDGE, IRQ26_GPIO2RISC0 );
+//		gpio_set_up_down_res(ENCODER1,GPIO_PIN_UP_DOWN_FLOAT);
+		gpio_set_interrupt_init(ENCODER1,GPIO_PIN_UP_DOWN_FLOAT, INTR_RISING_EDGE, IRQ26_GPIO2RISC0 );
 
 
 		gpio_set_func(ENCODER2,AS_GPIO);
 		gpio_input_en(ENCODER2);
-		gpio_set_up_down_res(ENCODER2,GPIO_PIN_UP_DOWN_FLOAT);
-//		gpio_set_interrupt_init(ENCODER2,GPIO_PIN_UP_DOWN_FLOAT, INTR_FALLING_EDGE, IRQ27_GPIO2RISC1 );
+//		gpio_set_up_down_res(ENCODER2,GPIO_PIN_UP_DOWN_FLOAT);
+		gpio_set_interrupt_init(ENCODER2,GPIO_PIN_UP_DOWN_FLOAT, INTR_FALLING_EDGE, IRQ27_GPIO2RISC1 );
 
 
 		lv_init();
@@ -392,9 +407,9 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		On_Off_Led_SW(ON_LED_SW1,ON_LED_SW2,ON_LED_SW3,ON_LED_SW4);
 
 		ec1 = gpio_read(ENCODER1);
+		ec2 = gpio_read(ENCODER2);
 
 		encoder_value1=encoder_value2=10;
-
 
 	}
 
@@ -411,40 +426,40 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 
 		lv_timer_handler();
 
+//		ec1_temp = gpio_read(ENCODER1);
+//		ec2_temp = gpio_read(ENCODER2);
+//		if(ec1 != ec1_temp)
+//		{
+//			if(ec1_temp ^ ec2_temp)
+//			{
+//				//func_led_l();
+//				encoder_value1 -- ;
+//				if(encoder_value1 <= 0 || encoder_value1 >= 100){
+//					encoder_value1 = 0;
+//				}
+//				sprintf(buff_test, "%d\n",encoder_value1);
+//				uart_send(UART0,buff_test,6);
+//				check_encoder_r_l = 1;
+//
+//			} else {
+//				//func_led_r();
+//				encoder_value1 ++ ;
+//				if(encoder_value1 >= 100) encoder_value1 = 100;
+//				sprintf(buff_test, "%d\n",encoder_value1);
+//				uart_send(UART0,buff_test,6);
+//				check_encoder_r_l = 2;
+//			}
+//			//ec1 = gpio_read(ENCODER1);
+//		}
 
-		ec1_temp = gpio_read(ENCODER1);
-		ec2_temp = gpio_read(ENCODER2);
-		if(ec1 != ec1_temp)
-		{
-			if(ec1_temp ^ ec2_temp)
-			{
-				//func_led_l();
-				encoder_value1 -- ;
-				if(encoder_value1 <= 0 || encoder_value1 >= 100){
-					encoder_value1 = 0;
-				}
-				sprintf(buff_test, "%d\n",encoder_value1);
-				uart_send(UART0,buff_test,6);
-				check_encoder_r_l = 1;
 
-			} else {
-				//func_led_r();
-				encoder_value1 ++ ;
-				if(encoder_value1 >= 100) encoder_value1 = 100;
-				sprintf(buff_test, "%d\n",encoder_value1);
-				uart_send(UART0,buff_test,6);
-				check_encoder_r_l = 2;
-			}
-
-//			ec1 = gpio_read(ENCODER1);
-		}
-
-//		check_OTA();
-//		check_provision();
-//		displayClock();
-//		check_Scene();
+		check_OTA();
+		check_provision();
+		displayClock();
+		check_Scene();
 		read_sw();
 		Encoder_Control();
+
 
 	}
 	return 0;

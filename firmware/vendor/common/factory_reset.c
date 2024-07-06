@@ -28,6 +28,9 @@
 #include "stack/ble/ble.h"
 #include "app_beacon.h"
 
+#include "../tuong/my_Function.h"
+#include "../tuong/LED_LC8823.h"
+
 //FLASH_ADDRESS_EXTERN;
 
 //////////////////Factory Reset///////////////////////////////////////////////////////////////////////
@@ -516,6 +519,11 @@ void kick_out(int led_en){
 #endif
 #else
 	factory_reset();
+
+	Blink_20_Led_Red();
+	Blink_20_Led_Red();
+	Blink_20_Led_Red();
+
     #if !WIN32
     if(led_en){
         show_factory_reset();

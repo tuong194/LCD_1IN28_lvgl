@@ -14,6 +14,7 @@
 extern u8 value_start;
 extern u8 ui_ota_is_working;
 
+extern u8 buff_test[8];
 extern int encoder_value1;
 extern int encoder_value2;
 extern int sub_encoder;
@@ -21,6 +22,7 @@ extern int sub_encoder;
 extern u8 get_ota_check_type();
 extern int access_cmd_set_light_hsl(u16 adr, u8 rsp_max, u16 lightness, u16 hue, u16 sat, int ack, transition_par_t *trs_par);
 extern  _Bool ec1;
+extern  _Bool ec2;
 extern u8 check_encoder_r_l;
 
 u8 stt_sw1;
@@ -165,7 +167,8 @@ void check_provision(void){
 		}else if(get_provision_state() == STATE_DEV_PROVED){
 			if(checkPro == 1){
 //				Relay_On_Off(stateLed2);
-//				RD_Send_Relay_Stt(2,stateLed2);
+
+				//checkPro = 0;
 				timeOut = pm_get_32k_tick();
 			}
 			/**********check Secure************/
@@ -175,15 +178,17 @@ void check_provision(void){
 							kick_out(0);
 						}
 					}
-			//		if(checkProvision == 2){
-			//			if(pm_get_32k_tick() - timeOut >= 32000*5){
-			//				uart_send_byte(UART0,'0');
-			//				kick_out(0);
-			//			}
-			//		}
+					if(checkProvision == 2){ // secure error
+						if(pm_get_32k_tick() - timeOut >= 32000*5){
+							uart_send_byte(UART0,'2');
+							kick_out(0);
+						}
+					}
 		}
 	}else if(checkProvision == 1){
+
 		if(checkSuccess == 1){
+			uart_send_byte(UART0, '1');
 			Write_Data_Flash();
 			//uart_send_byte(UART0,'1');
 			checkSuccess = 0;
@@ -243,11 +248,11 @@ void check_Scene(void){
 		}
 }
 void set_RGB_panel(u16 hsvH){
-	lv_img_set_angle(ui_Image3, hsvH*10);
-	if(hsvH<=180){
-		color = lv_color_hsv_to_rgb(180-hsvH,100,100); //H,S,V
+	lv_img_set_angle(ui_Image3, hsvH*36);  // 3.6 degree = 1
+	if(hsvH<=50){
+		color = lv_color_hsv_to_rgb(180-hsvH*3.6,100,100); //H,S,V
 	}else{
-		color = lv_color_hsv_to_rgb(540-hsvH,100,100);
+		color = lv_color_hsv_to_rgb(540-hsvH*3.6,100,100);
 	}
 	lv_obj_set_style_bg_color(ui_Panel2, color, LV_PART_MAIN | LV_STATE_DEFAULT);
 }
@@ -255,10 +260,15 @@ void Set_RGB(void){
 	transition_par_t trs_par = {0};
 	trs_par.transit_t = 10;
 	u16 hue;
-	if(hsvH<=180){
-		hue = (180-hsvH)*65535/360;
+//	if(hsvH<=180){
+//		hue = (180-hsvH)*65535/360;
+//	}else{
+//		hue = (540-hsvH)*65535/360;
+//	}
+	if(hsvH<=50){
+		hue = (50-hsvH)*65535/100;
 	}else{
-		hue = (540-hsvH)*65535/360;
+		hue = (150-hsvH)*65535/100;
 	}
 	u16 lightness = dim_set*32767/100; // 50%
 	u16 sat = 0xffff;
@@ -435,6 +445,7 @@ void read_sw(void){
 			access_cmd_set_light_ctl_temp_100(LED_ADDR,2,ctt_set,0);
 
 		}if(mode == MODE_RGB_SET){
+
 			encoder_value1 = hsvH;
 			ui_Screen3_screen_init();
 			lv_disp_load_scr(ui_Screen3);
@@ -572,23 +583,32 @@ void Encoder_Control(void){
 				lv_label_set_text(ui_Label1, buff);
 				access_cmd_set_light_ctl_temp_100(LED_ADDR,2,ctt_set,0);
 			}else if(mode == MODE_RGB_SET){
+				if(check_encoder_r_l == 1 && (hsvH==0 || hsvH >= 100)){
+					encoder_value1 = 99;
+				}else if(check_encoder_r_l == 2 && hsvH >= 99){
+					encoder_value1 = 0;
+				}
 				hsvH = encoder_value1;
 
 				checkHSV();
 				set_RGB_panel(hsvH);
 				Set_RGB();
 			}
-			if(check_encoder_r_l == 1){
-				func_led_l();
-			}else if(check_encoder_r_l == 2){
-				func_led_r();
-			}
-			check_encoder_r_l =0;
 
 			Write_Data_Flash();
-			ec1 = gpio_read(ENCODER1);
-
+			if(check_encoder_r_l == 1){
+				sprintf(buff_test, "%d\n",encoder_value1);
+				uart_send(UART0,buff_test,6);
+				//func_led_l();
+			}else if(check_encoder_r_l == 2){
+				sprintf(buff_test, "%d\n",encoder_value1);
+				uart_send(UART0,buff_test,6);
+				//func_led_r();
+			}
+			check_encoder_r_l =0;
 		}
+		ec1 = gpio_read(ENCODER1);
+		ec2 = gpio_read(ENCODER2);
 	}
 }
 

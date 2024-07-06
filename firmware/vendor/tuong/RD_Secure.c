@@ -49,7 +49,7 @@ unsigned char RD_Secure_AesreCheck(uint8_t key[16], uint8_t mac[6], uint16_t uni
 
 	if(aes_encrypt(&key[0],compareBuff,aesEncrypt)!= 0){
 		//uart_send_byte(UART0,'F');
-		checkProvision=3;
+		checkProvision=5;
 	}
 
 	for(u8 i=0;i< 6;i++){
@@ -88,14 +88,16 @@ void RD_Handle_MessType(uint8_t par[8], uint16_t Gw_Add_Buff)
 	Secure_return = RD_Secure_AesreCheck(&RD_key[0], &tbl_mac[0], ele_adr_primary, &par[2]);
 	if(Secure_return == 1){
 		checkProvision=1;
+		uart_send_byte(UART0, '1');
 
 	}else{
+		uart_send_byte(UART0, '2');
 		checkProvision=2;
 	}
 }
 int RD_Messenger_ProcessCommingProcess_Type(u8 *par, int par_len, mesh_cb_fun_par_t *cb_par){
 
-	uint16_t Gw_Add_Buff =0x00;
+	uint16_t Gw_Add_Buff =0xffff;
 	Gw_Add_Buff = cb_par->adr_src;
 
 	uint16_t header_Buff = 0x0000;
