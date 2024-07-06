@@ -1,0 +1,230 @@
+00000000 T _IRESET_ENTRY	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:320
+00000000 W _ITB_BASE_
+00000000 T _RETENTION_RESET_VMA_START	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:320
+00000000 A __FLASH_512K_ENABLE
+00000000 A __FW_OFFSET
+00000000 A __FW_START_BY_LEGACY_BOOTLOADER_EN
+00000000 A __PM_DEEPSLEEP_RETENTION_ENABLE
+00000000 A __SPEECH_ENABLE
+00000001 A __BOOT_LOADER_EN
+00000001 A __MCU_RUN_SRAM_EN
+00000022 t _ISTART	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:334
+0000002a t _ISWS_USB_DIS	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:342
+00000040 a irqno
+00000088 t _WAKEUP_FLASH	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:396
+000000a2 t _MSPI_WAIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:404
+000000bc t _WAIT_EFUSE_LOAD_FINISH	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:420
+000000c2 t _MULTI_ADDRESS_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:430
+000000d2 t _INO_RET_DATA_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:454
+000000ea t _INO_RET_DATA_INIT_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:458
+000000fc t _INO_RET_BSS_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:467
+00000110 t _INO_RET_BSS_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:471
+0000011c t _IDLM_DATA_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:479
+00000134 t _IDLM_DATA_INIT_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:483
+00000146 t _IDLM_BSS_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:492
+0000015a t _IDLM_BSS_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:496
+00000166 t _IZERO_AES	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:503
+0000017a t _IZERO_AES_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:507
+00000186 t _IFILL_STK	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:528
+00000186 t _IMAIN_FUNC	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:528
+0000019c t _IEND	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:539
+000001a0 T _AES_VMA_END
+000001a0 T _AES_VMA_START
+000001a0 T _RETENTION_RESET_VMA_END
+00000200 T _GLOBAL_VECTORS_DATA_VMA_START
+00000200 T __vectors
+00000302 T _GLOBAL_VECTORS_DATA_VMA_END
+00000308 D _DATA_VMA_START
+00000308 D _RETENTION_DATA_VMA_END
+00000308 D _RETENTION_DATA_VMA_START
+00000308 d adc_vref_cfg	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/adc.c:34
+00000310 d g_pm_early_wakeup_time_us	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:61
+00000318 d g_pm_r_delay_cycle	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:76
+0000031c d sys_clk	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/clock.c:47
+00000322 D _DATA_VMA_END
+00000328 S _BSS_VMA_START
+00000328 s blt_miscParam	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/ext_driver/ext_pm.c:80
+0000032c s boot_load_err.21297
+00000330 s boot_loader_loop_cnt.21302
+00000334 s cpu_sleep_wakeup	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/ext_driver/ext_pm.c:84
+00000338 s g_chip_version	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/sys.c:39
+0000033c s g_plic_preempt_en	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/plic.c:31
+0000033d s g_pm_long_suspend	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:54
+00000340 S g_pm_multi_addr	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:58
+00000344 s g_pm_status_info	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:44
+00000348 s g_pm_tick_32k_calib	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:51
+0000034c s g_pm_tick_32k_cur	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:53
+00000350 s g_pm_tick_cur	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:52
+00000354 s ota_copy_err.21290
+00000358 s pm_tim_recover	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/ext_driver/ext_pm.c:85
+0000035c s trap0_cnt	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/common/chip_adapt_layer/al.c:777
+00000360 s trap1_entry_ra	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/common/chip_adapt_layer/al.c:778
+00000364 s trap2_entry_sp	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/common/chip_adapt_layer/al.c:779
+00000368 s trap3_entry_gp	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/common/chip_adapt_layer/al.c:780
+0000036c s trap4_mcause	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/common/chip_adapt_layer/al.c:781
+00000370 s trap5_mepc	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/common/chip_adapt_layer/al.c:782
+00000374 s trap6_mtvl	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/common/chip_adapt_layer/al.c:783
+00000378 s trap7_mdcause	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/common/chip_adapt_layer/al.c:784
+0000037c s trap8_mscratch	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/common/chip_adapt_layer/al.c:785
+00000380 b pmcd	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:422
+000003b0 B _BSS_VMA_END
+000003b0 T _RAMCODE_VMA_START	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm_32k_rc.c:391
+000003b0 t pm_tim_recover_32k_rc	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm_32k_rc.c:390
+000003e8 t pm_get_32k_rc_calib	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:465
+00000424 t pm_update_32k_rc_sleep_tick	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:434
+00000470 t is_valid_fw_bootloader	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/boot_loader/main.c:158
+0000049c t delay_ms	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/stimer.c:43
+000004c4 t delay_us	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/stimer.c:31
+000004e4 t flash_send_addr	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/flash.c:107
+00000528 t flash_send_cmd	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/flash.c:93
+00000574 t flash_wait_done	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/flash.c:120
+000005bc t clock_set_32k_tick	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/clock.c:204
+0000061c t tlk_mem_set	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../common/tstring.c:110
+00000634 t except_handler	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/common/chip_adapt_layer/al.c:787
+00000688 t clock_get_32k_tick	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/clock.c:242
+000006b8 t plic_exit_critical_sec	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/plic.c:60
+000006f4 t plic_enter_critical_sec	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/plic.c:39
+00000738 t flash_mspi_read_ram.constprop.8	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/flash.c:147
+00000874 t flash_mspi_write_ram.constprop.7	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/flash.c:211
+00000944 t boot_load_with_ota_check	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/boot_loader/main.c:165
+00000b08 D __global_pointer$
+00000b34 t analog_write_reg8	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/analog.c:124
+00000b70 t analog_read_reg8	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/analog.c:106
+00000bb4 t clock_init.constprop.9	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/clock.c:281
+00000cf0 t pm_wait_bbpll_done	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:188
+00000da4 t pm_sleep_start	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm.c:254
+00000f44 t cpu_sleep_wakeup_32k_rc_ram	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm_32k_rc.c:77
+000013c8 t clock_cal_24m_rc	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/clock.c:162
+00001400 A __STACK_INIT_SIZE__
+00001454 t sys_init.constprop.0	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/ext_driver/ext_pm.c:333
+00001688 T main	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/boot_loader/main.c:236
+000017c8 T memset	/cygdrive/c/Andestech/AndeSight_RDS_v323/toolchains/nds32le-elf-mculib-v5f/riscv32-elf/sys-include/string.h:25
+000017e0 T trap_entry	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../common/plic_isr.c:53
+00001830 D _NO_RETENTION_BSS_VMA_END
+00001830 D _NO_RETENTION_BSS_VMA_START
+00001830 D _NO_RETENTION_DATA_VMA_END
+00001830 D _NO_RETENTION_DATA_VMA_START
+00001830 T _RAMCODE_VMA_END
+00001e06 A BIN_SIZE
+00004000 A __FW_RAMCODE_SIZE_MAX
+00020000 A _STACK_TOP
+00080000 D _DLM_BSS_VMA_END
+00080000 D _DLM_BSS_VMA_START
+00080000 D _DLM_DATA_VMA_END
+00080000 D _DLM_DATA_VMA_START
+00080000 d const_sdk_version	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../common/sdk_version.c:38
+00080028 D _end
+20000000 T BIN_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:49
+20000000 A NDS_SAG_LMA_FLASH
+20000000 W _RELAX_END_	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:49
+20000000 T _RESET_ENTRY	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:49
+20000028 t _START	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:81
+20000030 t _SWS_USB_DIS	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:89
+2000008e t _RETENTION_RESET_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:141
+200000a6 t _RETENTION_RESET_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:145
+200000b8 t _GLOBAL_VECTORS_DATA_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:155
+200000d0 t _GLOBAL_VECTORS_DATA_INIT_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:159
+200000e2 t _RETENTION_DATA_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:169
+200000fa t _RETENTION_DATA_INIT_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:173
+2000010c t _RAMCODE_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:183
+20000124 t _RAMCODE_INIT_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:187
+20000136 t _DATA_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:197
+2000014a t _DATA_INIT_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:201
+2000015c t _ZERO_BSS	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:212
+20000170 t _ZERO_BSS_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:216
+2000017c t _NO_RET_DATA_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:224
+20000194 t _NO_RET_DATA_INIT_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:228
+200001a6 t _NO_RET_BSS_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:237
+200001ba t _NO_RET_BSS_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:241
+200001c6 t _DLM_DATA_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:249
+200001de t _DLM_DATA_INIT_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:253
+200001f0 t _DLM_BSS_INIT	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:262
+20000204 t _DLM_BSS_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:266
+20000210 t _ZERO_AES	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:273
+20000224 t _ZERO_AES_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:277
+20000230 t _FILL_STK	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:285
+20000248 t _FILL_STK_BEGIN	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:290
+20000254 t _MAIN_FUNC	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:297
+2000026a t _END	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:308
+20000270 A _RETENTION_RESET_LMA_START
+20000410 A _GLOBAL_VECTORS_DATA_LMA_START
+20000518 A _DATA_LMA_START
+20000518 A _RETENTION_DATA_LMA_START
+20000538 A _RAMCODE_LMA_START
+200019b8 t flash_dread	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/flash.c:326
+200019dc t flash_page_program	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/flash.c:414
+20001a34 t flash_erase_sector	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/flash.c:269
+20001a64 t cpu_sleep_wakeup_32k_rc	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/lib/src/pm_32k_rc.c:380
+20001a80 t crc32_half_cal.constprop.5	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../stack/ble/service/ota/ota.c:79
+20001ab0 t pwm_kick_32k_pad.constprop.2	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/ext_driver/ext_pm.c:144
+20001b18 t analog_read_reg32.constprop.10	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/core.h:102
+20001b5c t pwm_kick_32k_pad_times.constprop.1	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/ext_driver/ext_pm.c:175
+20001bd4 t cpu_wakeup_no_deepretn_back_init	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../drivers/B91/ext_driver/ext_pm.c:262
+20001d88 T default_irq_entry	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq1	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq10	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq11	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq12	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq13	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq14	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq15	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq16	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq17	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq18	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq19	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq2	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq20	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq21	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq22	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq23	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq24	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq25	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq26	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq27	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq28	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq29	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq3	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq30	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq31	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq32	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq33	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq34	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq35	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq36	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq37	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq38	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq39	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq4	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq40	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq41	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq42	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq43	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq44	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq45	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq46	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq47	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq48	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq49	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq5	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq50	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq51	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq52	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq53	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq54	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq55	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq56	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq57	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq58	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq59	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq6	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq60	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq61	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq62	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq63	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq7	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq8	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d88 W entry_irq9	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:547
+20001d8a W trap_handler	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../boot/B91/cstartup_B91.S:552
+20001d90 r crc32_half_tbl	/cygdrive/c/TelinkV323/9218/telink_b91_sig_mesh_sdk-B91_V4.1.0.0_big/firmware/B91_bootloader/../vendor/boot_loader/main.c:82
+20001de0 A _DLM_DATA_LMA_START
+20001de0 A _NO_RETENTION_DATA_LMA_START

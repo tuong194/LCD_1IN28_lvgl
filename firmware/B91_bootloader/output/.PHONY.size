@@ -1,0 +1,2 @@
+   text	   code	 rodata	   data	    bss	    dec	    hex	filename
+   7590	   7526	     64	     64	    136	   7790	   1e6e	B91_bootloader.elf
