@@ -248,11 +248,11 @@ void check_Scene(void){
 		}
 }
 void set_RGB_panel(u16 hsvH){
-	lv_img_set_angle(ui_Image3, hsvH*36);  // 3.6 degree = 1
-	if(hsvH<=50){
-		color = lv_color_hsv_to_rgb(180-hsvH*3.6,100,100); //H,S,V
+	lv_img_set_angle(ui_Image3, hsvH*72);  // 7.2 degree = 1
+	if(hsvH<=25){
+		color = lv_color_hsv_to_rgb(180-hsvH*7.2,100,100); //H,S,V
 	}else{
-		color = lv_color_hsv_to_rgb(540-hsvH*3.6,100,100);
+		color = lv_color_hsv_to_rgb(540-hsvH*7.2,100,100);
 	}
 	lv_obj_set_style_bg_color(ui_Panel2, color, LV_PART_MAIN | LV_STATE_DEFAULT);
 }
@@ -265,10 +265,10 @@ void Set_RGB(void){
 //	}else{
 //		hue = (540-hsvH)*65535/360;
 //	}
-	if(hsvH<=50){
-		hue = (50-hsvH)*65535/100;
+	if(hsvH<=25){
+		hue = (25-hsvH)*65535/50;
 	}else{
-		hue = (150-hsvH)*65535/100;
+		hue = (75-hsvH)*65535/50;
 	}
 	u16 lightness = dim_set*32767/100; // 50%
 	u16 sat = 0xffff;
@@ -340,78 +340,9 @@ void read_sw(void){
 	}else if(swx == '4'){
 		stt_sw4 = !stt_sw4;
 		On_Off_Led_SW(stt_sw1, stt_sw2, stt_sw3, stt_sw4);
-		if(checkScene == 1){
-			if(mode == MODE_DIM_SET){
-				dim_set--;
-				if(dim_set >100) dim_set = 0;
-
-				lv_arc_set_value(ui_Arc1, dim_set);
-				sprintf(buff,"%d",dim_set);
-				lv_label_set_text(ui_Label1, buff);
-				access_set_lum(LED_ADDR,2,dim_set,0);
-
-			}else if(mode == MODE_CTT_SET){
-				ctt_set--;
-				if(ctt_set > 100) ctt_set = 0;
-
-				lv_arc_set_value(ui_Arc1, ctt_set);
-				sprintf(buff,"%d",ctt_set);
-				lv_label_set_text(ui_Label1, buff);
-				access_cmd_set_light_ctl_temp_100(LED_ADDR,2,ctt_set,0);
-			}else if(mode == MODE_RGB_SET){
-				hsvH--;
-				if(hsvH > 360) hsvH = 360;
-				checkHSV();
-				set_RGB_panel(hsvH);
-				Set_RGB();
-			}
-
-		}else if(checkScene == 0){
-			transition_par_t trs_par = {0};
-			trs_par.transit_t = 10;
-			stateLed2 = !stateLed2;
-
-			if(stateLed2){
-				access_cmd_set_lightness(LED_ADDR,2,lum2_lightness(dim_set),0, &trs_par);
-			}else{
-				access_cmd_set_lightness(LED_ADDR,2,0,0, &trs_par);
-			}
-		}
-		Write_Data_Flash();
 	}else if(swx == '3'){
 		stt_sw3 = !stt_sw3;
 		On_Off_Led_SW(stt_sw1, stt_sw2, stt_sw3, stt_sw4);
-		if(checkScene == 1){
-			if(mode == MODE_DIM_SET){
-				dim_set++;
-				if(dim_set > 100) dim_set = 100;
-
-				lv_arc_set_value(ui_Arc1, dim_set);
-				sprintf(buff,"%d",dim_set);
-				lv_label_set_text(ui_Label1, buff);
-				access_set_lum(LED_ADDR,2,dim_set,0);
-
-			}else if(mode == MODE_CTT_SET){
-				ctt_set++;
-				if(ctt_set > 100) ctt_set = 100;
-
-				lv_arc_set_value(ui_Arc1, ctt_set);
-				sprintf(buff,"%d",ctt_set);
-				lv_label_set_text(ui_Label1, buff);
-				access_cmd_set_light_ctl_temp_100(LED_ADDR,2,ctt_set,0);
-			}else if(mode == MODE_RGB_SET){
-				hsvH++;
-				if(hsvH >= 360) hsvH = 0;
-				checkHSV();
-				set_RGB_panel(hsvH);
-				Set_RGB();
-			}
-
-		}else if(checkScene == 0){
-			stateLed1 = !stateLed1;
-
-		}
-		Write_Data_Flash();
 	}
 	else if(swx == '2'){
 		stt_sw2 = !stt_sw2;
@@ -488,7 +419,7 @@ void Read_Data_Flash(void){
 	hsvH1 = buf[5];
 	hsvH2 = buf[6];
 	value_start = buf[7];
-	uart_send_byte(UART0, 'R');
+	//uart_send_byte(UART0, 'R');
 	//uart_send_byte(UART0, buf[0]);
 }
 
@@ -504,7 +435,6 @@ void Encoder_Control1(void){
 						sprintf(buff,"%d",dim_set);
 						lv_label_set_text(ui_Label1, buff);
 						access_set_lum(LED_ADDR,2,dim_set,0);
-
 					}else if(mode == MODE_CTT_SET){
 						ctt_set+=sub_encoder;
 						if(ctt_set > 100) ctt_set = 100;
@@ -583,9 +513,9 @@ void Encoder_Control(void){
 				lv_label_set_text(ui_Label1, buff);
 				access_cmd_set_light_ctl_temp_100(LED_ADDR,2,ctt_set,0);
 			}else if(mode == MODE_RGB_SET){
-				if(check_encoder_r_l == 1 && (hsvH==0 || hsvH >= 100)){
-					encoder_value1 = 99;
-				}else if(check_encoder_r_l == 2 && hsvH >= 99){
+				if(check_encoder_r_l == 1 && (hsvH==0 || hsvH >= 50)){   // unsigned >=0
+					encoder_value1 = 49;
+				}else if(check_encoder_r_l == 2 && hsvH >= 49){
 					encoder_value1 = 0;
 				}
 				hsvH = encoder_value1;
@@ -599,11 +529,11 @@ void Encoder_Control(void){
 			if(check_encoder_r_l == 1){
 				sprintf(buff_test, "%d\n",encoder_value1);
 				uart_send(UART0,buff_test,6);
-				//func_led_l();
+				func_led_l();
 			}else if(check_encoder_r_l == 2){
 				sprintf(buff_test, "%d\n",encoder_value1);
 				uart_send(UART0,buff_test,6);
-				//func_led_r();
+				func_led_r();
 			}
 			check_encoder_r_l =0;
 		}

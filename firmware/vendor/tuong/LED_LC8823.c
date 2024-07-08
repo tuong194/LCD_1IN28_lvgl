@@ -22,12 +22,14 @@ void Config_Pin_Led_Lc8823(void){
 	gpio_output_en(LED_CI);
 }
 
+
+/****************Frame****************/
 void start_frame_led(void){
 	gpio_write(LED_DI,0);
 	for(int i=0;i<32;i++){
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,0);
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,1);
 	}
 	wd_clear();
@@ -35,20 +37,20 @@ void start_frame_led(void){
 
 void end_frame_led(void){
 	for(int i=0;i<32;i++){
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,0);
 		gpio_write(LED_DI,1);
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,1);
 	}
 }
 
 void EN_Frame_Color(void){
 	for(int i=0;i<8;i++){
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,0);
 		gpio_write(LED_DI,1);
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,1);
 	}
 	wd_clear();
@@ -56,10 +58,10 @@ void EN_Frame_Color(void){
 
 void DIS_Frame_Color(void){
 	for(int i=0;i<8;i++){
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,0);
 		gpio_write(LED_DI,0);
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,1);
 	}
 	wd_clear();
@@ -67,17 +69,17 @@ void DIS_Frame_Color(void){
 
 void Frame_On_Led(void){    // dim 50%
 	for(int i=0;i<4;i++){
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,0);
 		gpio_write(LED_DI,1);
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,1);
 	}
 	for(int i=0;i<4;i++){
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,0);
 		gpio_write(LED_DI,0);
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,1);
 	}
 	wd_clear();
@@ -87,16 +89,16 @@ void Frame_On_Led_20pt(void){    // dim 2/32
 
 	for(int i=0;i<8;i++){
 		if(i == 3 || i == 4 || i == 5 || i==7){
-			sleep_us(30);
+			//sleep_us(500000/FREQ_LED);
 			gpio_write(LED_CI,0);
 			gpio_write(LED_DI,0);
-			sleep_us(30);
+			//sleep_us(500000/FREQ_LED);
 			gpio_write(LED_CI,1);
 		}else{
-			sleep_us(30);
+			//sleep_us(500000/FREQ_LED);
 			gpio_write(LED_CI,0);
 			gpio_write(LED_DI,1);
-			sleep_us(30);
+			//sleep_us(500000/FREQ_LED);
 			gpio_write(LED_CI,1);
 		}
 	}
@@ -104,22 +106,25 @@ void Frame_On_Led_20pt(void){    // dim 2/32
 }
 void Frame_Off_Led(void){
 	for(int i=0;i<3;i++){
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,0);
 		gpio_write(LED_DI,1);
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,1);
 	}
 	for(int i=0;i<5;i++){
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,0);
 		gpio_write(LED_DI,0);
-		sleep_us(30);
+		//sleep_us(500000/FREQ_LED);
 		gpio_write(LED_CI,1);
 	}
 	wd_clear();
 }
 
+
+
+// CONTROL LED
 void Off_Led(void){
 	Frame_Off_Led();
 	DIS_Frame_Color();
@@ -309,6 +314,10 @@ void On_Off_Led_SW(on_off_led_sw1 stt_sw1, on_off_led_sw2 stt_sw2, on_off_led_sw
 	}else if(stt_sw3 == OFF_LED_SW3){
 		off_led_sw();
 		off_led_sw();
+	}
+
+	for(u8 i = 9; i<=20; i++){
+		Off_Led();
 	}
 	end_frame_led();
 }

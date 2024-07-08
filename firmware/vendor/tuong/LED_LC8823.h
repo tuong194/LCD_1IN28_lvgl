@@ -16,6 +16,8 @@
 #include "proj_lib/ble/ll/ll.h"
 #include "proj_lib/sig_mesh/app_mesh.h"
 
+#define FREQ_LED 20000
+
 #define LED_DI GPIO_PA5
 #define LED_CI GPIO_PA6
 

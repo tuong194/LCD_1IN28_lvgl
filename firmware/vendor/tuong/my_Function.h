@@ -24,7 +24,7 @@
 #define GATEWAY_ADDRESS 0x0001
 #define LED_ADDR 0xFFFF
 
-#define TIMEOUT_SECURE 15   // 30s
+#define TIMEOUT_SECURE 30   // 30s
 
 #define MODE_DIM_SET 0
 #define MODE_CTT_SET 1
