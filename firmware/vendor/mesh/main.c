@@ -459,7 +459,7 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 		check_Scene();
 		read_sw();
 		Encoder_Control();
-
+	tesst
 
 	}
 	return 0;
