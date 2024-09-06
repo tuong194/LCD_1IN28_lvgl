@@ -7,6 +7,7 @@ C_SRCS += \
 ../vendor/tuong/LCD_128.c \
 ../vendor/tuong/LCD_lvgl.c \
 ../vendor/tuong/LED_LC8823.c \
+../vendor/tuong/LED_TIMER.c \
 ../vendor/tuong/Message_Control.c \
 ../vendor/tuong/RD_Secure.c \
 ../vendor/tuong/font.c \
@@ -18,6 +19,7 @@ OBJS += \
 ./vendor/tuong/LCD_128.o \
 ./vendor/tuong/LCD_lvgl.o \
 ./vendor/tuong/LED_LC8823.o \
+./vendor/tuong/LED_TIMER.o \
 ./vendor/tuong/Message_Control.o \
 ./vendor/tuong/RD_Secure.o \
 ./vendor/tuong/font.o \
@@ -29,6 +31,7 @@ C_DEPS += \
 ./vendor/tuong/LCD_128.d \
 ./vendor/tuong/LCD_lvgl.d \
 ./vendor/tuong/LED_LC8823.d \
+./vendor/tuong/LED_TIMER.d \
 ./vendor/tuong/Message_Control.d \
 ./vendor/tuong/RD_Secure.d \
 ./vendor/tuong/font.d \
